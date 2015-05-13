@@ -25,60 +25,7 @@ class UserIdentity extends CUserIdentity
 		else if($user->password!==$this->password)
                     $this->errorCode = self::ERROR_PASSWORD_INVALID;
 		else {
-                    if($user->usertype==1){
-			$companiesdb = Usercompanypermission::model()->findAllbyAttributes(array('userid'=>$user->userid,'active'=>1));	
-                       
-                       $menu_model = new Menu();
-                       $type=$user->usertype;
-                       $useri=$user->userid;
-                       $menu = $menu_model->qryMenu($type,$useri);
-                      
-                        
-                        $items[] = array('label'=>'Cambiar compania');
-			foreach( $companiesdb as $row){
-				$tax1 = explode(',',$row->company->tax);
-				$duration1 = explode(',',$row->company->duration);
-				foreach($tax1 as $tx){
-						$taxes[$tx]=$tx." %";
-				}
-				foreach($duration1 as $dur){
-					$durations[$dur]=$dur." hrs";
-				}
-						
-				if($row->company->active==1){
-					if(!isset($companyid) && !isset($companydsc)){
-						$companyid = $row->company->companyid;
-						$companydsc = $row->company->companydsc;
-						$tax = $taxes;
-						$duration = $durations;						
-					}
-					
-					$companies[$row->companyid] = array('companydsc'=>$row->company->companydsc, 'tax'=>$taxes, 'duration'=>$durations);		
-					$items[] = array('label'=>$row->company->companydsc, 'url'=>Yii::app()->createAbsoluteUrl('/portoprint/change/company',array('id'=>$row->companyid)));		
-			
-				}
-			}
-			
-			$items[] = '---';
-            $items[] = array('label'=>'Cerrar Sesion');
-            $items[] = array('label'=>'Salir', 'url'=>Yii::app()->createAbsoluteUrl("site/logout"));
-                        
-                        $vars=  Profile::model()->findByAttributes(array('profileid'=>$user->profileid));
-                        
-			$this->setState('userid',$user->userid);
-                        $this->setState('specialpermission',  $vars->specialpermission);
-                        $this->setState('profileid',$user->profileid);
-			$this->setState('username',$user->employeeuser->firstname." ".$user->employeeuser->plastname);
-			$this->setState('usertype',$user->usertype);
-			$this->setState('companies',$companies);
-			$this->setState('companyid',$companyid);
-			$this->setState('companydsc',$companydsc);
-			$this->setState('tax',$tax);
-			$this->setState('duration',$durations);
-			$this->setState('items',$items);
-                        $this->setState('menu',$menu);
-			
-                    } else if($user->usertype==2){
+                     if($user->usertype==2){
                         
                       
                         $this->setState('userid',$user->userid);
@@ -102,7 +49,7 @@ class UserIdentity extends CUserIdentity
                     }
                     
 			$this->errorCode=self::ERROR_NONE;
-            $this->errorCode = self::ERROR_NONE;
+                        $this->errorCode = self::ERROR_NONE;
         }
         return !$this->errorCode;
 	}
