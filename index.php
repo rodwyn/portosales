@@ -5,7 +5,7 @@ ini_set('error_reporting', 1);
 ini_set('display_errors', 1);
 
 // change the following paths if necessary
-echo  $yii=dirname(__FILE__).'/framework1.1.13/framework/yii.php';
+$yii=dirname(__FILE__).'/framework1.1.13/framework/yii.php';
 $config=dirname(__FILE__).'/protected/config/main.php';
 
 
