@@ -1,0 +1,77 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 14-ago-2014, 10:28:06
+    Author     : friedrich
+*/
+
+.v_error, .invalid ,.error{
+    font-size: 0.93em;
+    font-style: italic;
+    color:#ee162d;
+    display: block;
+    font-weight: 600;
+    
+}
+
+#newssp{
+    display: block;
+    min-height: 35px;
+}
+
+#newssp div{
+    width: 30%;
+    display: inline;
+}
+#newssp div div{
+    left: auto;
+    top:auto;
+}
+.factura_p {
+    margin:10px 15px;
+}
+.factura_p .btn{
+    padding: 3px 12px;
+}
+
+.factura_p div.line{
+    margin: 15px auto;
+}
+.factura_p div.line label{
+    font-size: 85%;
+}
+.factura_p div.line span{
+        display: inline-flex;
+}
+@media screen and (max-width:700px){
+    .factura_p div.line span{
+        display: block;
+        margin: 12px auto;
+    }
+}
+  #gauge, #gauge1, #gauge2, #gauge3 {
+        width:200px; height:160px;
+        display: inline-block;
+        margin: 1em;
+      }
+
+div.div_cobro{
+    width: 80%;
+    background: #CCC;
+    padding: 9px;
+}
+div.div_cobro table {
+    border-spacing: 4px;
+    border-collapse: separate;
+    width: 100%;
+}
+div.div_cobro table thead{
+    text-align: center;
+}
+span.state-error{
+    margin: 0 7px;
+}
+

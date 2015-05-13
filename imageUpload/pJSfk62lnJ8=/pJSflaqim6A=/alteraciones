@@ -1,0 +1,8 @@
+select * from rate where rateid in (24158,24159);
+select * from rateodc where rateid in (17914,17975);
+
+UPDATE `portop_main`.`rate` SET `statustime`='2013-12-23 14:37:56' WHERE `rateid`='17976';
+
+UPDATE `portop_main`.`rate` SET `odptime`='2013-12-23 14:37:57', `odctime`='2013-12-23 14:37:57' WHERE `rateid`='17976';
+
+UPDATE `portop_main`.`rateodc` SET `statustime`='2013-12-23 14:37:57', `odccdate`='2013-12-23 ' WHERE `rateid`='17976';

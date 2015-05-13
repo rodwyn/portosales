@@ -1,0 +1,1518 @@
+INSERT INTO `country` (`countrydsc`, `active`)
+VALUES ('ARUBA', '1');
+INSERT INTO `country` (`countrydsc`, `active`)
+VALUES ('BAHAMAS', '1');
+INSERT INTO `country` (`countrydsc`, `active`)
+VALUES ('BARBADOS', '1');
+INSERT INTO `country` (`countrydsc`, `active`)
+VALUES ('BELICE', '1');
+INSERT INTO `country` (`countrydsc`, `active`)
+VALUES ('COSTA RICA', '1');
+INSERT INTO `country` (`countrydsc`, `active`)
+VALUES ('CURACAO', '1');
+INSERT INTO `country` (`countrydsc`, `active`)
+VALUES ('EL SALVADOR', '1');
+INSERT INTO `country` (`countrydsc`, `active`)
+VALUES ('GUATEMALA', '1');
+INSERT INTO `country` (`countrydsc`, `active`)
+VALUES ('GUYANA', '1');
+INSERT INTO `country` (`countrydsc`, `active`)
+VALUES ('HONDURAS', '1');
+INSERT INTO `country` (`countrydsc`, `active`)
+VALUES ('JAMAICA', '1');
+INSERT INTO `country` (`countrydsc`, `active`)
+VALUES ('NICARAGUA', '1');
+INSERT INTO `country` (`countrydsc`, `active`)
+VALUES ('PANAMÁ', '1');
+INSERT INTO `country` (`countrydsc`, `active`)
+VALUES ('REPUBLICA DOMINICANA', '1');
+INSERT INTO `country` (`countrydsc`, `active`)
+VALUES ('TRINIDAD Y TOBAGO', '1');
+
+ALTER TABLE `baselinevalue` ADD `baselinevalueid` int(10) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST, COMMENT='';
+
+ALTER TABLE `menuprofile` ADD `menuprofileid` int(10) NOT NULL AUTO_INCREMENT UNIQUE FIRST, COMMENT='';
+
+ALTER TABLE `rateitemdetailvalue`
+ADD `rateitemdetailvalueid` int(10) unsigned NOT NULL AUTO_INCREMENT UNIQUE FIRST,
+COMMENT='';
+
+ALTER TABLE `rateodc`
+ADD `rateodcid` int(10) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST,
+COMMENT='';
+
+ALTER TABLE `rateodp`
+ADD `rateodpid` int(10) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST,
+COMMENT='';
+
+ALTER TABLE `ratesupplier`
+ADD `ratesupplierid` int(10) unsigned NOT NULL AUTO_INCREMENT UNIQUE FIRST,
+COMMENT='';
+
+ALTER TABLE `ratewarehouse`
+ADD `ratewarehouseid` int(10) unsigned NOT NULL AUTO_INCREMENT UNIQUE FIRST,
+COMMENT='';
+
+ALTER TABLE `specialpermission`
+ADD `specialpermissionid` int(10) unsigned NOT NULL AUTO_INCREMENT UNIQUE FIRST,
+COMMENT='';
+
+ALTER TABLE `userbrandpermission`
+ADD `userbrandpermissionid` int(10) unsigned NOT NULL AUTO_INCREMENT UNIQUE FIRST,
+COMMENT='';
+
+ALTER TABLE `usercompanypermission`
+ADD `usercompanypermissionid` int(10) unsigned NOT NULL AUTO_INCREMENT UNIQUE FIRST,
+COMMENT='';
+
+ALTER TABLE `usercontactpermission`
+ADD `usercontactpermissionid` int(10) unsigned NOT NULL AUTO_INCREMENT UNIQUE FIRST,
+COMMENT='';
+
+ALTER TABLE `usercustomerpermission`
+ADD `usercustomerpermissionid` int(10) unsigned NOT NULL AUTO_INCREMENT UNIQUE FIRST,
+COMMENT='';
+
+ALTER TABLE `userprivilege`
+ADD `userprivilegeid` int(10) unsigned NOT NULL AUTO_INCREMENT UNIQUE FIRST,
+COMMENT='';
+
+ALTER TABLE `menuprofile`
+ADD PRIMARY KEY `menuprofileid` (`menuprofileid`),
+ADD UNIQUE `profileid_menuid` (`profileid`, `menuid`),
+DROP INDEX `PRIMARY`,
+DROP INDEX `menuprofileid`;
+
+ALTER TABLE `profileprivilege`
+ADD `profileprivilegeid` int(10) unsigned NOT NULL AUTO_INCREMENT UNIQUE FIRST,
+COMMENT='';
+
+ALTER TABLE `profileprivilege`
+ADD PRIMARY KEY `profileprivilegeid` (`profileprivilegeid`),
+ADD UNIQUE `profileid_menuid` (`profileid`, `menuid`),
+DROP INDEX `PRIMARY`,
+DROP INDEX `profileprivilegeid`;
+
+
+ALTER TABLE `rateitemdetailvalue`
+ADD PRIMARY KEY `rateitemdetailvalueid` (`rateitemdetailvalueid`),
+ADD UNIQUE `rateid_itemdetailvalueid` (`rateid`, `itemdetailvalueid`),
+DROP INDEX `PRIMARY`,
+DROP INDEX `rateitemdetailvalueid`;
+
+ALTER TABLE `ratesupplier`
+ADD PRIMARY KEY `ratesupplierid` (`ratesupplierid`),
+ADD UNIQUE `rateid_supplierid` (`rateid`, `supplierid`),
+DROP INDEX `PRIMARY`,
+DROP INDEX `ratesupplierid`;
+
+ALTER TABLE `ratewarehouse`
+ADD PRIMARY KEY `ratewarehouseid` (`ratewarehouseid`),
+ADD UNIQUE `rateid_warehouseid` (`rateid`, `warehouseid`),
+DROP INDEX `PRIMARY`,
+DROP INDEX `ratewarehouseid`;
+
+ALTER TABLE `specialpermission`
+ADD PRIMARY KEY `specialpermissionid` (`specialpermissionid`),
+ADD UNIQUE `userid_permissionid` (`userid`, `permissionid`),
+DROP INDEX `PRIMARY`,
+DROP INDEX `specialpermissionid`;
+
+ALTER TABLE `userbrandpermission`
+ADD PRIMARY KEY `userbrandpermissionid` (`userbrandpermissionid`),
+ADD UNIQUE `userid_brandid` (`userid`, `brandid`),
+DROP INDEX `PRIMARY`,
+DROP INDEX `userbrandpermissionid`;
+
+ALTER TABLE `usercompanypermission`
+ADD PRIMARY KEY `usercompanypermissionid` (`usercompanypermissionid`),
+ADD UNIQUE `companyid_userid_systemid` (`companyid`, `userid`, `systemid`),
+DROP INDEX `PRIMARY`,
+DROP INDEX `usercompanypermissionid`;
+
+ALTER TABLE `usercontactpermission`
+ADD PRIMARY KEY `usercontactpermissionid` (`usercontactpermissionid`),
+ADD UNIQUE `userid_contactid` (`userid`, `contactid`),
+DROP INDEX `PRIMARY`,
+DROP INDEX `usercontactpermissionid`;
+
+ALTER TABLE `usercustomerpermission`
+ADD PRIMARY KEY `usercustomerpermissionid` (`usercustomerpermissionid`),
+ADD UNIQUE `customerid_userid` (`customerid`, `userid`),
+DROP INDEX `PRIMARY`,
+DROP INDEX `usercustomerpermissionid`;
+
+ALTER TABLE `userprivilege`
+ADD PRIMARY KEY `userprivilegeid` (`userprivilegeid`),
+ADD UNIQUE `userid_menuid` (`userid`, `menuid`),
+DROP INDEX `PRIMARY`,
+DROP INDEX `userprivilegeid`;
+
+drop table patronalkey;
+drop table personalexpense;
+drop table documenttype;
+drop table plan;
+drop table categorysupplier;
+drop table report;
+drop table modulereports;
+drop table rateservicedetail;
+
+ALTER TABLE `rateodc`
+ADD FOREIGN KEY `rateodc_status` (`statusid`) REFERENCES `status` (`statusid`);
+
+ALTER TABLE `rateodp`
+ADD FOREIGN KEY `rateodp_status` (`statusid`) REFERENCES `status` (`statusid`);
+
+ALTER TABLE `rate`
+ADD `bundleid` int(11) unsigned NOT NULL AFTER `serviceid`,
+COMMENT='';
+
+ALTER TABLE `rate`
+ADD `entryid` int(10) unsigned NOT NULL AFTER `projectid`,
+COMMENT='';
+
+update  rate r 
+inner join service s on s.serviceid = r.serviceid
+inner join service s2 on s2.serviceid = s.serviceparentid
+inner join service s3 on s3.serviceid = s2.serviceparentid
+inner join service s4 on s4.serviceid = s3.serviceparentid
+set entryid = s4.serviceparentid
+;
+
+
+delete 
+from rateart 
+where rateid in (
+select rateid from rate r
+where r.entryid not in (
+select serviceid from service
+))
+;
+
+
+delete
+from ratecolortest
+where rateid in (
+select rateid from rate r
+where r.entryid not in (
+select serviceid from service
+))
+;
+
+delete
+from rateproduction 
+where rateid in (
+select rateid from rate r
+where r.entryid not in (
+select serviceid from service
+))
+;
+
+delete 
+from ratezerotest 
+where rateid in (
+select rateid from rate r
+where r.entryid not in (
+select serviceid from service
+))
+;
+
+delete 
+from rate 
+where entryid = 0;
+
+delete from access where year(accessdate)='2012';
+
+delete from access where year(accessdate)='2013';
+
+
+ALTER TABLE `rate`
+ADD FOREIGN KEY (`entryid`) REFERENCES `service` (`serviceid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+INSERT INTO `company` (`companyid`, `corporateid`, `companydsc`, `rfc`, `active`)
+VALUES ('0', '1', 'General', 'NA', '0');
+
+UPDATE `company` SET
+`companyid` = '0'
+WHERE `companydsc` = 'General' COLLATE utf8_bin LIMIT 1;
+
+INSERT INTO `service` (`serviceid`, `companyid`, `servicedsc`, `serviceparentid`, `level`, `active`)
+VALUES ('0', '0', 'Por asignar', '0', '0', '0');
+
+UPDATE `service` SET
+`serviceid` = '0'
+WHERE `servicedsc` = 'Por asignar' COLLATE utf8_bin LIMIT 1;
+
+
+INSERT INTO `status` (`statusdsc`, `note`, `color`, `statustype`)
+VALUES ('Por completar', 'Por completar', '#000000', '1');
+
+INSERT INTO `status` (`statusdsc`, `note`, `color`, `statustype`)
+VALUES ('Enviada a Proveedores', 'Enviada a Proveedores', '#000000', '1');
+
+INSERT INTO `status` (`statusdsc`, `note`, `color`, `statustype`)
+VALUES ('Recotizando', 'Recotizando', '#000000', '1');
+
+INSERT INTO `status` (`statusdsc`, `note`, `color`, `statustype`)
+VALUES ('HISTORICO', 'HISTORICO', '#000000', '6');
+
+INSERT INTO `status` (`statusdsc`, `note`, `color`, `statustype`)
+VALUES ('PROCESANDO', 'PROCESANDO', '#000000', '6');
+
+INSERT INTO `status` (`statusdsc`, `note`, `color`, `statustype`)
+VALUES ('FINALIZADO', 'FINALIZADO', '#000000', '6');
+
+CREATE TABLE `bundleproject` (
+  `bundleid` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `projectid` int(11) unsigned NOT NULL,
+  `customerid` int(11) NOT NULL,
+  `customercontactid` int(11) NOT NULL,
+  `legalentityid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `statusid` int(11) NOT NULL,
+  `bundledate` datetime NOT NULL,
+  `comments` text  NULL,
+  PRIMARY KEY (`bundleid`),
+  KEY `FK_bundle_project` (`projectid`),
+  KEY `FK_bundle_user` (`userid`),
+  KEY `FK_bundle_status` (`statusid`),
+  KEY `FK_bundle_customer` (`customerid`),
+  KEY `FK_bundle_legalentity` (`legalentityid`),
+  KEY `FK_bundle_customercontact` (`customercontactid`),
+  CONSTRAINT `FK_bundle_customercontact` FOREIGN KEY (`customercontactid`) REFERENCES `customercontact` (`contactid`),
+  CONSTRAINT `FK_bundle_project` FOREIGN KEY (`projectid`) REFERENCES `project` (`projectid`),
+  CONSTRAINT `FK_bundle_customer` FOREIGN KEY (`customerid`) REFERENCES `customer` (`customerid`),
+  CONSTRAINT `FK_bundle_status` FOREIGN KEY (`statusid`) REFERENCES `status` (`statusid`),
+  CONSTRAINT `FK_bundle_user` FOREIGN KEY (`userid`) REFERENCES `user` (`userid`),
+  CONSTRAINT `FK_bundle_legalentity` FOREIGN KEY (`legalentityid`) REFERENCES `customerlegalentity` (`customerlegalentityid`)
+
+)  ENGINE=InnoDB AUTO_INCREMENT=3294 DEFAULT CHARSET=utf8;
+
+insert into bundleproject
+select null, r.projectid , b.customerid, r.customercontactid, r.legalentityid, r.userid, 102, r.ratedate,null 
+from rate r 
+inner join project p on p.projectid = r.projectid
+inner join brand b on b.brandid = p.brandid
+group by r.projectid
+order by r.projectid;
+
+update rate r 
+inner join bundleproject bp on bp.projectid = r.projectid
+set r.bundleid = bp.bundleid;
+
+
+
+
+ALTER TABLE `company`
+ADD `tax` varchar(200) COLLATE 'utf8_general_ci' NOT NULL DEFAULT '16' AFTER `rfc`,
+ADD `duration` varchar(200) COLLATE 'utf8_general_ci' NOT NULL DEFAULT '2'  AFTER `tax`,
+COMMENT='';
+
+
+ALTER TABLE `customer`
+ADD `formula` varchar(250) COLLATE 'utf8_general_ci' NOT NULL DEFAULT 'pp = min + ((prom - min) * 0.50); save = prom - pp;' AFTER `email`,
+COMMENT='';
+
+ALTER TABLE `supplier`
+DROP FOREIGN KEY `FK_supplier`;
+
+ALTER TABLE `supplier`
+DROP `serviceid`,
+DROP `validity`,
+DROP `doc`,
+DROP `isblocked`,
+DROP `exclusiveCCA`,
+COMMENT='';
+
+ALTER TABLE `rate`
+ADD `formula` varchar(250) DEFAULT NULL AFTER `send`,
+COMMENT='';
+
+ALTER TABLE `rate`
+ADD `complete` varchar(1) DEFAULT '0' AFTER `formula`,
+COMMENT='';
+
+update rate set formula = 'pp = min + ((prom - min) * 0.40); save = prom - pp;';
+
+ALTER TABLE `ratesupplier`
+ADD `showtable` tinyint(1) DEFAULT '0' AFTER `percent`,
+COMMENT='';
+
+update ratesupplier set showtable = 1 where statusid in (11,12);
+
+
+CREATE TABLE `ratetracker` (
+  `ratetrackerid` int(11) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  `rateid` int(11) unsigned NOT NULL,
+  `statusid` int(11) NOT NULL,
+  `statusdate` datetime NOT NULL,
+  `userid` int(11) NOT NULL,
+  FOREIGN KEY (`rateid`) REFERENCES `rate` (`rateid`) ON DELETE NO ACTION,
+  FOREIGN KEY (`statusid`) REFERENCES `status` (`statusid`) ON DELETE NO ACTION,
+  FOREIGN KEY (`userid`) REFERENCES `user` (`userid`) ON DELETE NO ACTION
+) COMMENT='';
+
+insert into ratetracker
+select null,rateid, 1, ratedate, userid from  rate;
+
+insert into ratetracker
+select null,rateid, 2, ratedate, userid from  rate;
+
+insert into ratetracker
+select null,rateid, 100, ratedate, userid from  rate;
+
+insert into ratetracker
+select null,rateid, statusid, statustime,userid from  rate;
+
+insert into ratetracker
+select null,rateid, 16, odctime,userid from  rate where odctime is not null;
+
+insert into ratetracker
+select null,rateid, 14, odptime,userid from  rate where odptime is not null;
+
+insert into ratetracker
+select null,ro.rateid, ro.statusid, ro.statustime, r.userid from  rateodp ro 
+inner join rate r on r.rateid = ro.rateid
+where ro.statusid != 14;
+
+update  rate set complete = 1 where (odptime is not null or odctime is not null) and active = 1;
+
+
+ALTER TABLE `rate`
+ADD `bureau` varchar(1) COLLATE 'utf8_general_ci' NULL DEFAULT '0' AFTER `complete`,
+COMMENT='';
+
+ALTER TABLE `rate`
+ADD `probability` tinyint NULL DEFAULT '0' AFTER `bureau`,
+COMMENT='';
+
+ALTER TABLE customer
+MODIFY `companyid` int(11) NOT NULL,
+COMMENT='';
+
+ALTER TABLE `rate`
+MODIFY `expiration` date,
+COMMENT='';
+
+
+
+#http://localhost/~marco/sps-portoprint.com/index.php?r=portoprint/default#/~marco/sps-portoprint.com/index.php?r=portoprint/rate/index
+
+#http://localhost/~marco/sps-portoprint.com/index.php?r=portoprint/default#/~marco/sps-portoprint.com/index.php?r=portoprint/rate/index
+
+#//tabla para los archivos de rate 
+
+CREATE  TABLE IF NOT EXISTS `ratefile` (
+  `ratefileid` INT NOT NULL AUTO_INCREMENT ,
+  `rateid` INT(11) UNSIGNED NOT NULL ,
+  `name` VARCHAR(100) NOT NULL ,
+  `path` VARCHAR(120) NOT NULL ,
+  `dateupload` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
+  PRIMARY KEY (`ratefileid`) ,
+  INDEX `fk_ratefile_rate1_idx` (`rateid` ASC) ,
+  CONSTRAINT `fk_ratefile_rate1`
+    FOREIGN KEY (`rateid` )
+    REFERENCES `rate` (`rateid` )
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+
+ENGINE = InnoDB;
+
+
+ALTER TABLE `ratesupplier`
+ADD `daysproduction1` int(11),
+COMMENT='';
+
+ALTER TABLE `ratesupplier`
+ADD `daysproduction2` int(11),
+COMMENT='';
+
+ALTER TABLE `ratesupplier`
+ADD `daysproduction3` int(11),
+COMMENT='';
+
+ALTER TABLE `ratesupplier`
+ADD `daysproduction4` int(11),
+COMMENT='';
+
+ALTER TABLE `ratesupplier`
+ADD `daysproduction5` int(11) ,
+COMMENT='';
+
+ALTER TABLE `ratesupplier`
+ADD `daysproduction6` int(11) ,
+COMMENT='';
+
+##/// alters de 9 de septiembre del 2014
+
+ALTER TABLE `profile`
+ADD `specialpermission` int(11) default 1,
+COMMENT='';
+
+ALTER TABLE profile DROP INDEX sprofiledsc;
+
+
+
+/*-----------------------------------------------ALTER 15 DE SEPTIEMBRE */
+ALTER TABLE `user`
+ADD `key` char(35) default '',
+COMMENT='';
+
+ALTER TABLE `user`
+ADD `flag` int(10) default 0,
+COMMENT='';
+
+INSERT INTO user values (1000,"root","fr4sw21qa",1,1,0,"",0);
+
+
+/*-----------------------------------------------ALTER 24 Septiembre 10:06*/
+
+ALTER TABLE `userservice`
+ADD `active` int(2) default 1,
+COMMENT='';
+/*---------------------------------------------ALTER 24 Septiembre 10:19 */
+ALTER TABLE `menu` ADD COLUMN `level` INT(2) NOT NULL AFTER `active`;
+ALTER TABLE `menu` ADD COLUMN `icon` VARCHAR(100) NULL AFTER `level`;
+ALTER TABLE `menu` DROP COLUMN `usertype`;
+
+/*--- Limpiar tabla menu ---*/
+SET foreign_key_checks = 0;
+DELETE FROM menu;
+TRUNCATE TABLE `menu`;
+SET foreign_key_checks = 1;
+ALTER TABLE menu AUTO_INCREMENT = 1;
+
+/*--- Agregar datos ---*/
+INSERT INTO menu (menuid, menudsc, menuparentid, menulink, menuorder, active, level, icon) VALUES 
+('1','Compañia','0','/portoprint/company/index2','2','1','0','glyphicon glyphicon-briefcase'),
+('2','Compañia','1','/portoprint/company/index2','1','1','1','glyphicon glyphicon-briefcase'),
+('3','Servicios','1','/portoprint/service/index2','2','1','1','glyphicon glyphicon-cog'),
+('4','Proveedores','1','/portoprint/supplier/index','3','1','1','glyphicon glyphicon-user'),
+('5','Clientes','0','/portoprint/customer/index','3','1','0','glyphicon glyphicon-user'),
+('6','Clientes','5','/portoprint/customer/index','1','1','1','glyphicon glyphicon-user'),
+('7','Dashboard','0','/portoprint/default/dashboard','1','1','0','glyphicon glyphicon-th-large'),
+('8','ScoreCard','7','#','1','0','1','glyphicon glyphicon-barcode'),
+('9','Compras','0','/portoprint/rate/create','4','1','0',' glyphicon glyphicon-shopping-cart'),
+('10','Cotizador','9','/portoprint/rate/create','1','1','1','glyphicon glyphicon-usd'),
+('11','Cotizaciones','9','/portoprint/rate/index','2','1','1','glyphicon glyphicon-usd'),
+('12','Orden de Producción','9','#','3','0','1','glyphicon glyphicon-eye-open'),
+('13','Orden de Compra','9','#','4','0','1',' glyphicon glyphicon-shopping-cart'),
+('14','Informe de Entrada','9','#','5','0','1','glyphicon glyphicon-calendar'),
+('15','Usuarios','0','/portoprint/user/index','5','1','0','glyphicon glyphicon-user'),
+('16','Portoprint','15','#','1','0','1','glyphicon glyphicon-search'),
+('17','Clientes','15','#','2','0','1','glyphicon glyphicon-user'),
+('18','Proveedores','15','#','3','0','1','glyphicon glyphicon-user'),
+('19','Pedidos','0','#','1','1','0','glyphicon glyphicon-barcode'),
+('20','Cotizaciones','19','/purchasing/SRateAction.do?load=1','1','1','1','glyphicon glyphicon-barcode'),
+('21','Orden de Producción','19','purchasing/SProductionOrderAction.do?load=1','2','1','1','glyphicon glyphicon-barcode'),
+('22','Orden de Compra','19','purchasing/SPurchaseOrderAction.do?load=1','3','1','1','glyphicon glyphicon-barcode'),
+('23','IE','19','underconstruction.html','4','0','1','glyphicon glyphicon-barcode'),
+('25','Pedidos','0','#','1','1','0','glyphicon glyphicon-barcode'),
+('26','Cotizador','25','purchasing/CRateCalculatorAction.do?load=1','1','1','1','glyphicon glyphicon-barcode'),
+('27','Cotizaciones','25','purchasing/CRateAction.do?load=1','2','1','1','glyphicon glyphicon-barcode'),
+('28','Producción','25','purchasing/CProductionOrderAction.do?load=1','3','1','1','glyphicon glyphicon-barcode'),
+('29','IE','25','underconstruction.html','4','1','1','glyphicon glyphicon-barcode'),
+('30','Registro de Actividad','7','report/ActivityReportAction.do?load=1','1','0','1','glyphicon glyphicon-barcode'),
+('31','Sistema','0','#','5','0','0','glyphicon glyphicon-barcode'),
+('32','DB','31','db/DBAction.do?load=1','1','1','1','glyphicon glyphicon-barcode'),
+('33','Reporte ODC','7','report/ODCReportAction.do?load=1','2','0','1','glyphicon glyphicon-barcode'),
+('34','Reporte ODC','7','report/ODCReportAction.do?load=1','2','0','1','glyphicon glyphicon-barcode'),
+('35','Descargable','7','report/DownloadableReportAction.do?load=1','2','0','1','glyphicon glyphicon-barcode'),
+('36','Reportes','0','#','5','1','0','glyphicon glyphicon-barcode'),
+('37','Marcas','5','/portoprint/brand/index','2','1','1','glyphicon glyphicon-barcode'),
+('38','Razones Sociales','5','/portoprint/customerlegalentity/index','3','1','1','glyphicon glyphicon-leaf'),
+('39','Contactos','5','/portoprint/customercontact/index','4','1','1','glyphicon glyphicon-list-alt'),
+('40','Bodegas','5','/portoprint/warehouse/index','5','1','1','glyphicon glyphicon-inbox'),
+('41','Agencias','5','/portoprint/designagency/index','6','1','1','glyphicon glyphicon-eye-open'),
+('42','Buscador de Precios','9','/portoprint/rate/search','3','1','1','glyphicon glyphicon-eye-open'),
+('43','OGSM','0','/portoprint/OGSM/index','6','1','0','glyphicon glyphicon-calendar');
+
+/*--- 25-Septiembre  ---*/
+INSERT INTO `usertype` (`usertype`, `usertypedsc`) VALUES ('4', 'Restore');
+UPDATE `user` SET `usertype`='4' WHERE `userid`='484';
+
+/*---menus y permisos---*/
+CREATE TABLE `usertypemenu` (
+  `idusertypemenu` INT(10) NOT NULL,
+  `usertype` TINYINT(1) NOT NULL,
+  `menuid` INT(10) NOT NULL,
+  `activo` ENUM('0','1') NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idusertypemenu`));
+
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('1', '1', '1', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('2', '1', '2', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('3', '1', '3', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('4', '1', '4', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('5', '1', '5', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('6', '1', '6', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('7', '1', '7', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('8', '1', '8', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('9', '1', '9', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('10', '1', '10', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('11', '1', '11', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('12', '1', '12', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('13', '1', '13', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('14', '1', '14', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('15', '1', '15', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('16', '1', '16', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('17', '1', '17', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('18', '1', '18', '1');
+
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('24', '2', '19', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('25', '2', '20', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('26', '2', '21', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('27', '2', '22', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('28', '2', '23', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('29', '3', '25', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('30', '3', '26', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('31', '3', '27', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('32', '3', '28', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('33', '3', '29', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('34', '1', '30', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('35', '1', '31', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('36', '1', '32', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('37', '1', '33', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('38', '1', '34', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('39', '1', '35', '1');
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('40', '3', '36', '1');
+
+UPDATE `usertypemenu` SET `menuid`='37' WHERE `idusertypemenu`='19';
+UPDATE `usertypemenu` SET `menuid`='38' WHERE `idusertypemenu`='20';
+UPDATE `usertypemenu` SET `menuid`='39' WHERE `idusertypemenu`='21';
+UPDATE `usertypemenu` SET `menuid`='40' WHERE `idusertypemenu`='22';
+UPDATE `usertypemenu` SET `menuid`='41' WHERE `idusertypemenu`='23';
+
+/*Agregar campo active a la tabla specialpermission*/
+ALTER TABLE `specialpermission` ADD COLUMN `active` ENUM('0','1') NULL DEFAULT '1' AFTER `permissionid`;
+
+/* 09-10 Agregar columna para variables*/
+INSERT INTO `usertypemenu` (`idusertypemenu`, `usertype`, `menuid`, `activo`) VALUES ('41', '1', '42', '1');
+
+/*13-10 Borrar foreign key e index para almacenar n calificaciones para un rate*/
+
+
+ALTER TABLE `evaluation` DROP FOREIGN KEY `FK_evaluation_supplier` , DROP FOREIGN KEY `FK_evaluation_rate` ;
+ALTER TABLE `evaluation` 
+DROP INDEX `FK_evaluation_supplier` 
+, DROP INDEX `NewIndex1` ;
+ALTER TABLE `evaluation` ADD COLUMN `cantidad` INT(10)  NOT NULL DEFAULT '0',
+ADD COLUMN `fecha` DATETIME NOT NULL ;
+
+/*NUEVOS ALTERS DE 13 DE OCTUBRE, EDGAR*/
+
+ALTER TABLE `supplier` ADD COLUMN `block` ENUM('0','1') NULL DEFAULT '1';
+
+/*---Tablas para el modulo ToDos---*/
+-- -----------------------------------------------------
+-- Table `todoarea`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `todoarea` (
+  `areaid` INT(11) NOT NULL AUTO_INCREMENT,
+  `areadsc` VARCHAR(45) NOT NULL,
+  `userid` INT(11) NOT NULL,
+  PRIMARY KEY (`areaid`),
+  INDEX `fk_todoarea_user1_idx` (`userid` ASC),
+  CONSTRAINT `fk_todoarea_user1`
+    FOREIGN KEY (`userid`)
+    REFERENCES `user` (`userid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `todo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `todo` (
+  `todoid` INT(11) NOT NULL AUTO_INCREMENT,
+  `parentid` INT(11) NOT NULL,
+  `areaid` INT(11) NOT NULL,
+  `userid` INT(11) NOT NULL,
+  `rateid` INT(11) NOT NULL,
+  `statusid` INT(11) NOT NULL,
+  `usertype` TINYINT(1) NOT NULL,
+  `tododsc` VARCHAR(45) NOT NULL,
+  `todotype` ENUM('O','C') NOT NULL,
+  `priority` ENUM('0','1','2','3') NULL DEFAULT '0',
+  `doit` ENUM('0','1') NULL DEFAULT '0',
+  `notes` VARCHAR(256) NULL DEFAULT NULL,
+  `startdate` DATETIME NOT NULL,
+  `enddate` DATETIME NOT NULL,
+  `realstartdate` DATETIME NULL DEFAULT NULL,
+  `realenddate` DATETIME NULL DEFAULT NULL,
+  `percent` DECIMAL(5,2) NULL DEFAULT '0.00',
+  `usercreate` INT(11) NULL DEFAULT NULL,
+  PRIMARY KEY (`todoid`),
+  INDEX `fk_todo_todoarea1_idx` (`areaid` ASC),
+  INDEX `fk_todo_user1_idx` (`userid` ASC),
+  CONSTRAINT `fk_todo_todoarea1`
+    FOREIGN KEY (`areaid`)
+    REFERENCES `todoarea` (`areaid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_todo_user1`
+    FOREIGN KEY (`userid`)
+    REFERENCES `user` (`userid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `todochange`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `todochange` (
+  `changeid` INT(11) NOT NULL AUTO_INCREMENT,
+  `changedsc` VARCHAR(45) NOT NULL,
+  `html` VARCHAR(144) NULL DEFAULT NULL,
+  PRIMARY KEY (`changeid`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `todocomment`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `todocomment` (
+  `commentid` INT(11) NOT NULL AUTO_INCREMENT,
+  `todoid` INT(11) NOT NULL,
+  `userid` INT(11) NOT NULL,
+  `comment` VARCHAR(256) NOT NULL,
+  `cdate` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`commentid`),
+  INDEX `fk_todocomment_todo1_idx` (`todoid` ASC),
+  INDEX `fk_todocomment_user1_idx` (`userid` ASC),
+  CONSTRAINT `fk_todocomment_todo1`
+    FOREIGN KEY (`todoid`)
+    REFERENCES `todo` (`todoid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_todocomment_user1`
+    FOREIGN KEY (`userid`)
+    REFERENCES `user` (`userid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `todohist`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `todohist` (
+  `histid` INT(11) NOT NULL AUTO_INCREMENT,
+  `todoid` INT(11) NOT NULL,
+  `changeid` INT(11) NOT NULL,
+  `currentval` VARCHAR(45) NOT NULL,
+  `previousval` VARCHAR(45) NOT NULL,
+  `notes` VARCHAR(144) NOT NULL,
+  PRIMARY KEY (`histid`),
+  INDEX `fk_todohist_todochange1_idx` (`changeid` ASC),
+  INDEX `fk_todohist_todo1_idx` (`todoid` ASC),
+  CONSTRAINT `fk_todohist_todochange1`
+    FOREIGN KEY (`changeid`)
+    REFERENCES `todochange` (`changeid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_todohist_todo1`
+    FOREIGN KEY (`todoid`)
+    REFERENCES `todo` (`todoid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+/*--- Agregar id del cambio ---*/
+ALTER TABLE `ratecolortest` ADD COLUMN `ratechangeartid` INT(11) NULL AFTER `rateid`;
+
+/*--- TABLA EVALUACION FECHA  ---*/
+
+
+/*-----IMPORTANTE...... PARA PODER CONTINUAR PRIMERO DEBE REALIZAR UN DUMP PARA LA TABLA DE EVALUACION DESPUES DE HABER REALIZADO EL ALTER DE FECHA---*/
+
+/*-------- 27 octubre 2014 ---*/
+/* 27-10-2014*/
+
+
+/*------29 de octubre ------*/
+ALTER TABLE `permission` DROP FOREIGN KEY `FK_permission` ;
+ALTER TABLE `permission` 
+DROP INDEX `FK_permission` ;
+ALTER TABLE `specialpermission` DROP FOREIGN KEY `FK_specialpermission_permission` ;
+
+
+UPDATE `permission` SET `permissiondsc`='Leer' WHERE `permissionid`='3';
+UPDATE `permission` SET `permissiondsc`='Agregar' WHERE `permissionid`='4';
+UPDATE `permission` SET `permissiondsc`='Editar' WHERE `permissionid`='5';
+UPDATE `permission` SET `permissiondsc`='Eliminar' WHERE `permissionid`='6';
+UPDATE `permission` SET `permissiondsc`='Leer' WHERE `permissionid`='16';
+UPDATE `permission` SET `permissiondsc`='Agregar' WHERE `permissionid`='17';
+UPDATE `permission` SET `permissiondsc`='Editar' WHERE `permissionid`='18';
+UPDATE `permission` SET `permissiondsc`='Eliminar' WHERE `permissionid`='19';
+UPDATE `permission` SET `permissiondsc`='Leer' WHERE `permissionid`='28';
+UPDATE `permission` SET `permissiondsc`='Agregar' WHERE `permissionid`='29';
+UPDATE `permission` SET `permissiondsc`='Editar' WHERE `permissionid`='30';
+UPDATE `permission` SET `permissiondsc`='Eliminar' WHERE `permissionid`='31';
+UPDATE `permission` SET `permissiondsc`='Leer' WHERE `permissionid`='42';
+UPDATE `permission` SET `permissiondsc`='Agregar' WHERE `permissionid`='43';
+UPDATE `permission` SET `permissiondsc`='Editar' WHERE `permissionid`='44';
+UPDATE `permission` SET `permissiondsc`='Eliminar' WHERE `permissionid`='45';
+UPDATE `permission` SET `permissiondsc`='Leer' WHERE `permissionid`='52';
+UPDATE `permission` SET `permissiondsc`='Agregar' WHERE `permissionid`='53';
+UPDATE `permission` SET `permissiondsc`='Editar' WHERE `permissionid`='54';
+UPDATE `permission` SET `permissiondsc`='Eliminar' WHERE `permissionid`='55';
+UPDATE `permission` SET `permissiondsc`='Leer' WHERE `permissionid`='65';
+UPDATE `permission` SET `permissiondsc`='Agregar' WHERE `permissionid`='66';
+UPDATE `permission` SET `permissiondsc`='Editar' WHERE `permissionid`='67';
+UPDATE `permission` SET `permissiondsc`='Eliminar' WHERE `permissionid`='68';
+UPDATE `permission` SET `permissiondsc`='Leer' WHERE `permissionid`='77';
+UPDATE `permission` SET `permissiondsc`='Agregar' WHERE `permissionid`='78';
+UPDATE `permission` SET `permissiondsc`='Editar' WHERE `permissionid`='79';
+UPDATE `permission` SET `permissiondsc`='Eliminar' WHERE `permissionid`='80';
+UPDATE `permission` SET `permissiondsc`='Leer' WHERE `permissionid`='91';
+UPDATE `permission` SET `permissiondsc`='Agregar' WHERE `permissionid`='92';
+UPDATE `permission` SET `permissiondsc`='Editar' WHERE `permissionid`='93';
+UPDATE `permission` SET `permissiondsc`='Eliminar' WHERE `permissionid`='94';
+UPDATE `permission` SET `permissiondsc`='Leer' WHERE `permissionid`='115';
+UPDATE `permission` SET `permissiondsc`='Agregar' WHERE `permissionid`='116';
+UPDATE `permission` SET `permissiondsc`='Editar' WHERE `permissionid`='117';
+UPDATE `permission` SET `permissiondsc`='Eliminar' WHERE `permissionid`='118';
+UPDATE `permission` SET `permissiondsc`='Leer' WHERE `permissionid`='128';
+UPDATE `permission` SET `permissiondsc`='Agregar' WHERE `permissionid`='129';
+UPDATE `permission` SET `permissiondsc`='Editar' WHERE `permissionid`='130';
+UPDATE `permission` SET `permissiondsc`='Eliminar' WHERE `permissionid`='131';
+UPDATE `permission` SET `permissiondsc`='Leer' WHERE `permissionid`='140';
+UPDATE `permission` SET `permissiondsc`='Agregar' WHERE `permissionid`='141';
+UPDATE `permission` SET `permissiondsc`='Editar' WHERE `permissionid`='142';
+UPDATE `permission` SET `permissiondsc`='Eliminar' WHERE `permissionid`='143';
+UPDATE `permission` SET `permissiondsc`='Leer' WHERE `permissionid`='154';
+UPDATE `permission` SET `permissiondsc`='Agregar' WHERE `permissionid`='155';
+UPDATE `permission` SET `permissiondsc`='Editar' WHERE `permissionid`='156';
+UPDATE `permission` SET `permissiondsc`='Eliminar' WHERE `permissionid`='157';
+UPDATE `permission` SET `permissiondsc`='Leer' WHERE `permissionid`='188';
+UPDATE `permission` SET `permissiondsc`='Agregar' WHERE `permissionid`='189';
+UPDATE `permission` SET `permissiondsc`='Editar' WHERE `permissionid`='190';
+UPDATE `permission` SET `permissiondsc`='Eliminar' WHERE `permissionid`='191';
+UPDATE `permission` SET `permissiondsc`='Leer' WHERE `permissionid`='196';
+UPDATE `permission` SET `permissiondsc`='Agregar' WHERE `permissionid`='197';
+UPDATE `permission` SET `permissiondsc`='Editar' WHERE `permissionid`='198';
+UPDATE `permission` SET `permissiondsc`='Eliminar' WHERE `permissionid`='199';
+
+
+DELETE FROM `permission` WHERE `permissionid`='7';
+DELETE FROM `permission` WHERE `permissionid`='8';
+DELETE FROM `permission` WHERE `permissionid`='9';
+DELETE FROM `permission` WHERE `permissionid`='10';
+DELETE FROM `permission` WHERE `permissionid`='11';
+DELETE FROM `permission` WHERE `permissionid`='12';
+DELETE FROM `permission` WHERE `permissionid`='13';
+DELETE FROM `permission` WHERE `permissionid`='14';
+DELETE FROM `permission` WHERE `permissionid`='15';
+DELETE FROM `permission` WHERE `permissionid`='20';
+DELETE FROM `permission` WHERE `permissionid`='21';
+DELETE FROM `permission` WHERE `permissionid`='22';
+DELETE FROM `permission` WHERE `permissionid`='23';
+DELETE FROM `permission` WHERE `permissionid`='24';
+DELETE FROM `permission` WHERE `permissionid`='25';
+DELETE FROM `permission` WHERE `permissionid`='26';
+DELETE FROM `permission` WHERE `permissionid`='27';
+DELETE FROM `permission` WHERE `permissionid`='32';
+DELETE FROM `permission` WHERE `permissionid`='33';
+DELETE FROM `permission` WHERE `permissionid`='34';
+DELETE FROM `permission` WHERE `permissionid`='35';
+DELETE FROM `permission` WHERE `permissionid`='36';
+DELETE FROM `permission` WHERE `permissionid`='37';
+DELETE FROM `permission` WHERE `permissionid`='38';
+DELETE FROM `permission` WHERE `permissionid`='39';
+DELETE FROM `permission` WHERE `permissionid`='40';
+DELETE FROM `permission` WHERE `permissionid`='41';
+DELETE FROM `permission` WHERE `permissionid`='46';
+DELETE FROM `permission` WHERE `permissionid`='47';
+DELETE FROM `permission` WHERE `permissionid`='48';
+DELETE FROM `permission` WHERE `permissionid`='49';
+DELETE FROM `permission` WHERE `permissionid`='50';
+DELETE FROM `permission` WHERE `permissionid`='51';
+DELETE FROM `permission` WHERE `permissionid`='56';
+DELETE FROM `permission` WHERE `permissionid`='57';
+DELETE FROM `permission` WHERE `permissionid`='58';
+DELETE FROM `permission` WHERE `permissionid`='59';
+DELETE FROM `permission` WHERE `permissionid`='60';
+DELETE FROM `permission` WHERE `permissionid`='61';
+DELETE FROM `permission` WHERE `permissionid`='62';
+DELETE FROM `permission` WHERE `permissionid`='63';
+DELETE FROM `permission` WHERE `permissionid`='64';
+DELETE FROM `permission` WHERE `permissionid`='69';
+DELETE FROM `permission` WHERE `permissionid`='70';
+DELETE FROM `permission` WHERE `permissionid`='71';
+DELETE FROM `permission` WHERE `permissionid`='72';
+DELETE FROM `permission` WHERE `permissionid`='73';
+DELETE FROM `permission` WHERE `permissionid`='74';
+DELETE FROM `permission` WHERE `permissionid`='75';
+DELETE FROM `permission` WHERE `permissionid`='76';
+DELETE FROM `permission` WHERE `permissionid`='81';
+DELETE FROM `permission` WHERE `permissionid`='82';
+DELETE FROM `permission` WHERE `permissionid`='83';
+DELETE FROM `permission` WHERE `permissionid`='84';
+DELETE FROM `permission` WHERE `permissionid`='85';
+DELETE FROM `permission` WHERE `permissionid`='86';
+DELETE FROM `permission` WHERE `permissionid`='87';
+DELETE FROM `permission` WHERE `permissionid`='88';
+DELETE FROM `permission` WHERE `permissionid`='89';
+DELETE FROM `permission` WHERE `permissionid`='90';
+DELETE FROM `permission` WHERE `permissionid`='95';
+DELETE FROM `permission` WHERE `permissionid`='96';
+DELETE FROM `permission` WHERE `permissionid`='97';
+DELETE FROM `permission` WHERE `permissionid`='98';
+DELETE FROM `permission` WHERE `permissionid`='99';
+DELETE FROM `permission` WHERE `permissionid`='100';
+DELETE FROM `permission` WHERE `permissionid`='119';
+DELETE FROM `permission` WHERE `permissionid`='120';
+DELETE FROM `permission` WHERE `permissionid`='121';
+DELETE FROM `permission` WHERE `permissionid`='122';
+DELETE FROM `permission` WHERE `permissionid`='123';
+DELETE FROM `permission` WHERE `permissionid`='124';
+DELETE FROM `permission` WHERE `permissionid`='125';
+DELETE FROM `permission` WHERE `permissionid`='126';
+DELETE FROM `permission` WHERE `permissionid`='127';
+DELETE FROM `permission` WHERE `permissionid`='132';
+DELETE FROM `permission` WHERE `permissionid`='133';
+DELETE FROM `permission` WHERE `permissionid`='134';
+DELETE FROM `permission` WHERE `permissionid`='135';
+DELETE FROM `permission` WHERE `permissionid`='136';
+DELETE FROM `permission` WHERE `permissionid`='137';
+DELETE FROM `permission` WHERE `permissionid`='138';
+DELETE FROM `permission` WHERE `permissionid`='139';
+DELETE FROM `permission` WHERE `permissionid`='144';
+DELETE FROM `permission` WHERE `permissionid`='145';
+DELETE FROM `permission` WHERE `permissionid`='146';
+DELETE FROM `permission` WHERE `permissionid`='147';
+DELETE FROM `permission` WHERE `permissionid`='148';
+DELETE FROM `permission` WHERE `permissionid`='149';
+DELETE FROM `permission` WHERE `permissionid`='150';
+DELETE FROM `permission` WHERE `permissionid`='151';
+DELETE FROM `permission` WHERE `permissionid`='152';
+DELETE FROM `permission` WHERE `permissionid`='153';
+DELETE FROM `permission` WHERE `permissionid`='178';
+DELETE FROM `permission` WHERE `permissionid`='181';
+DELETE FROM `permission` WHERE `permissionid`='179';
+DELETE FROM `permission` WHERE `permissionid`='182';
+DELETE FROM `permission` WHERE `permissionid`='180';
+DELETE FROM `permission` WHERE `permissionid`='192';
+DELETE FROM `permission` WHERE `permissionid`='193';
+DELETE FROM `permission` WHERE `permissionid`='194';
+DELETE FROM `permission` WHERE `permissionid`='195';
+DELETE FROM `permission` WHERE `permissionid`='200';
+DELETE FROM `permission` WHERE `permissionid`='201';
+DELETE FROM `permission` WHERE `permissionid`='202';
+DELETE FROM `permission` WHERE `permissionid`='203';
+DELETE FROM `permission` WHERE `permissionid`='204';
+DELETE FROM `permission` WHERE `permissionid`='205';
+DELETE FROM `permission` WHERE `permissionid`='183';
+DELETE FROM `permission` WHERE `permissionid`='158';
+DELETE FROM `permission` WHERE `permissionid`='159';
+DELETE FROM `permission` WHERE `permissionid`='160';
+DELETE FROM `permission` WHERE `permissionid`='161';
+DELETE FROM `permission` WHERE `permissionid`='162';
+DELETE FROM `permission` WHERE `permissionid`='163';
+
+
+/*--- 30 octubre 2014 Ing. Rodwyn Moreno ---*/
+#Alters para el lavantamiento del menu OGSM 
+#INSERT INTO `menu` (`menudsc`, `menuparentid`, `menulink`, `menuorder`, `active`, `level`, `icon`) VALUES ('OGSM', '0', '/portoprint/OGSM/index', '6', '1', '0', 'glyphicon glyphicon-calendar');
+#Cambiar primary key idusertypemenu a autoincrementable.
+ALTER TABLE `usertypemenu` CHANGE COLUMN `idusertypemenu` `idusertypemenu` INT(10) NOT NULL AUTO_INCREMENT ;
+#Insertar relación tipo de usuario con menu.
+INSERT INTO `usertypemenu` (`usertype`, `menuid`, `activo`) VALUES ('1', '43', '1');
+#Insertar relación privilegios del usuario en el menu.
+INSERT INTO `userprivilege` (`userid`, `menuid`, `menuread`, `menuadd`, `menuedit`, `menudelete`) VALUES ('1', '43', '1', '1', '1', '1');
+
+#Insertar Áreas 
+INSERT INTO `todoarea` (`areaid`, `areadsc`, `userid`) VALUES ('1', 'Impresos', '275');
+INSERT INTO `todoarea` (`areaid`, `areadsc`, `userid`) VALUES ('2', 'Promocionales', '384');
+INSERT INTO `todoarea` (`areaid`, `areadsc`, `userid`) VALUES ('3', 'Displays', '442');
+INSERT INTO `todoarea` (`areaid`, `areadsc`, `userid`) VALUES ('4', 'Bodega', '139');
+INSERT INTO `todoarea` (`areaid`, `areadsc`, `userid`) VALUES ('5', 'Finanzas', '1');
+INSERT INTO `todoarea` (`areaid`, `areadsc`, `userid`) VALUES ('6', 'R. Humanos', '1');
+INSERT INTO `todoarea` (`areaid`, `areadsc`, `userid`) VALUES ('7', 'Calidad', '306');
+INSERT INTO `todoarea` (`areaid`, `areadsc`, `userid`) VALUES ('8', 'Programación', '1');
+INSERT INTO `todoarea` (`areaid`, `areadsc`, `userid`) VALUES ('9', 'Pintas', '1');
+INSERT INTO `todoarea` (`areaid`, `areadsc`, `userid`) VALUES ('10', 'Ventas', '1');
+INSERT INTO `todoarea` (`areaid`, `areadsc`, `userid`) VALUES ('11', 'ZENITH', '1');
+INSERT INTO `todoarea` (`areaid`, `areadsc`, `userid`) VALUES ('12', 'In Store', '1');
+INSERT INTO `todoarea` (`areaid`, `areadsc`, `userid`) VALUES ('13', 'Sub Dirección', '1');
+INSERT INTO `todoarea` (`areaid`, `areadsc`, `userid`) VALUES ('14', 'Gerente General', '1');
+#Alter campo active 
+ALTER TABLE `todoarea` ADD COLUMN `active` ENUM('0','1') NOT NULL DEFAULT '1' AFTER `userid`;
+
+# 05-noviembre-2014 Ing. Rodwyn Moreno
+CREATE TABLE IF NOT EXISTS `userarea` (
+  `userareaid` INT(11) NOT NULL AUTO_INCREMENT,
+  `userid` INT(11) NOT NULL,
+  `areaid` INT(11) NOT NULL,
+  PRIMARY KEY (`userareaid`),
+  INDEX `fk_userarea_user1_idx` (`userid` ASC),
+  INDEX `fk_userarea_todoarea1_idx` (`areaid` ASC),
+  CONSTRAINT `fk_userarea_user1`
+    FOREIGN KEY (`userid`)
+    REFERENCES `user` (`userid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_userarea_todoarea1`
+    FOREIGN KEY (`areaid`)
+    REFERENCES `todoarea` (`areaid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+
+DEFAULT CHARACTER SET = utf8;
+
+
+
+
+/* ALTER A TABLA RATE PARA IDENTIFICAR TIPO DE COTIZACION (NORMAL=0, RENEGOCIACION=T,SCREENSHOT=S) EDGAR SANABRIA 14-11-2014*/
+ALTER TABLE rate ADD COLUMN `raterenegotiate` VARCHAR(45) NULL DEFAULT '0'  AFTER `active` ;
+
+/* ALTER A TABLA PERMISSION AGREGA DOS PERMISOS ADICIONALES PARA BOTON SCREENSHOT Y RENEGOCIACION EDGAR SANABRIA 19-11-2014*/
+INSERT INTO `permission` (`menuid`, `permissiondsc`, `permissiongroup`) VALUES ('11', 'Activo', 'ScreenShot');
+INSERT INTO `permission` (`menuid`, `permissiondsc`, `permissiongroup`) VALUES ('11', 'Activo', 'Renegociacion');
+
+/*COLUMNAS PARA HISTORIA EN DATOS DE RATES EDGAR SANABRIA 19-11-2014*/
+ALTER TABLE `rateart` DROP FOREIGN KEY `FK_rateart_rate` ;
+ALTER TABLE `rateart` 
+DROP INDEX `FK_rateart_rate` ;
+
+ALTER TABLE rateart ADD COLUMN `ratechangeartid` INT(11) NULL DEFAULT '0';
+ALTER TABLE rateart ADD COLUMN `version_hist` INT(11) NULL DEFAULT '1'  ;
+ALTER TABLE `rateart` ADD COLUMN `date_histo` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP  AFTER `version_hist` ;
+
+ALTER TABLE ratecolortest ADD COLUMN `version_hist` INT(11) NULL DEFAULT '1'   ;
+ALTER TABLE `ratecolortest` ADD COLUMN `date_histo` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP  AFTER `version_hist` ;
+
+/* MODIFICAR TABLA RATEPRODUCCION PARA PODER INSERTAR HISTORIA DE INFORMACION DE PRODUCCION POR RATE EDGAR SANABRIA 19-11-2014*/
+ALTER TABLE `rateproduction` DROP FOREIGN KEY `FK_rateproduction_rate` ;
+
+ALTER TABLE `rateproduction` 
+DROP INDEX `FK_rateproduction_rate` ;
+ALTER TABLE `rateproduction` CHANGE COLUMN `rateid` `rateid` INT(11) NOT NULL  ;
+
+ALTER TABLE `ratezerotest` DROP FOREIGN KEY `FK_ratezerotest_rate` ;
+ALTER TABLE `ratezerotest` 
+DROP INDEX `FK_ratezerotest_rate` ;
+ALTER TABLE `ratezerotest` CHANGE COLUMN `rateid` `rateid` INT(11) NOT NULL  ;
+
+
+ALTER TABLE rateproduction ADD COLUMN `version_hist` INT(11) NULL DEFAULT '1';
+ALTER TABLE `rateproduction` ADD COLUMN `date_histo` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP  AFTER `version_hist` ;
+ALTER TABLE ratezerotest ADD COLUMN `version_hist` INT(11) NULL DEFAULT '1';
+ALTER TABLE ratezerotest ADD COLUMN `ratechangeartid` INT(11) NULL DEFAULT '0';
+ALTER TABLE `ratezerotest` ADD COLUMN `date_histo` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP  AFTER `version_hist` ;
+
+# 21-NOV-2014 Ing. Rodwyn Moreno
+# Se agrego el tipo de todo P=personal.
+ALTER TABLE `todo` CHANGE COLUMN `todotype` `todotype` ENUM('O','C','P') NOT NULL ;
+
+#24-NOV-2014 Ing. Rodwyn Moreno
+#Se agrego el menu Reporte
+INSERT INTO `menu` (`menudsc`, `menuparentid`, `menulink`, `menuorder`, `active`, `level`, `icon`) VALUES ('Actividad', '0', '/portoprint/access/index', '7', '1', '0', 'glyphicon glyphicon-list-alt');
+#Insertar relación tipo de usuario con menu
+#INSERT INTO `usertypemenu` (`usertype`, `menuid`, `activo`) VALUES ('1', '44', '1');
+#Insertar relación privilegios del usuario en el menu.
+INSERT INTO `userprivilege` (`userid`, `menuid`, `menuread`, `menuadd`, `menuedit`, `menudelete`) VALUES ('1', '44', '1', '1', '1', '1');
+
+
+/* ASIGNACION DE MODULO PROVEDORES Y PORTOPRINT EDGAR SANABRIA 19-11-2014*/
+UPDATE `menu` SET `menulink`='/portoprint/user/index', `active`='1', `icon`='glyphicon glyphicon-user' WHERE `menuid`='16';
+UPDATE `menu` SET `menulink`='/portoprint/user/index' WHERE `menuid`='15';
+UPDATE `menu` SET `menulink`='/portoprint/user/supplier', `active`='1', `icon`='glyphicon glyphicon-registration-mark' WHERE `menuid`='18';
+
+
+/* Columna bandera para cargar archivo de proveedor EDGAR SANABRIA 28-11-2014*/
+ALTER TABLE `ratefile` ADD COLUMN `ratefilesupplier` INT NULL DEFAULT 0  AFTER `dateupload` ;
+ALTER TABLE todoarea ADD COLUMN `serviceid` INT(11) NULL  AFTER `active` ;
+ALTER TABLE `todoarea` CHANGE COLUMN `serviceid` `serviceid` INT(11) NULL DEFAULT 0  , ADD COLUMN `companyid` INT(11) NULL  AFTER `serviceid` ;
+UPDATE `todoarea` SET `companyid`='6' ;
+UPDATE `todoarea` SET `serviceid`='1' WHERE `areaid`='1';
+UPDATE `todoarea` SET `serviceid`='1109' WHERE `areaid`='2';
+UPDATE `todoarea` SET `serviceid`='4363' WHERE `areaid`='3';
+
+#01-DIC-2014
+#Ing. Rodwyn Moreno - Se inserto una área con id cero para no romper el esquema de foreign keys.
+INSERT INTO `todoarea` (`areaid`, `areadsc`, `userid`, `active`, `companyid`) VALUES ('0', 'Sin área', '1', '1', '6');
+
+#11-DIC-2014
+#Ing. Rodwyn Moreno - Se agrego un campo para almacenar el ID del responsable de área.
+ALTER TABLE `todo` ADD COLUMN `managerid` INT(11) NULL AFTER `usercreate`;
+
+/*INSERTAR ESTATUS ENVIADO PRECIO EDGAR SANABRIA 11-12-2014*/
+INSERT INTO `status` (`statusdsc`, `note`, `color`, `statustype`) VALUES ('Captura de Precio Proveedor', 'proveedor que sube precio', '#000000', '2');
+ALTER TABLE `ratetracker` ADD COLUMN `supplierid` INT(11) NULL DEFAULT '0' AFTER `userid` ;
+ALTER TABLE `supplieruser` ADD COLUMN `email` VARCHAR(45) NULL  AFTER `mlastname` , ADD COLUMN `phone` VARCHAR(45) NULL  AFTER `email` ;
+
+## hasta aqui esta corriendo todos los alters en base test de produccion
+
+/*ESTATUS EN RATEID EDGAR SANABRIA 17-12-2014*/
+
+
+CREATE  TABLE `status_production` (
+  `status_productionid` INT NOT NULL AUTO_INCREMENT ,
+  `status_productiondsc` VARCHAR(120) NOT NULL ,
+  `status_productionporcent` VARCHAR(45) NULL DEFAULT '0' ,
+  `status_productionorder` INT NULL ,
+  `status_productiontype` VARCHAR(45) NULL ,
+  PRIMARY KEY (`status_productionid`) ,
+  UNIQUE INDEX `status_productionid_UNIQUE` (`status_productionid` ASC) );
+
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODP'	,	'N'	,'	1	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODP Cancelada Proveedor'	,	'C'	,'	2	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODP Cancelada Cliente'	,	'0'	,'	3	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODC'	,	'9'	,'	4	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODC a tiempo'	,	'N'	,'	5	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODC demorada'	,	'N'	,'	6	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODC Cancelada Proveedor'	,	'C'	,'	7	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODC Cancelada Cliente'	,	'0'	,'	8	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Iniciando Proceso de Produccion'	,	'4'	,'	9	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Imprimiendo'	,	'9'	,'	10	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('En proceso de acabados'	,	'4'	,'	11	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('En proceso de empaque'	,	'9'	,'	12	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Listo para embarque'	,	'9'	,'	13	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('En ruta de entrega'	,	'9'	,'	14	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Entregado/remisión pendiente'	,	'9'	,'	15	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Entregado/remisión enviada'	,	'9'	,'	16	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('En resguardo (Formato de Produccion enviado)'	,	'N'	,'	17	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Recotización'	,	'N'	,'	18	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Formato de Entrada a tiempo'	,	'N'	,'	19	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Cita a tiempo'	,	'N'	,'	20	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Cita demorada'	,	'N'	,'	21	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Cita cancelada'	,	'N'	,'	22	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('GR Pendiente'	,	'N'	,'	23	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Facturado'	,	'10'	,'	24	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Direccion de entrega a tiempo'	,	'N'	,'	25	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Direccion de entrega demorada'	,	'N'	,'	26	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Distribucion/Split a tiempo'	,	'N'	,'	27	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Distribucion/Split demorado'	,	'N'	,'	28	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Prueba de color a tiempo'	,	'N'	,'	29	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Prueba de color demorada'	,	'N'	,'	30	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Prueba de color aprobada'	,	'5'	,'	31	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Prueba de color rechazada'	,	'N'	,'	32	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Prueba cero a tiempo'	,	'N'	,'	33	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Prueba cero demorada'	,	'N'	,'	34	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Prueba cero aprobada'	,	'5'	,'	35	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Prueba cero rechazada'	,	'N'	,'	36	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de calidad (color/tono)'	,	'N'	,'	37	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de calidad (acabados)'	,	'N'	,'	38	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de calidad (empaque)'	,	'N'	,'	39	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de entrega (bodega no recibe)'	,	'N'	,'	40	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de entrega (transporte demorado)'	,	'N'	,'	41	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de entrega (formato de entrada demorado)'	,	'N'	,'	42	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Produccion a tiempo'	,	'N'	,'	43	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Produccion demorada'	,	'N'	,'	44	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Produccion Rechazada'	,	'N'	,'	45	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Arte a tiempo'	,	'9'	,'	46	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Arte demorado (Cliente)'	,	'N'	,'	47	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Arte demorado (Portoprint)'	,	'N'	,'	48	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Arte por ajustar (Portoprint)'	,	'N'	,'	49	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Arte por ajustar (Cliente)'	,	'N'	,'	50	',	'1');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Formato de Entrada a tiempo'	,	'N'	,'	51	',	'1');
+												
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODP'	,	'N'	,'	1	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODP Cancelada Proveedor'	,	'C'	,'	2	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODP Cancelada Cliente'	,	'0'	,'	3	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODC'	,	'9'	,'	4	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODC a tiempo'	,	'N'	,'	5	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODC demorada'	,	'N'	,'	6	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODC Cancelada Proveedor'	,	'C'	,'	7	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODC Cancelada Cliente'	,	'0'	,'	8	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Iniciando Proceso de Produccion'	,	'4'	,'	9	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('En Produccion'	,	'9'	,'	10	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('En Personalizacion'	,	'4'	,'	11	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('En proceso de empaque'	,	'9'	,'	12	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Listo para embarque'	,	'9'	,'	13	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('En ruta de entrega'	,	'9'	,'	14	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Entregado/remisión pendiente'	,	'9'	,'	15	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Entregado/remisión enviada'	,	'9'	,'	16	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('En resguardo (Formato de Produccion enviado)'	,	'N'	,'	17	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Recotización'	,	'N'	,'	18	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Formato de Entrada a tiempo'	,	'N'	,'	19	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Cita a tiempo'	,	'N'	,'	20	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Cita demorada'	,	'N'	,'	21	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Cita cancelada'	,	'N'	,'	22	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('GR Pendiente'	,	'N'	,'	23	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Facturado'	,	'10'	,'	24	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Direccion de entrega a tiempo'	,	'N'	,'	25	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Direccion de entrega demorada'	,	'N'	,'	26	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Distribucion/Split a tiempo'	,	'N'	,'	27	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Distribucion/Split demorado'	,	'N'	,'	28	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Render virtual a tiempo'	,	'N'	,'	29	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Render virtual demorada'	,	'N'	,'	30	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Render virtual aprobado'	,	'5'	,'	31	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Render virtual rechazado'	,	'N'	,'	32	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Muestra final  a tiempo'	,	'N'	,'	33	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Muestra Final demorada'	,	'N'	,'	34	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Muestra final  aprobada'	,	'5'	,'	35	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Muestra final  rechazada'	,	'N'	,'	36	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de calidad (color/tono)'	,	'N'	,'	37	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de calidad (acabados)'	,	'N'	,'	38	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de calidad (empaque)'	,	'N'	,'	39	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de entrega (bodega no recibe)'	,	'N'	,'	40	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de entrega (transporte demorado)'	,	'N'	,'	41	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de entrega (formato de entrada demorado)'	,	'N'	,'	42	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Produccion a tiempo'	,	'N'	,'	43	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Produccion demorada'	,	'N'	,'	44	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Produccion Rechazada'	,	'N'	,'	45	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Arte a tiempo'	,	'9'	,'	46	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Arte demorado (Cliente)'	,	'N'	,'	47	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Arte demorado (Portoprint)'	,	'N'	,'	48	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Arte por ajustar (Portoprint)'	,	'N'	,'	49	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Arte por ajustar (Cliente)'	,	'N'	,'	50	',	'2');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Formato de Entrada a tiempo'	,	'N'	,'	51	',	'2');
+												
+												
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODP'	,	'N'	,'	1	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODP Cancelada Proveedor'	,	'C'	,'	2	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODP Cancelada Cliente'	,	'0'	,'	3	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODC'	,	'9'	,'	4	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODC a tiempo'	,	'N'	,'	5	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODC demorada'	,	'N'	,'	6	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODC Cancelada Proveedor'	,	'C'	,'	7	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('ODC Cancelada Cliente'	,	'0'	,'	8	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Iniciando Proceso de Produccion'	,	'4'	,'	9	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Fabricacion de estructura'	,	'9'	,'	10	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('En proceso de acabados/ pintura/ ensamble'	,	'4'	,'	11	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('En proceso de empaque'	,	'9'	,'	12	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Listo para embarque'	,	'9'	,'	13	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('En ruta de entrega'	,	'9'	,'	14	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Entregado/remisión pendiente'	,	'9'	,'	15	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Entregado/remisión enviada'	,	'9'	,'	16	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('En resguardo (Formato de Produccion enviado)'	,	'N'	,'	17	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Recotización'	,	'N'	,'	18	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Formato de Entrada a tiempo'	,	'N'	,'	19	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Cita a tiempo'	,	'N'	,'	20	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Cita demorada'	,	'N'	,'	21	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Cita cancelada'	,	'N'	,'	22	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('GR Pendiente'	,	'N'	,'	23	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Facturado'	,	'10'	,'	24	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Direccion de entrega a tiempo'	,	'N'	,'	25	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Direccion de entrega demorada'	,	'N'	,'	26	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Distribucion/Split a tiempo'	,	'N'	,'	27	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Distribucion/Split demorado'	,	'N'	,'	28	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Prueba de color a tiempo'	,	'N'	,'	29	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Prueba de color demorada'	,	'N'	,'	30	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Prueba de color aprobada'	,	'5'	,'	31	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Prueba de color rechazada'	,	'N'	,'	32	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Primer pieza de produccion a tiempo'	,	'N'	,'	33	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Primer pieza de produccion demorada'	,	'N'	,'	34	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Primer pieza de produccion aprobada'	,	'5'	,'	35	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Primer pieza de produccion rechazada'	,	'N'	,'	36	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de calidad (color/tono/estructura)'	,	'N'	,'	37	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de calidad (acabados)'	,	'N'	,'	38	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de calidad (empaque)'	,	'N'	,'	39	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de entrega (bodega no recibe)'	,	'N'	,'	40	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de entrega (transporte demorado)'	,	'N'	,'	41	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Problemas de entrega (formato de entrada demorado)'	,	'N'	,'	42	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Produccion a tiempo'	,	'N'	,'	43	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Produccion demorada'	,	'N'	,'	44	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Produccion Rechazada'	,	'N'	,'	45	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Arte a tiempo'	,	'9'	,'	46	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Arte demorado (Cliente)'	,	'N'	,'	47	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Arte demorado (Portoprint)'	,	'N'	,'	48	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Arte por ajustar (Portoprint)'	,	'N'	,'	49	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Arte por ajustar (Cliente)'	,	'N'	,'	50	',	'3');
+INSERT INTO `status_production` (`status_productiondsc`	,	`status_productionporcent`	,	`status_productionorder`	,	`status_productiontype`) VALUES ('Formato de Entrada a tiempo'	,	'N'	,'	51	',	'3');
+
+
+
+CREATE  TABLE `hist_production` (
+  `hist_productionid` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+  `rateid` INT(11) NULL ,
+  `type` VARCHAR(45) NULL ,
+  `status_productionid` INT(11) NULL ,
+  `ratetrackerid` INT(11) NULL ,
+  PRIMARY KEY (`hist_productionid`) );
+
+ALTER TABLE `ratetracker` ADD COLUMN `ratefilter` VARCHAR(45) NULL DEFAULT '0'  AFTER `supplierid` ;
+
+ALTER TABLE `status_production` ADD COLUMN `active` INT NULL DEFAULT '1'  AFTER `status_productiontype` ;
+
+ALTER TABLE `ratetracker` DROP FOREIGN KEY `ratetracker_ibfk_2` ;
+ALTER TABLE `ratetracker` 
+DROP INDEX `statusid` ;
+
+
+UPDATE `status_production` SET `status_productionorder`='1' WHERE `status_productionid`='9';
+UPDATE `status_production` SET `status_productionorder`='2' WHERE `status_productionid`='10';
+UPDATE `status_production` SET `status_productionorder`='3' WHERE `status_productionid`='11';
+UPDATE `status_production` SET `status_productionorder`='4' WHERE `status_productionid`='12';
+UPDATE `status_production` SET `status_productionorder`='5' WHERE `status_productionid`='13';
+UPDATE `status_production` SET `status_productionorder`='6' WHERE `status_productionid`='14';
+UPDATE `status_production` SET `status_productionorder`='7' WHERE `status_productionid`='15';
+UPDATE `status_production` SET `status_productionorder`='8' WHERE `status_productionid`='16';
+UPDATE `status_production` SET `status_productionorder`='9' WHERE `status_productionid`='17';
+UPDATE `status_production` SET `status_productionorder`='10' WHERE `status_productionid`='18';
+UPDATE `status_production` SET `status_productionorder`='11' WHERE `status_productionid`='19';
+UPDATE `status_production` SET `status_productionorder`='12' WHERE `status_productionid`='20';
+UPDATE `status_production` SET `status_productionorder`='13' WHERE `status_productionid`='21';
+UPDATE `status_production` SET `status_productionorder`='14' WHERE `status_productionid`='22';
+UPDATE `status_production` SET `status_productionorder`='15' WHERE `status_productionid`='23';
+UPDATE `status_production` SET `status_productionorder`='16' WHERE `status_productionid`='24';
+UPDATE `status_production` SET `status_productionorder`='17' WHERE `status_productionid`='25';
+UPDATE `status_production` SET `status_productionorder`='18' WHERE `status_productionid`='26';
+UPDATE `status_production` SET `status_productionorder`='19' WHERE `status_productionid`='27';
+UPDATE `status_production` SET `status_productionorder`='20' WHERE `status_productionid`='28';
+UPDATE `status_production` SET `status_productionorder`='21' WHERE `status_productionid`='29';
+UPDATE `status_production` SET `status_productionorder`='22' WHERE `status_productionid`='30';
+UPDATE `status_production` SET `status_productionorder`='23' WHERE `status_productionid`='31';
+UPDATE `status_production` SET `status_productionorder`='24' WHERE `status_productionid`='32';
+UPDATE `status_production` SET `status_productionorder`='25' WHERE `status_productionid`='33';
+UPDATE `status_production` SET `status_productionorder`='26' WHERE `status_productionid`='34';
+UPDATE `status_production` SET `status_productionorder`='27' WHERE `status_productionid`='35';
+UPDATE `status_production` SET `status_productionorder`='28' WHERE `status_productionid`='36';
+UPDATE `status_production` SET `status_productionorder`='29' WHERE `status_productionid`='37';
+UPDATE `status_production` SET `status_productionorder`='30' WHERE `status_productionid`='38';
+UPDATE `status_production` SET `status_productionorder`='31' WHERE `status_productionid`='39';
+UPDATE `status_production` SET `status_productionorder`='32' WHERE `status_productionid`='40';
+UPDATE `status_production` SET `status_productionorder`='33' WHERE `status_productionid`='41';
+UPDATE `status_production` SET `status_productionorder`='34' WHERE `status_productionid`='42';
+UPDATE `status_production` SET `status_productionorder`='35' WHERE `status_productionid`='43';
+UPDATE `status_production` SET `status_productionorder`='36' WHERE `status_productionid`='44';
+UPDATE `status_production` SET `status_productionorder`='37' WHERE `status_productionid`='45';
+UPDATE `status_production` SET `status_productionorder`='38' WHERE `status_productionid`='46';
+UPDATE `status_production` SET `status_productionorder`='39' WHERE `status_productionid`='47';
+UPDATE `status_production` SET `status_productionorder`='40' WHERE `status_productionid`='48';
+UPDATE `status_production` SET `status_productionorder`='41' WHERE `status_productionid`='49';
+UPDATE `status_production` SET `status_productionorder`='42' WHERE `status_productionid`='50';
+UPDATE `status_production` SET `status_productionorder`='43' WHERE `status_productionid`='51';
+UPDATE `status_production` SET `status_productionorder`='44' WHERE `status_productionid`='2';
+UPDATE `status_production` SET `status_productionorder`='45' WHERE `status_productionid`='3';
+UPDATE `status_production` SET `status_productionorder`='46' WHERE `status_productionid`='5';
+UPDATE `status_production` SET `status_productionorder`='47' WHERE `status_productionid`='6';
+UPDATE `status_production` SET `status_productionorder`='48' WHERE `status_productionid`='7';
+UPDATE `status_production` SET `status_productionorder`='49' WHERE `status_productionid`='8';
+
+UPDATE `status_production` SET `status_productionorder`='1' WHERE `status_productionid`='60';
+UPDATE `status_production` SET `status_productionorder`='2' WHERE `status_productionid`='61';
+UPDATE `status_production` SET `status_productionorder`='3' WHERE `status_productionid`='62';
+UPDATE `status_production` SET `status_productionorder`='4' WHERE `status_productionid`='63';
+UPDATE `status_production` SET `status_productionorder`='5' WHERE `status_productionid`='64';
+UPDATE `status_production` SET `status_productionorder`='6' WHERE `status_productionid`='65';
+UPDATE `status_production` SET `status_productionorder`='7' WHERE `status_productionid`='66';
+UPDATE `status_production` SET `status_productionorder`='8' WHERE `status_productionid`='67';
+UPDATE `status_production` SET `status_productionorder`='9' WHERE `status_productionid`='68';
+UPDATE `status_production` SET `status_productionorder`='10' WHERE `status_productionid`='69';
+UPDATE `status_production` SET `status_productionorder`='11' WHERE `status_productionid`='70';
+UPDATE `status_production` SET `status_productionorder`='12' WHERE `status_productionid`='71';
+UPDATE `status_production` SET `status_productionorder`='13' WHERE `status_productionid`='72';
+UPDATE `status_production` SET `status_productionorder`='14' WHERE `status_productionid`='73';
+UPDATE `status_production` SET `status_productionorder`='15' WHERE `status_productionid`='74';
+UPDATE `status_production` SET `status_productionorder`='16' WHERE `status_productionid`='75';
+UPDATE `status_production` SET `status_productionorder`='17' WHERE `status_productionid`='76';
+UPDATE `status_production` SET `status_productionorder`='18' WHERE `status_productionid`='77';
+UPDATE `status_production` SET `status_productionorder`='19' WHERE `status_productionid`='78';
+UPDATE `status_production` SET `status_productionorder`='20' WHERE `status_productionid`='79';
+UPDATE `status_production` SET `status_productionorder`='21' WHERE `status_productionid`='80';
+UPDATE `status_production` SET `status_productionorder`='22' WHERE `status_productionid`='81';
+UPDATE `status_production` SET `status_productionorder`='23' WHERE `status_productionid`='82';
+UPDATE `status_production` SET `status_productionorder`='24' WHERE `status_productionid`='83';
+UPDATE `status_production` SET `status_productionorder`='25' WHERE `status_productionid`='84';
+UPDATE `status_production` SET `status_productionorder`='26' WHERE `status_productionid`='85';
+UPDATE `status_production` SET `status_productionorder`='27' WHERE `status_productionid`='86';
+UPDATE `status_production` SET `status_productionorder`='28' WHERE `status_productionid`='87';
+UPDATE `status_production` SET `status_productionorder`='29' WHERE `status_productionid`='88';
+UPDATE `status_production` SET `status_productionorder`='30' WHERE `status_productionid`='89';
+UPDATE `status_production` SET `status_productionorder`='31' WHERE `status_productionid`='90';
+UPDATE `status_production` SET `status_productionorder`='32' WHERE `status_productionid`='91';
+UPDATE `status_production` SET `status_productionorder`='33' WHERE `status_productionid`='92';
+UPDATE `status_production` SET `status_productionorder`='34' WHERE `status_productionid`='93';
+UPDATE `status_production` SET `status_productionorder`='35' WHERE `status_productionid`='94';
+UPDATE `status_production` SET `status_productionorder`='36' WHERE `status_productionid`='95';
+UPDATE `status_production` SET `status_productionorder`='37' WHERE `status_productionid`='96';
+UPDATE `status_production` SET `status_productionorder`='38' WHERE `status_productionid`='97';
+UPDATE `status_production` SET `status_productionorder`='39' WHERE `status_productionid`='98';
+UPDATE `status_production` SET `status_productionorder`='40' WHERE `status_productionid`='99';
+UPDATE `status_production` SET `status_productionorder`='41' WHERE `status_productionid`='100';
+UPDATE `status_production` SET `status_productionorder`='42' WHERE `status_productionid`='101';
+UPDATE `status_production` SET `status_productionorder`='43' WHERE `status_productionid`='102';
+UPDATE `status_production` SET `status_productionorder`='44' WHERE `status_productionid`='53';
+UPDATE `status_production` SET `status_productionorder`='45' WHERE `status_productionid`='54';
+UPDATE `status_production` SET `status_productionorder`='46' WHERE `status_productionid`='56';
+UPDATE `status_production` SET `status_productionorder`='47' WHERE `status_productionid`='57';
+UPDATE `status_production` SET `status_productionorder`='48' WHERE `status_productionid`='58';
+UPDATE `status_production` SET `status_productionorder`='49' WHERE `status_productionid`='59';
+
+UPDATE `status_production` SET `status_productionorder`='1' WHERE `status_productionid`='111';
+UPDATE `status_production` SET `status_productionorder`='2' WHERE `status_productionid`='112';
+UPDATE `status_production` SET `status_productionorder`='3' WHERE `status_productionid`='113';
+UPDATE `status_production` SET `status_productionorder`='4' WHERE `status_productionid`='114';
+UPDATE `status_production` SET `status_productionorder`='5' WHERE `status_productionid`='115';
+UPDATE `status_production` SET `status_productionorder`='6' WHERE `status_productionid`='116';
+UPDATE `status_production` SET `status_productionorder`='7' WHERE `status_productionid`='117';
+UPDATE `status_production` SET `status_productionorder`='8' WHERE `status_productionid`='118';
+UPDATE `status_production` SET `status_productionorder`='9' WHERE `status_productionid`='119';
+UPDATE `status_production` SET `status_productionorder`='10' WHERE `status_productionid`='120';
+UPDATE `status_production` SET `status_productionorder`='11' WHERE `status_productionid`='121';
+UPDATE `status_production` SET `status_productionorder`='12' WHERE `status_productionid`='122';
+UPDATE `status_production` SET `status_productionorder`='13' WHERE `status_productionid`='123';
+UPDATE `status_production` SET `status_productionorder`='14' WHERE `status_productionid`='124';
+UPDATE `status_production` SET `status_productionorder`='15' WHERE `status_productionid`='125';
+UPDATE `status_production` SET `status_productionorder`='16' WHERE `status_productionid`='126';
+UPDATE `status_production` SET `status_productionorder`='17' WHERE `status_productionid`='127';
+UPDATE `status_production` SET `status_productionorder`='18' WHERE `status_productionid`='128';
+UPDATE `status_production` SET `status_productionorder`='19' WHERE `status_productionid`='129';
+UPDATE `status_production` SET `status_productionorder`='20' WHERE `status_productionid`='130';
+UPDATE `status_production` SET `status_productionorder`='21' WHERE `status_productionid`='131';
+UPDATE `status_production` SET `status_productionorder`='22' WHERE `status_productionid`='132';
+UPDATE `status_production` SET `status_productionorder`='23' WHERE `status_productionid`='133';
+UPDATE `status_production` SET `status_productionorder`='24' WHERE `status_productionid`='134';
+UPDATE `status_production` SET `status_productionorder`='25' WHERE `status_productionid`='135';
+UPDATE `status_production` SET `status_productionorder`='26' WHERE `status_productionid`='136';
+UPDATE `status_production` SET `status_productionorder`='27' WHERE `status_productionid`='137';
+UPDATE `status_production` SET `status_productionorder`='28' WHERE `status_productionid`='138';
+UPDATE `status_production` SET `status_productionorder`='29' WHERE `status_productionid`='139';
+UPDATE `status_production` SET `status_productionorder`='30' WHERE `status_productionid`='140';
+UPDATE `status_production` SET `status_productionorder`='31' WHERE `status_productionid`='141';
+UPDATE `status_production` SET `status_productionorder`='32' WHERE `status_productionid`='142';
+UPDATE `status_production` SET `status_productionorder`='33' WHERE `status_productionid`='143';
+UPDATE `status_production` SET `status_productionorder`='34' WHERE `status_productionid`='144';
+UPDATE `status_production` SET `status_productionorder`='35' WHERE `status_productionid`='145';
+UPDATE `status_production` SET `status_productionorder`='36' WHERE `status_productionid`='146';
+UPDATE `status_production` SET `status_productionorder`='37' WHERE `status_productionid`='147';
+UPDATE `status_production` SET `status_productionorder`='38' WHERE `status_productionid`='148';
+UPDATE `status_production` SET `status_productionorder`='39' WHERE `status_productionid`='149';
+UPDATE `status_production` SET `status_productionorder`='40' WHERE `status_productionid`='150';
+UPDATE `status_production` SET `status_productionorder`='41' WHERE `status_productionid`='151';
+UPDATE `status_production` SET `status_productionorder`='42' WHERE `status_productionid`='152';
+UPDATE `status_production` SET `status_productionorder`='43' WHERE `status_productionid`='153';
+UPDATE `status_production` SET `status_productionorder`='44' WHERE `status_productionid`='104';
+UPDATE `status_production` SET `status_productionorder`='45' WHERE `status_productionid`='105';
+UPDATE `status_production` SET `status_productionorder`='46' WHERE `status_productionid`='107';
+UPDATE `status_production` SET `status_productionorder`='47' WHERE `status_productionid`='108';
+UPDATE `status_production` SET `status_productionorder`='48' WHERE `status_productionid`='109';
+UPDATE `status_production` SET `status_productionorder`='49' WHERE `status_productionid`='110';
+
+CREATE  TABLE `rateremision` (
+  `rateremisionid` INT NOT NULL AUTO_INCREMENT ,
+  `cantparcial` INT NULL ,
+  `rateid` INT NULL ,
+  `datecreate` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP ,
+  PRIMARY KEY (`rateremisionid`) );
+
+INSERT INTO `status` (`statusdsc`, `note`, `color`, `statustype`) VALUES ('Recepcion de BidSheet', 'RBS', '', '1');
+ALTER TABLE `rate` ADD COLUMN `ratebidsheet` DATETIME NULL  AFTER `raterenegotiate` ;
+
+
+#23-DIC-2014
+#Ing. Rodwyn Moreno - Relación usuarios-área (impresos).
+INSERT INTO `userarea` (`userid`, `areaid`) VALUES ('141', '1');
+INSERT INTO `userarea` (`userid`, `areaid`) VALUES ('179', '1');
+INSERT INTO `userarea` (`userid`, `areaid`) VALUES ('351', '1');
+INSERT INTO `userarea` (`userid`, `areaid`) VALUES ('442', '1');
+INSERT INTO `userarea` (`userid`, `areaid`) VALUES ('503', '1');
+
+#promocionales
+INSERT INTO `userarea` (`userid`, `areaid`) VALUES ('343', '2');
+INSERT INTO `userarea` (`userid`, `areaid`) VALUES ('350', '2');
+INSERT INTO `userarea` (`userid`, `areaid`) VALUES ('361', '2');
+INSERT INTO `userarea` (`userid`, `areaid`) VALUES ('405', '2');
+#Displays
+INSERT INTO `userarea` (`userid`, `areaid`) VALUES ('342', '3');
+INSERT INTO `userarea` (`userid`, `areaid`) VALUES ('441', '3');
+INSERT INTO `userarea` (`userid`, `areaid`) VALUES ('437', '3');
+INSERT INTO `userarea` (`userid`, `areaid`) VALUES ('490', '3');
+#Bodega
+INSERT INTO `userarea` (`userid`, `areaid`) VALUES ('139', '4');
+INSERT INTO `userarea` (`userid`, `areaid`) VALUES ('135', '4');
+INSERT INTO `userarea` (`userid`, `areaid`) VALUES ('347', '4');
+INSERT INTO `userarea` (`userid`, `areaid`) VALUES ('341', '4');
+
+INSERT INTO `usertypemenu` (`usertype`, `menuid`, `activo`) VALUES ('1', '37', '1');
+INSERT INTO `usertypemenu` (`usertype`, `menuid`, `activo`) VALUES ('1', '38', '1');
+INSERT INTO `usertypemenu` (`usertype`, `menuid`, `activo`) VALUES ('1', '39', '1');
+INSERT INTO `usertypemenu` (`usertype`, `menuid`, `activo`) VALUES ('1', '40', '1');
+INSERT INTO `usertypemenu` (`usertype`, `menuid`, `activo`) VALUES ('1', '41', '1');
+
+insert into userprivilege
+select null,up.userid, ro.menuid, 1, 1, 1,1 from  usertypemenu ro 
+left join userprivilege up on up.menuid=6
+where ro.menuid in (37,38,39,40,41);
+
+
+/***** hasta aqio en real cargado 26 de diciembre 2014  */
+UPDATE `userprivilege` SET `menuadd`='1', `menuedit`='1', `menudelete`='1' 
+WHERE `menuid` in (1,5,9,15);   
+
+/*Agregar datos de proveedor EDGAR SANABRIA 17-12-2014*/
+ALTER TABLE `supplier` ADD COLUMN `contryid` VARCHAR(45) NULL  AFTER `block` , ADD COLUMN `stateid` VARCHAR(45) NULL  AFTER `contryid` ;
+
+
+#13-ENE-2015
+#CREAR TABLA ACTIVIDAD
+CREATE TABLE `activity` (
+  `activityid` BIGINT(20) NOT NULL AUTO_INCREMENT,
+  `userid` INT(11) NOT NULL,
+  `menuid` INT(10) UNSIGNED NOT NULL,
+  `activity` VARCHAR(140) CHARACTER SET 'utf8' COLLATE 'utf8_spanish2_ci' NOT NULL,
+  `activitydate` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `type` CHAR NOT NULL DEFAULT 'N',
+  `id` INT(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`activityid`),
+  INDEX `fk_activity_menu1_idx` (`menuid` ASC),
+  INDEX `fk_activity_user1_idx` (`userid` ASC),
+  CONSTRAINT `fk_activity_menu1`
+    FOREIGN KEY (`menuid`)
+    REFERENCES `menu` (`menuid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_activity_user1`
+    FOREIGN KEY (`userid`)
+    REFERENCES `user` (`userid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
+);
+INSERT INTO `menu` (`menuid`, `menudsc`, `menuparentid`, `menuorder`, `active`, `level`) VALUES (0,'N/A', '0', '0', '0', '0');
+
+
+
+CREATE  TABLE `generalform` (
+  `general_formid` INT NOT NULL AUTO_INCREMENT ,
+  `general_form` VARCHAR(100) NULL ,
+  `general_form_type` VARCHAR(80) NULL ,
+  `companyid` INT NOT NULL ,
+  PRIMARY KEY (`general_formid`) );
+
+CREATE  TABLE `formcustomer` (
+  `formcustomerid` INT NOT NULL AUTO_INCREMENT ,
+  `customerid` INT NOT NULL ,
+  `general_formid` INT NOT NULL ,
+  PRIMARY KEY (`formcustomerid`) );
+ALTER TABLE `generalform` ADD COLUMN `userid` INT NOT NULL  AFTER `general_form_type` ;
+
+INSERT INTO `generalform` (`general_formid`,`general_form`,`general_form_type`,`companyid`) VALUES (1,'\"\\$promeds[\\$i] = \\$prome[\\$i]/count(\\$ratesuppliers);\"','PRM',6);
+INSERT INTO `generalform` (`general_formid`,`general_form`,`general_form_type`,`companyid`) VALUES (2,'$svpep[\\$i] = \\$promeds[\\$i]-((\\$promeds[\\$i]*0.93));','SVPEP',6);
+INSERT INTO `generalform` (`general_formid`,`general_form`,`general_form_type`,`companyid`) VALUES (3,'$svtotal[\\$i] =\\$promeds[\\$i]-\\$mins[0][\'quantity_\'.\\$i];','SVT',6);
+INSERT INTO `generalform` (`general_formid`,`general_form`,`general_form_type`,`companyid`) VALUES (4,'$svppt[\\$i] = \\$promeds[\\$i]-((\\$promeds[\\$i]*0.9));','SVP',6);
+INSERT INTO `generalform` (`general_formid`,`general_form`,`general_form_type`,`companyid`) VALUES (5,'$svex[\\$i] = \\$svtotal[\\$i]-\\$svpep[\\$i]-\\$svppt[\\$i]','SVEX',6);
+INSERT INTO `generalform` (`general_formid`,`general_form`,`general_form_type`,`companyid`) VALUES (6,'$ppt[\\$i] = \\$promeds[\\$i]*0.93;','PPTB',6);
+INSERT INTO `generalform` (`general_formid`,`general_form`,`general_form_type`,`companyid`) VALUES (7,'$ppt[\\$i] = \\$promeds[\\$i]-\\$svpep[\\$i]-(\\$svex[\\$i]/2);','PPTA',6);
+INSERT INTO `generalform` (`general_formid`,`general_form`,`general_form_type`,`companyid`) VALUES (8,'$ppt[\\$i] = \\$promeds[\\$i]*0.90;','PPTB',6);
+INSERT INTO `generalform` (`general_formid`,`general_form`,`general_form_type`,`companyid`) VALUES (9,'$svpep[\\$i] = \\$promeds[\\$i]-((\\$promeds[\\$i]*0.90));','SVPEP',6);
+
+INSERT INTO `formcustomer` (`formcustomerid`,`customerid`,`general_formid`) VALUES (1,9,1);
+INSERT INTO `formcustomer` (`formcustomerid`,`customerid`,`general_formid`) VALUES (2,9,2);
+INSERT INTO `formcustomer` (`formcustomerid`,`customerid`,`general_formid`) VALUES (3,9,3);
+INSERT INTO `formcustomer` (`formcustomerid`,`customerid`,`general_formid`) VALUES (4,9,4);
+INSERT INTO `formcustomer` (`formcustomerid`,`customerid`,`general_formid`) VALUES (5,9,5);
+INSERT INTO `formcustomer` (`formcustomerid`,`customerid`,`general_formid`) VALUES (6,9,6);
+INSERT INTO `formcustomer` (`formcustomerid`,`customerid`,`general_formid`) VALUES (7,9,7);
+INSERT INTO `formcustomer` (`customerid`, `general_formid`) VALUES ('45', '1');
+INSERT INTO `formcustomer` (`customerid`, `general_formid`) VALUES ('45', '9');
+INSERT INTO `formcustomer` (`customerid`, `general_formid`) VALUES ('45', '8');
+INSERT INTO `formcustomer` (`customerid`, `general_formid`) VALUES ('45', '3');
+INSERT INTO `formcustomer` (`customerid`, `general_formid`) VALUES ('45', '4');
+INSERT INTO `formcustomer` (`customerid`, `general_formid`) VALUES ('45', '5');
+INSERT INTO `formcustomer` (`customerid`, `general_formid`) VALUES ('45', '7');
+
+
+/***** hasta aqio en real cargado 19 de Enero 2015  */
+
+ALTER TABLE `rate` ADD COLUMN `rateext` INT NULL DEFAULT 0  AFTER `ratebidsheet` ;  
