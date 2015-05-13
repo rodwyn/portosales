@@ -23,3 +23,20 @@ CREATE TABLE IF NOT EXISTS `portosales`.`usercompany` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+-- -----------------------------------------------------
+-- Table `portosales`.`usercompany`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `portosales`.`usercompany` (
+  `usercompanyid` INT(11) NOT NULL,
+  `userid` INT(11) NOT NULL,
+  `companyid` INT(11) NOT NULL,
+  `active` TINYINT(1) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`usercompanyid`),
+  INDEX `fk_usercompany_company1_idx` (`companyid` ASC),
+  CONSTRAINT `fk_usercompany_company1`
+    FOREIGN KEY (`companyid`)
+    REFERENCES `portosales`.`company` (`companyid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
