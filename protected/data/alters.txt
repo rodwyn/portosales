@@ -2,27 +2,6 @@
 // Crear tipo de usuario vendedor.
 INSERT INTO `usertype` (`usertypedsc`) VALUES ('Vendedor');}
 //Ing. Rodwyn Moreno
--- Table `portosales`.`usercompany`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `portosales`.`usercompany` (
-  `usercompanyid` INT(11) NOT NULL,
-  `userid` INT(11) NOT NULL,
-  `companyid` INT(11) NOT NULL,
-  `active` TINYINT(1) NOT NULL DEFAULT 1,
-  PRIMARY KEY (`usercompanyid`),
-  INDEX `fk_usercompany_user1_idx` (`userid` ASC),
-  INDEX `fk_usercompany_company1_idx` (`companyid` ASC),
-  CONSTRAINT `fk_usercompany_user1`
-    FOREIGN KEY (`userid`)
-    REFERENCES `portosales`.`user` (`userid`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_usercompany_company1`
-    FOREIGN KEY (`companyid`)
-    REFERENCES `portosales`.`company` (`companyid`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
 
 -- -----------------------------------------------------
 -- Table `portosales`.`usercompany`
@@ -40,3 +19,15 @@ CREATE TABLE IF NOT EXISTS `portosales`.`usercompany` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+#Edgar Sanabria Paredes
+#Complementos para tablas iniciales
+
+INSERT INTO `portosales`.`corporate` (`corporatedsc`, `active`) VALUES ('PORTOPRINT', '1');
+INSERT INTO `portosales`.`company` (`companyid`, `corporateid`, `companydsc`, `rfc`, `tax`, `duration`, `active`) VALUES ('', '1', 'MultiEmpeños', 'multi903494', '1', '2', '1');
+INSERT INTO `portosales`.`employeeuser` (`userid`, `firstname`, `plastname`, `mlastname`, `phone`, `email`) VALUES ('1', 'Edgar', 'Sanabria', 'Paredes', '5538816601', 'ragde18@hotmail.es');
+DELETE FROM `portosales`.`usertype` WHERE `usertype`='4';
+DELETE FROM `portosales`.`usertype` WHERE `usertype`='3';
+UPDATE `portosales`.`usertype` SET `usertypedsc`='Administrador' WHERE `usertype`='2';
+UPDATE `portosales`.`usertype` SET `usertypedsc`='Vendedor' WHERE `usertype`='1';
+INSERT INTO `usertype` (`usertypedsc`) VALUES ('Vendedor');
