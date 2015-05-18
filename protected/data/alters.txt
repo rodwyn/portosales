@@ -31,3 +31,4 @@ DELETE FROM `portosales`.`usertype` WHERE `usertype`='3';
 UPDATE `portosales`.`usertype` SET `usertypedsc`='Administrador' WHERE `usertype`='2';
 UPDATE `portosales`.`usertype` SET `usertypedsc`='Vendedor' WHERE `usertype`='1';
 INSERT INTO `usertype` (`usertypedsc`) VALUES ('Vendedor');
+INSERT INTO `portosales`.`usercompany` (`usercompanyid`, `userid`, `companyid`, `active`) VALUES ('1', '1', '1', '1');
