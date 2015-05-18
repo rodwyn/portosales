@@ -9,19 +9,19 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
 		<!-- bootstrap & fontawesome -->
-		<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/theme/assets/css/bootstrap.css" />
-		<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/theme/assets/css/font-awesome.css" />
+		<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/themes/assets/css/bootstrap.css" />
+		<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/themes/assets/css/font-awesome.css" />
 
 		<!-- text fonts -->
-		<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/theme/assets/css/ace-fonts.css" />
+		<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/themes/assets/css/ace-fonts.css" />
 
 		<!-- ace styles -->
-		<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/theme/assets/css/ace.css" />
+		<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/themes/assets/css/ace.css" />
 
 		<!--[if lte IE 9]>
 			<link rel="stylesheet" href="../assets/css/ace-part2.css" />
 		<![endif]-->
-		<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/theme/assets/css/ace-rtl.css" />
+		<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/themes/assets/css/ace-rtl.css" />
 
 		<!--[if lte IE 9]>
 		  <link rel="stylesheet" href="../assets/css/ace-ie.css" />
@@ -39,7 +39,7 @@
         
 	<body id="login" class="login-layout">
 		<!-- possible classes: minified, no-right-panel, fixed-ribbon, fixed-header, fixed-width-->
-
+                  
 
 		<div id="main" role="main" class="main-container">
 
@@ -55,18 +55,18 @@
 
 		<!--[if !IE]> -->
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='<?php echo Yii::app()->request->baseUrl; ?>/theme/assets/js/jquery.js'>"+"<"+"/script>");
+			window.jQuery || document.write("<script src='<?php echo Yii::app()->request->baseUrl; ?>/themes/assets/js/jquery.js'>"+"<"+"/script>");
 		</script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='../assets/js/jquery1x.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
+                <script type="text/javascript">
+                 window.jQuery || document.write("<script src='../assets/js/jquery1x.js'>"+"<"+"/script>");
+                </script>
+                <![endif]-->
 		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='<?php echo Yii::app()->request->baseUrl; ?>/theme/assets/js/jquery.mobile.custom.js'>"+"<"+"/script>");
+			if('ontouchstart' in document.documentElement) document.write("<script src='<?php echo Yii::app()->request->baseUrl; ?>/themes/assets/js/jquery.mobile.custom.js'>"+"<"+"/script>");
 		</script>
 
 		<!-- inline scripts related to this page -->
@@ -82,7 +82,7 @@
 			
 			
 			
-			//you don't need this, just used for changing background
+			//you don't need this, just used for changing backgroundPostgreSQL
 			jQuery(function($) {
 			 $('#btn-login-dark').on('click', function(e) {
 				$('body').attr('class', 'login-layout');

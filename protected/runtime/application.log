@@ -1,950 +1,633 @@
-2015/01/14 08:52:01 [error] [system.db.CDbCommand] CDbCommand::fetchAll() falló: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.serviceids' in 'field list'. La sentencia SQL ejecutada fue: SELECT  LPAD(t.rateid,8,0) as rateid, 
-                            LPAD(t.bundleid,8,0) as bundleid, 
-                            t.entryid, 
-                            t.serviceids, 
-                            s.servicedsc, 
-                            t.statusid, 
-                            st.statusdsc, 
-                            LPAD( t.parentrateid ,8,0) as  parentrateid, 
-                            t.version, 
-                            t.projectid, 
-                            p.projectdsc, 
-                            c.customerid, 
-                            c.customerdsc, 
-                            b.branddsc, 
-                            s.servicedsc, 
-                            concat(eu.firstname, ' ', eu.plastname ) as firstname, 
-                            t.statustime, 
-                            wh.name as whname, 
-                            da.designagencydsc, 
-                            concat(cc.name,' ', cc.plastname) as name, 
-                            t.ratedate, 
-                            t.expiration, 
-                            t.note, 
-                            t.ratetype, 
-                            t.image, 
-                            t.quantity_1, 
-                            t.quantity_2, 
-                            t.quantity_3, 
-                            t.quantity_4, 
-                            t.quantity_5, 
-                            t.quantity_6, 
-                            t.odptime, 
-                            t.odctime, 
-                            t.quantityselect, 
-                            t.ppp_1, 
-                            t.ppp_2, 
-                            t.ppp_3, 
-                            t.ppp_4, 
-                            t.ppp_5, 
-                            t.ppp_6, 
-                            t.pprice, 
-                            t.saving, 
-                            t.iva, 
-                            t.currency, 
-                            t.duration, 
-                            t.send, 
-                            t.formula, 
-                            ADDTIME(t.statustime,duration) as finalize, 
-                            t.complete, 
-                            t.probability,
-                            IFNULL(r.rateodpid,0) as rateodpid,
-                            IFNULL((SELECT t.quantityselect - SUM(cantidad) FROM evaluation WHERE rateid = t.rateid),t.quantityselect) as resto,
-                            r.supplierid,ucp.userid FROM `rate` `t` INNER JOIN project p ON p.projectid = t.projectid
-						   INNER JOIN employeeuser eu on eu.userid = t.userid
-						   INNER JOIN warehouse wh on wh.warehouseid = t.warehouseid
-						   INNER JOIN designagency da on da.designagencyid = t.designagencyid
-						   INNER JOIN customercontact cc on cc.contactid = t.customercontactid
-						   INNER JOIN service s ON s.serviceid = t.serviceid
-						   INNER JOIN status st ON st.statusid = t.statusid
-						   INNER JOIN brand b ON b.brandid = p.brandid
-						   INNER JOIN customer c on c.customerid = b.customerid
-						   INNER JOIN service s2 on s2.serviceid = s.serviceparentid
-						   INNER JOIN service s3 on s3.serviceid = s2.serviceparentid
-						   INNER JOIN service s4 on s4.serviceid = s3.serviceparentid
-						   INNER JOIN service s5 on s5.serviceid = s4.serviceparentid
-						   INNER JOIN userservice  ON userservice.serviceid = s5.serviceid
-						   INNER JOIN usercustomerpermission ucp ON ucp.customerid = c.customerid
-                                                   LEFT  JOIN rateodp r ON r.rateid = t.rateid WHERE  t.bundleid = 00011505 AND ucp.userid = 1 and userservice.userid = 1 and t.active = 1 ORDER BY t.ratedate desc.
-in /var/www/sps-portoprint.com/Test/protected/modules/portoprint/models/Rate.php (420)
-in /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php (1654)
-in /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php (734)
-2015/01/14 08:52:01 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falló al ejecutar la sentencia SQL: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.serviceids' in 'field list'. The SQL statement executed was: SELECT  LPAD(t.rateid,8,0) as rateid, 
-                            LPAD(t.bundleid,8,0) as bundleid, 
-                            t.entryid, 
-                            t.serviceids, 
-                            s.servicedsc, 
-                            t.statusid, 
-                            st.statusdsc, 
-                            LPAD( t.parentrateid ,8,0) as  parentrateid, 
-                            t.version, 
-                            t.projectid, 
-                            p.projectdsc, 
-                            c.customerid, 
-                            c.customerdsc, 
-                            b.branddsc, 
-                            s.servicedsc, 
-                            concat(eu.firstname, ' ', eu.plastname ) as firstname, 
-                            t.statustime, 
-                            wh.name as whname, 
-                            da.designagencydsc, 
-                            concat(cc.name,' ', cc.plastname) as name, 
-                            t.ratedate, 
-                            t.expiration, 
-                            t.note, 
-                            t.ratetype, 
-                            t.image, 
-                            t.quantity_1, 
-                            t.quantity_2, 
-                            t.quantity_3, 
-                            t.quantity_4, 
-                            t.quantity_5, 
-                            t.quantity_6, 
-                            t.odptime, 
-                            t.odctime, 
-                            t.quantityselect, 
-                            t.ppp_1, 
-                            t.ppp_2, 
-                            t.ppp_3, 
-                            t.ppp_4, 
-                            t.ppp_5, 
-                            t.ppp_6, 
-                            t.pprice, 
-                            t.saving, 
-                            t.iva, 
-                            t.currency, 
-                            t.duration, 
-                            t.send, 
-                            t.formula, 
-                            ADDTIME(t.statustime,duration) as finalize, 
-                            t.complete, 
-                            t.probability,
-                            IFNULL(r.rateodpid,0) as rateodpid,
-                            IFNULL((SELECT t.quantityselect - SUM(cantidad) FROM evaluation WHERE rateid = t.rateid),t.quantityselect) as resto,
-                            r.supplierid,ucp.userid FROM `rate` `t` INNER JOIN project p ON p.projectid = t.projectid
-						   INNER JOIN employeeuser eu on eu.userid = t.userid
-						   INNER JOIN warehouse wh on wh.warehouseid = t.warehouseid
-						   INNER JOIN designagency da on da.designagencyid = t.designagencyid
-						   INNER JOIN customercontact cc on cc.contactid = t.customercontactid
-						   INNER JOIN service s ON s.serviceid = t.serviceid
-						   INNER JOIN status st ON st.statusid = t.statusid
-						   INNER JOIN brand b ON b.brandid = p.brandid
-						   INNER JOIN customer c on c.customerid = b.customerid
-						   INNER JOIN service s2 on s2.serviceid = s.serviceparentid
-						   INNER JOIN service s3 on s3.serviceid = s2.serviceparentid
-						   INNER JOIN service s4 on s4.serviceid = s3.serviceparentid
-						   INNER JOIN service s5 on s5.serviceid = s4.serviceparentid
-						   INNER JOIN userservice  ON userservice.serviceid = s5.serviceid
-						   INNER JOIN usercustomerpermission ucp ON ucp.customerid = c.customerid
-                                                   LEFT  JOIN rateodp r ON r.rateid = t.rateid WHERE  t.bundleid = 00011505 AND ucp.userid = 1 and userservice.userid = 1 and t.active = 1 ORDER BY t.ratedate desc' in /var/www/framework1.1.13/framework/db/CDbCommand.php:541
+2015/05/14 22:17:19 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
 Stack trace:
-#0 /var/www/framework1.1.13/framework/db/CDbCommand.php(395): CDbCommand->queryInternal('fetchAll', Array, Array)
-#1 /var/www/framework1.1.13/framework/db/ar/CActiveRecord.php(1297): CDbCommand->queryAll()
-#2 /var/www/framework1.1.13/framework/db/ar/CActiveRecord.php(1416): CActiveRecord->query(Object(CDbCriteria), true)
-#3 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/models/Rate.php(420): CActiveRecord->findAll(Object(CDbCriteria))
-#4 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(1654): Rate->bundleByUser('00011505', '1')
-#5 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(734): RateController->loadBundleModel('00011505')
-#6 /var/www/framework1.1.13/framework/web/actions/CInlineAction.php(49): RateController->actionPrice()
-#7 /var/www/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#8 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#9 /var/www/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#10 /var/www/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#11 /var/www/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#12 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#13 /var/www/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#14 /var/www/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#15 /var/www/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('price')
-#16 /var/www/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('portoprint/rate...')
-#17 /var/www/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#18 /var/www/sps-portoprint.com/Test/index.php(19): CApplication->run()
-#19 {main}
-REQUEST_URI=/Test/index.php?r=portoprint/rate/price&id=laKRpZankak%3D&start=l6KSqJKjk6GWpw%3D%3D&end=l6KSqZKikqGWpg%3D%3D&customer=lQ%3D%3D&add=lg%3D%3D&edt=lg%3D%3D&del=lg%3D%3D&menu=lqM%3D
-HTTP_REFERER=http://sps-portoprint.com/Test/index.php?r=portoprint/default
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('index')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/index')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/index.php?r=site/index
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
 ---
-2015/01/14 08:52:43 [error] [system.db.CDbCommand] CDbCommand::fetchAll() falló: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.serviceids' in 'field list'. La sentencia SQL ejecutada fue: SELECT  LPAD(t.rateid,8,0) as rateid, 
-                            LPAD(t.bundleid,8,0) as bundleid, 
-                            t.entryid, 
-                            t.serviceids, 
-                            s.servicedsc, 
-                            t.statusid, 
-                            st.statusdsc, 
-                            LPAD( t.parentrateid ,8,0) as  parentrateid, 
-                            t.version, 
-                            t.projectid, 
-                            p.projectdsc, 
-                            c.customerid, 
-                            c.customerdsc, 
-                            b.branddsc, 
-                            s.servicedsc, 
-                            concat(eu.firstname, ' ', eu.plastname ) as firstname, 
-                            t.statustime, 
-                            wh.name as whname, 
-                            da.designagencydsc, 
-                            concat(cc.name,' ', cc.plastname) as name, 
-                            t.ratedate, 
-                            t.expiration, 
-                            t.note, 
-                            t.ratetype, 
-                            t.image, 
-                            t.quantity_1, 
-                            t.quantity_2, 
-                            t.quantity_3, 
-                            t.quantity_4, 
-                            t.quantity_5, 
-                            t.quantity_6, 
-                            t.odptime, 
-                            t.odctime, 
-                            t.quantityselect, 
-                            t.ppp_1, 
-                            t.ppp_2, 
-                            t.ppp_3, 
-                            t.ppp_4, 
-                            t.ppp_5, 
-                            t.ppp_6, 
-                            t.pprice, 
-                            t.saving, 
-                            t.iva, 
-                            t.currency, 
-                            t.duration, 
-                            t.send, 
-                            t.formula, 
-                            ADDTIME(t.statustime,duration) as finalize, 
-                            t.complete, 
-                            t.probability,
-                            IFNULL(r.rateodpid,0) as rateodpid,
-                            IFNULL((SELECT t.quantityselect - SUM(cantidad) FROM evaluation WHERE rateid = t.rateid),t.quantityselect) as resto,
-                            r.supplierid,ucp.userid FROM `rate` `t` INNER JOIN project p ON p.projectid = t.projectid
-						   INNER JOIN employeeuser eu on eu.userid = t.userid
-						   INNER JOIN warehouse wh on wh.warehouseid = t.warehouseid
-						   INNER JOIN designagency da on da.designagencyid = t.designagencyid
-						   INNER JOIN customercontact cc on cc.contactid = t.customercontactid
-						   INNER JOIN service s ON s.serviceid = t.serviceid
-						   INNER JOIN status st ON st.statusid = t.statusid
-						   INNER JOIN brand b ON b.brandid = p.brandid
-						   INNER JOIN customer c on c.customerid = b.customerid
-						   INNER JOIN service s2 on s2.serviceid = s.serviceparentid
-						   INNER JOIN service s3 on s3.serviceid = s2.serviceparentid
-						   INNER JOIN service s4 on s4.serviceid = s3.serviceparentid
-						   INNER JOIN service s5 on s5.serviceid = s4.serviceparentid
-						   INNER JOIN userservice  ON userservice.serviceid = s5.serviceid
-						   INNER JOIN usercustomerpermission ucp ON ucp.customerid = c.customerid
-                                                   LEFT  JOIN rateodp r ON r.rateid = t.rateid WHERE  t.bundleid = 00011505 AND ucp.userid = 1 and userservice.userid = 1 and t.active = 1 ORDER BY t.ratedate desc.
-in /var/www/sps-portoprint.com/Test/protected/modules/portoprint/models/Rate.php (420)
-in /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php (1654)
-in /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php (734)
-2015/01/14 08:52:43 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falló al ejecutar la sentencia SQL: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.serviceids' in 'field list'. The SQL statement executed was: SELECT  LPAD(t.rateid,8,0) as rateid, 
-                            LPAD(t.bundleid,8,0) as bundleid, 
-                            t.entryid, 
-                            t.serviceids, 
-                            s.servicedsc, 
-                            t.statusid, 
-                            st.statusdsc, 
-                            LPAD( t.parentrateid ,8,0) as  parentrateid, 
-                            t.version, 
-                            t.projectid, 
-                            p.projectdsc, 
-                            c.customerid, 
-                            c.customerdsc, 
-                            b.branddsc, 
-                            s.servicedsc, 
-                            concat(eu.firstname, ' ', eu.plastname ) as firstname, 
-                            t.statustime, 
-                            wh.name as whname, 
-                            da.designagencydsc, 
-                            concat(cc.name,' ', cc.plastname) as name, 
-                            t.ratedate, 
-                            t.expiration, 
-                            t.note, 
-                            t.ratetype, 
-                            t.image, 
-                            t.quantity_1, 
-                            t.quantity_2, 
-                            t.quantity_3, 
-                            t.quantity_4, 
-                            t.quantity_5, 
-                            t.quantity_6, 
-                            t.odptime, 
-                            t.odctime, 
-                            t.quantityselect, 
-                            t.ppp_1, 
-                            t.ppp_2, 
-                            t.ppp_3, 
-                            t.ppp_4, 
-                            t.ppp_5, 
-                            t.ppp_6, 
-                            t.pprice, 
-                            t.saving, 
-                            t.iva, 
-                            t.currency, 
-                            t.duration, 
-                            t.send, 
-                            t.formula, 
-                            ADDTIME(t.statustime,duration) as finalize, 
-                            t.complete, 
-                            t.probability,
-                            IFNULL(r.rateodpid,0) as rateodpid,
-                            IFNULL((SELECT t.quantityselect - SUM(cantidad) FROM evaluation WHERE rateid = t.rateid),t.quantityselect) as resto,
-                            r.supplierid,ucp.userid FROM `rate` `t` INNER JOIN project p ON p.projectid = t.projectid
-						   INNER JOIN employeeuser eu on eu.userid = t.userid
-						   INNER JOIN warehouse wh on wh.warehouseid = t.warehouseid
-						   INNER JOIN designagency da on da.designagencyid = t.designagencyid
-						   INNER JOIN customercontact cc on cc.contactid = t.customercontactid
-						   INNER JOIN service s ON s.serviceid = t.serviceid
-						   INNER JOIN status st ON st.statusid = t.statusid
-						   INNER JOIN brand b ON b.brandid = p.brandid
-						   INNER JOIN customer c on c.customerid = b.customerid
-						   INNER JOIN service s2 on s2.serviceid = s.serviceparentid
-						   INNER JOIN service s3 on s3.serviceid = s2.serviceparentid
-						   INNER JOIN service s4 on s4.serviceid = s3.serviceparentid
-						   INNER JOIN service s5 on s5.serviceid = s4.serviceparentid
-						   INNER JOIN userservice  ON userservice.serviceid = s5.serviceid
-						   INNER JOIN usercustomerpermission ucp ON ucp.customerid = c.customerid
-                                                   LEFT  JOIN rateodp r ON r.rateid = t.rateid WHERE  t.bundleid = 00011505 AND ucp.userid = 1 and userservice.userid = 1 and t.active = 1 ORDER BY t.ratedate desc' in /var/www/framework1.1.13/framework/db/CDbCommand.php:541
+2015/05/14 22:19:51 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
 Stack trace:
-#0 /var/www/framework1.1.13/framework/db/CDbCommand.php(395): CDbCommand->queryInternal('fetchAll', Array, Array)
-#1 /var/www/framework1.1.13/framework/db/ar/CActiveRecord.php(1297): CDbCommand->queryAll()
-#2 /var/www/framework1.1.13/framework/db/ar/CActiveRecord.php(1416): CActiveRecord->query(Object(CDbCriteria), true)
-#3 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/models/Rate.php(420): CActiveRecord->findAll(Object(CDbCriteria))
-#4 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(1654): Rate->bundleByUser('00011505', '1')
-#5 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(734): RateController->loadBundleModel('00011505')
-#6 /var/www/framework1.1.13/framework/web/actions/CInlineAction.php(49): RateController->actionPrice()
-#7 /var/www/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#8 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#9 /var/www/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#10 /var/www/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#11 /var/www/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#12 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#13 /var/www/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#14 /var/www/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#15 /var/www/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('price')
-#16 /var/www/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('portoprint/rate...')
-#17 /var/www/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#18 /var/www/sps-portoprint.com/Test/index.php(19): CApplication->run()
-#19 {main}
-REQUEST_URI=/Test/index.php?r=portoprint/rate/price&id=laKRpZankak%3D&start=l6KSqJKjk6GWpw%3D%3D&end=l6KSqZKikqGWpg%3D%3D&customer=lQ%3D%3D&add=lg%3D%3D&edt=lg%3D%3D&del=lg%3D%3D&menu=lqM%3D
-HTTP_REFERER=http://sps-portoprint.com/Test/index.php?r=portoprint/default
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('index')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/index')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/index.php?r=site/index
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
 ---
-2015/01/21 17:07:23 [error] [exception.CException] exception 'CException' with message 'Propiedad "Ratesupplier"."quantity_$i" no se encuentra definida.' in /var/www/framework1.1.13/framework/base/CComponent.php:130
+2015/05/14 22:19:52 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
 Stack trace:
-#0 /var/www/framework1.1.13/framework/db/ar/CActiveRecord.php(143): CComponent->__get('quantity_$i')
-#1 /var/www/framework1.1.13/framework/base/CModel.php(595): CActiveRecord->__get('quantity_$i')
-#2 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/open_perm.php(323) : eval()'d code(1): CModel->offsetGet('quantity_$i')
-#3 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/open_perm.php(323): eval()
-#4 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#5 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#6 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#7 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/all.php(783): CController->renderPartial('price/open_perm', Array)
-#8 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#9 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#10 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#11 /var/www/framework1.1.13/framework/web/CController.php(782): CController->renderPartial('price/all', Array, true)
-#12 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(770): CController->render('price/all', Array)
-#13 /var/www/framework1.1.13/framework/web/actions/CInlineAction.php(49): RateController->actionPrice()
-#14 /var/www/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#15 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#16 /var/www/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#17 /var/www/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#18 /var/www/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#19 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#20 /var/www/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#21 /var/www/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#22 /var/www/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('price')
-#23 /var/www/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('portoprint/rate...')
-#24 /var/www/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#25 /var/www/sps-portoprint.com/Test/index.php(19): CApplication->run()
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('index')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/index')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/index.php?r=site/index
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/14 22:19:55 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('index')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/index')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/index.php?r=site/index
+HTTP_REFERER=http://localhost/sales/index.php?r=site/page&view=about
+---
+2015/05/14 22:19:59 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/
+---
+2015/05/14 22:23:12 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/
+---
+2015/05/14 22:23:12 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/
+---
+2015/05/14 22:23:13 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/
+---
+2015/05/14 22:23:13 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/
+---
+2015/05/14 22:23:13 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/
+---
+2015/05/14 22:23:14 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/
+---
+2015/05/14 22:23:14 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/
+---
+2015/05/14 22:23:14 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/
+---
+2015/05/14 22:23:14 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/
+---
+2015/05/14 22:23:14 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/
+---
+2015/05/14 22:23:15 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/
+---
+2015/05/14 22:23:15 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/
+---
+2015/05/14 22:23:15 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/
+---
+2015/05/14 22:23:15 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/
+---
+2015/05/14 22:23:16 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.usertype" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('usertype')
+#1 /srv/www/htdocs/sales/protected/controllers/SiteController.php(30): CWebUser->__get('usertype')
+#2 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionIndex()
+#3 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#5 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('')
+#7 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('')
+#8 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#9 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#10 {main}
+REQUEST_URI=/sales/
+---
+2015/05/18 14:35:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "default/index".' in /srv/www/htdocs/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/index')
+#1 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=default/index
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/18 14:35:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "default/index".' in /srv/www/htdocs/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/index')
+#1 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=default/index
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/18 14:36:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "default/index".' in /srv/www/htdocs/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/index')
+#1 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=default/index
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/18 14:42:40 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'portosales.Default' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `Default`.
+in /srv/www/htdocs/sales/index.php (13)
+2015/05/18 14:44:18 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'portosales.Default' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `Default`.
+in /srv/www/htdocs/sales/index.php (13)
+2015/05/18 14:47:09 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'portosales.Default' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `Default`.
+in /srv/www/htdocs/sales/index.php (13)
+2015/05/18 14:47:24 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'portosales.Default' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `Default`.
+in /srv/www/htdocs/sales/index.php (13)
+2015/05/18 14:47:28 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'portosales.Default' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `Default`.
+in /srv/www/htdocs/sales/index.php (13)
+2015/05/18 14:47:50 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'portosales.Default' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `Default`.
+in /srv/www/htdocs/sales/index.php (13)
+2015/05/18 14:47:53 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'portosales.Default' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `Default`.
+in /srv/www/htdocs/sales/index.php (13)
+2015/05/18 14:47:56 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'portosales.Default' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `Default`.
+in /srv/www/htdocs/sales/index.php (13)
+2015/05/18 14:55:59 [error] [php] Undefined variable: model (/srv/www/htdocs/sales/protected/views/layouts/main.php:54)
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/widgets/CContentDecorator.php(76): SiteController->renderFile()
+#1 /srv/www/htdocs/yii/framework/web/widgets/CContentDecorator.php(54): CContentDecorator->decorate()
+#2 /srv/www/htdocs/yii/framework/web/widgets/COutputProcessor.php(44): CContentDecorator->processOutput()
+#3 /srv/www/htdocs/yii/framework/web/CBaseController.php(214): CContentDecorator->run()
+#4 /srv/www/htdocs/yii/framework/web/CBaseController.php(308): SiteController->endWidget()
+#5 /srv/www/htdocs/sales/protected/views/layouts/column1.php(6): SiteController->endContent()
+#6 /srv/www/htdocs/yii/framework/web/CBaseController.php(126): require()
+#7 /srv/www/htdocs/yii/framework/web/CBaseController.php(95): SiteController->renderInternal()
+#8 /srv/www/htdocs/yii/framework/web/CController.php(784): SiteController->renderFile()
+#9 /srv/www/htdocs/sales/protected/controllers/SiteController.php(133): SiteController->render()
+#10 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#11 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#12 /srv/www/htdocs/yii/framework/web/filters/CFilterChain.php(133): SiteController->runAction()
+#13 /srv/www/htdocs/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#14 /srv/www/htdocs/yii/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#15 /srv/www/htdocs/yii/framework/web/filters/CInlineFilter.php(58): SiteController->filterAccessControl()
+#16 /srv/www/htdocs/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#17 /srv/www/htdocs/yii/framework/web/CController.php(291): CFilterChain->run()
+#18 /srv/www/htdocs/yii/framework/web/CController.php(265): SiteController->runActionWithFilters()
+#19 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): SiteController->run()
+#20 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#21 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#22 /srv/www/htdocs/sales/index.php(13): CWebApplication->run()
+REQUEST_URI=/sales/index.php?r=site/login
+in /srv/www/htdocs/sales/protected/views/layouts/main.php (54)
+in /srv/www/htdocs/sales/protected/views/layouts/column1.php (6)
+in /srv/www/htdocs/sales/protected/controllers/SiteController.php (133)
+2015/05/18 14:56:02 [error] [php] Undefined variable: model (/srv/www/htdocs/sales/protected/views/layouts/main.php:54)
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/widgets/CContentDecorator.php(76): SiteController->renderFile()
+#1 /srv/www/htdocs/yii/framework/web/widgets/CContentDecorator.php(54): CContentDecorator->decorate()
+#2 /srv/www/htdocs/yii/framework/web/widgets/COutputProcessor.php(44): CContentDecorator->processOutput()
+#3 /srv/www/htdocs/yii/framework/web/CBaseController.php(214): CContentDecorator->run()
+#4 /srv/www/htdocs/yii/framework/web/CBaseController.php(308): SiteController->endWidget()
+#5 /srv/www/htdocs/sales/protected/views/layouts/column1.php(6): SiteController->endContent()
+#6 /srv/www/htdocs/yii/framework/web/CBaseController.php(126): require()
+#7 /srv/www/htdocs/yii/framework/web/CBaseController.php(95): SiteController->renderInternal()
+#8 /srv/www/htdocs/yii/framework/web/CController.php(784): SiteController->renderFile()
+#9 /srv/www/htdocs/sales/protected/controllers/SiteController.php(133): SiteController->render()
+#10 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#11 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#12 /srv/www/htdocs/yii/framework/web/filters/CFilterChain.php(133): SiteController->runAction()
+#13 /srv/www/htdocs/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#14 /srv/www/htdocs/yii/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#15 /srv/www/htdocs/yii/framework/web/filters/CInlineFilter.php(58): SiteController->filterAccessControl()
+#16 /srv/www/htdocs/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#17 /srv/www/htdocs/yii/framework/web/CController.php(291): CFilterChain->run()
+#18 /srv/www/htdocs/yii/framework/web/CController.php(265): SiteController->runActionWithFilters()
+#19 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): SiteController->run()
+#20 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#21 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#22 /srv/www/htdocs/sales/index.php(13): CWebApplication->run()
+REQUEST_URI=/sales/index.php?r=site/login
+in /srv/www/htdocs/sales/protected/views/layouts/main.php (54)
+in /srv/www/htdocs/sales/protected/views/layouts/column1.php (6)
+in /srv/www/htdocs/sales/protected/controllers/SiteController.php (133)
+2015/05/18 14:56:03 [error] [php] Undefined variable: model (/srv/www/htdocs/sales/protected/views/layouts/main.php:54)
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/widgets/CContentDecorator.php(76): SiteController->renderFile()
+#1 /srv/www/htdocs/yii/framework/web/widgets/CContentDecorator.php(54): CContentDecorator->decorate()
+#2 /srv/www/htdocs/yii/framework/web/widgets/COutputProcessor.php(44): CContentDecorator->processOutput()
+#3 /srv/www/htdocs/yii/framework/web/CBaseController.php(214): CContentDecorator->run()
+#4 /srv/www/htdocs/yii/framework/web/CBaseController.php(308): SiteController->endWidget()
+#5 /srv/www/htdocs/sales/protected/views/layouts/column1.php(6): SiteController->endContent()
+#6 /srv/www/htdocs/yii/framework/web/CBaseController.php(126): require()
+#7 /srv/www/htdocs/yii/framework/web/CBaseController.php(95): SiteController->renderInternal()
+#8 /srv/www/htdocs/yii/framework/web/CController.php(784): SiteController->renderFile()
+#9 /srv/www/htdocs/sales/protected/controllers/SiteController.php(133): SiteController->render()
+#10 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#11 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#12 /srv/www/htdocs/yii/framework/web/filters/CFilterChain.php(133): SiteController->runAction()
+#13 /srv/www/htdocs/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#14 /srv/www/htdocs/yii/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#15 /srv/www/htdocs/yii/framework/web/filters/CInlineFilter.php(58): SiteController->filterAccessControl()
+#16 /srv/www/htdocs/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#17 /srv/www/htdocs/yii/framework/web/CController.php(291): CFilterChain->run()
+#18 /srv/www/htdocs/yii/framework/web/CController.php(265): SiteController->runActionWithFilters()
+#19 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): SiteController->run()
+#20 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#21 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#22 /srv/www/htdocs/sales/index.php(13): CWebApplication->run()
+REQUEST_URI=/sales/index.php?r=site/login
+in /srv/www/htdocs/sales/protected/views/layouts/main.php (54)
+in /srv/www/htdocs/sales/protected/views/layouts/column1.php (6)
+in /srv/www/htdocs/sales/protected/controllers/SiteController.php (133)
+2015/05/18 14:56:33 [error] [php] Undefined variable: model (/srv/www/htdocs/sales/protected/views/layouts/main.php:54)
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/widgets/CContentDecorator.php(76): SiteController->renderFile()
+#1 /srv/www/htdocs/yii/framework/web/widgets/CContentDecorator.php(54): CContentDecorator->decorate()
+#2 /srv/www/htdocs/yii/framework/web/widgets/COutputProcessor.php(44): CContentDecorator->processOutput()
+#3 /srv/www/htdocs/yii/framework/web/CBaseController.php(214): CContentDecorator->run()
+#4 /srv/www/htdocs/yii/framework/web/CBaseController.php(308): SiteController->endWidget()
+#5 /srv/www/htdocs/sales/protected/views/layouts/column1.php(6): SiteController->endContent()
+#6 /srv/www/htdocs/yii/framework/web/CBaseController.php(126): require()
+#7 /srv/www/htdocs/yii/framework/web/CBaseController.php(95): SiteController->renderInternal()
+#8 /srv/www/htdocs/yii/framework/web/CController.php(784): SiteController->renderFile()
+#9 /srv/www/htdocs/sales/protected/controllers/SiteController.php(133): SiteController->render()
+#10 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#11 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#12 /srv/www/htdocs/yii/framework/web/filters/CFilterChain.php(133): SiteController->runAction()
+#13 /srv/www/htdocs/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#14 /srv/www/htdocs/yii/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#15 /srv/www/htdocs/yii/framework/web/filters/CInlineFilter.php(58): SiteController->filterAccessControl()
+#16 /srv/www/htdocs/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#17 /srv/www/htdocs/yii/framework/web/CController.php(291): CFilterChain->run()
+#18 /srv/www/htdocs/yii/framework/web/CController.php(265): SiteController->runActionWithFilters()
+#19 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): SiteController->run()
+#20 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#21 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#22 /srv/www/htdocs/sales/index.php(13): CWebApplication->run()
+REQUEST_URI=/sales/index.php?r=site/login
+in /srv/www/htdocs/sales/protected/views/layouts/main.php (54)
+in /srv/www/htdocs/sales/protected/views/layouts/column1.php (6)
+in /srv/www/htdocs/sales/protected/controllers/SiteController.php (133)
+2015/05/18 14:56:34 [error] [php] Undefined variable: model (/srv/www/htdocs/sales/protected/views/layouts/main.php:54)
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/widgets/CContentDecorator.php(76): SiteController->renderFile()
+#1 /srv/www/htdocs/yii/framework/web/widgets/CContentDecorator.php(54): CContentDecorator->decorate()
+#2 /srv/www/htdocs/yii/framework/web/widgets/COutputProcessor.php(44): CContentDecorator->processOutput()
+#3 /srv/www/htdocs/yii/framework/web/CBaseController.php(214): CContentDecorator->run()
+#4 /srv/www/htdocs/yii/framework/web/CBaseController.php(308): SiteController->endWidget()
+#5 /srv/www/htdocs/sales/protected/views/layouts/column1.php(6): SiteController->endContent()
+#6 /srv/www/htdocs/yii/framework/web/CBaseController.php(126): require()
+#7 /srv/www/htdocs/yii/framework/web/CBaseController.php(95): SiteController->renderInternal()
+#8 /srv/www/htdocs/yii/framework/web/CController.php(784): SiteController->renderFile()
+#9 /srv/www/htdocs/sales/protected/controllers/SiteController.php(133): SiteController->render()
+#10 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#11 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams()
+#12 /srv/www/htdocs/yii/framework/web/filters/CFilterChain.php(133): SiteController->runAction()
+#13 /srv/www/htdocs/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#14 /srv/www/htdocs/yii/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#15 /srv/www/htdocs/yii/framework/web/filters/CInlineFilter.php(58): SiteController->filterAccessControl()
+#16 /srv/www/htdocs/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#17 /srv/www/htdocs/yii/framework/web/CController.php(291): CFilterChain->run()
+#18 /srv/www/htdocs/yii/framework/web/CController.php(265): SiteController->runActionWithFilters()
+#19 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): SiteController->run()
+#20 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#21 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#22 /srv/www/htdocs/sales/index.php(13): CWebApplication->run()
+REQUEST_URI=/sales/index.php?r=site/login
+in /srv/www/htdocs/sales/protected/views/layouts/main.php (54)
+in /srv/www/htdocs/sales/protected/views/layouts/column1.php (6)
+in /srv/www/htdocs/sales/protected/controllers/SiteController.php (133)
+2015/05/18 16:25:50 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.companydsc" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('companydsc')
+#1 /srv/www/htdocs/sales/protected/views/default/index.php(47): CWebUser->__get('companydsc')
+#2 /srv/www/htdocs/yii/framework/web/CBaseController.php(126): require('/srv/www/htdocs...')
+#3 /srv/www/htdocs/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/srv/www/htdocs...', NULL, true)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(869): CBaseController->renderFile('/srv/www/htdocs...', NULL, true)
+#5 /srv/www/htdocs/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#6 /srv/www/htdocs/sales/protected/controllers/DefaultController.php(7): CController->render('index')
+#7 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionIndex()
+#8 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('index')
+#12 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/index')
+#13 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#14 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/sales/index.php?r=default/index
+---
+2015/05/18 16:25:52 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.companydsc" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('companydsc')
+#1 /srv/www/htdocs/sales/protected/views/default/index.php(47): CWebUser->__get('companydsc')
+#2 /srv/www/htdocs/yii/framework/web/CBaseController.php(126): require('/srv/www/htdocs...')
+#3 /srv/www/htdocs/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/srv/www/htdocs...', NULL, true)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(869): CBaseController->renderFile('/srv/www/htdocs...', NULL, true)
+#5 /srv/www/htdocs/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#6 /srv/www/htdocs/sales/protected/controllers/DefaultController.php(7): CController->render('index')
+#7 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionIndex()
+#8 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('index')
+#12 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/index')
+#13 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#14 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/sales/index.php?r=default/index
+---
+2015/05/18 16:25:55 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.companydsc" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('companydsc')
+#1 /srv/www/htdocs/sales/protected/views/default/index.php(47): CWebUser->__get('companydsc')
+#2 /srv/www/htdocs/yii/framework/web/CBaseController.php(126): require('/srv/www/htdocs...')
+#3 /srv/www/htdocs/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/srv/www/htdocs...', NULL, true)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(869): CBaseController->renderFile('/srv/www/htdocs...', NULL, true)
+#5 /srv/www/htdocs/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#6 /srv/www/htdocs/sales/protected/controllers/DefaultController.php(7): CController->render('index')
+#7 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionIndex()
+#8 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('index')
+#12 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/index')
+#13 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#14 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/sales/index.php?r=default/index
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/18 16:25:57 [error] [exception.CException] exception 'CException' with message 'Property "CWebUser.companydsc" is not defined.' in /srv/www/htdocs/yii/framework/base/CComponent.php:130
+Stack trace:
+#0 /srv/www/htdocs/yii/framework/web/auth/CWebUser.php(146): CComponent->__get('companydsc')
+#1 /srv/www/htdocs/sales/protected/views/default/index.php(47): CWebUser->__get('companydsc')
+#2 /srv/www/htdocs/yii/framework/web/CBaseController.php(126): require('/srv/www/htdocs...')
+#3 /srv/www/htdocs/yii/framework/web/CBaseController.php(95): CBaseController->renderInternal('/srv/www/htdocs...', NULL, true)
+#4 /srv/www/htdocs/yii/framework/web/CController.php(869): CBaseController->renderFile('/srv/www/htdocs...', NULL, true)
+#5 /srv/www/htdocs/yii/framework/web/CController.php(782): CController->renderPartial('index', NULL, true)
+#6 /srv/www/htdocs/sales/protected/controllers/DefaultController.php(7): CController->render('index')
+#7 /srv/www/htdocs/yii/framework/web/actions/CInlineAction.php(49): DefaultController->actionIndex()
+#8 /srv/www/htdocs/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#9 /srv/www/htdocs/yii/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#10 /srv/www/htdocs/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /srv/www/htdocs/yii/framework/web/CWebApplication.php(282): CController->run('index')
+#12 /srv/www/htdocs/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('default/index')
+#13 /srv/www/htdocs/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#14 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/sales/index.php?r=default/index
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/18 21:02:35 [error] [exception.CException] exception 'CException' with message 'CAssetManager.basePath "/srv/www/htdocs/portosales/assets" is invalid. Please make sure the directory exists and is writable by the Web server process.' in /srv/www/htdocs/portosales/yii/framework/web/CAssetManager.php:138
+Stack trace:
+#0 /srv/www/htdocs/portosales/yii/framework/web/CAssetManager.php(123): CAssetManager->setBasePath('/srv/www/htdocs...')
+#1 /srv/www/htdocs/portosales/yii/framework/web/CAssetManager.php(217): CAssetManager->getBasePath()
+#2 /srv/www/htdocs/portosales/yii/framework/web/CClientScript.php(511): CAssetManager->publish('/srv/www/htdocs...')
+#3 /srv/www/htdocs/portosales/yii/framework/web/CClientScript.php(548): CClientScript->getCoreScriptUrl()
+#4 /srv/www/htdocs/portosales/yii/framework/web/CClientScript.php(349): CClientScript->getPackageBaseUrl('jquery')
+#5 /srv/www/htdocs/portosales/yii/framework/web/CClientScript.php(208): CClientScript->renderCoreScripts()
+#6 /srv/www/htdocs/portosales/yii/framework/web/CController.php(351): CClientScript->render('<!DOCTYPE html>...')
+#7 /srv/www/htdocs/portosales/yii/framework/web/CController.php(788): CController->processOutput('<!DOCTYPE html>...')
+#8 /srv/www/htdocs/portosales/protected/controllers/SiteController.php(136): CController->render('login', Array)
+#9 /srv/www/htdocs/portosales/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#10 /srv/www/htdocs/portosales/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#11 /srv/www/htdocs/portosales/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#12 /srv/www/htdocs/portosales/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#13 /srv/www/htdocs/portosales/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#14 /srv/www/htdocs/portosales/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#15 /srv/www/htdocs/portosales/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#16 /srv/www/htdocs/portosales/yii/framework/web/CController.php(291): CFilterChain->run()
+#17 /srv/www/htdocs/portosales/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 /srv/www/htdocs/portosales/yii/framework/web/CWebApplication.php(282): CController->run('login')
+#19 /srv/www/htdocs/portosales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#20 /srv/www/htdocs/portosales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#21 /srv/www/htdocs/portosales/index.php(13): CApplication->run()
+#22 {main}
+REQUEST_URI=/portosales/index.php?r=site/login
+---
+2015/05/18 21:03:46 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in /srv/www/htdocs/portosales/yii/framework/db/CDbConnection.php:399
+Stack trace:
+#0 /srv/www/htdocs/portosales/yii/framework/db/CDbConnection.php(347): CDbConnection->open()
+#1 /srv/www/htdocs/portosales/yii/framework/db/CDbConnection.php(325): CDbConnection->setActive(true)
+#2 /srv/www/htdocs/portosales/yii/framework/base/CModule.php(394): CDbConnection->init()
+#3 /srv/www/htdocs/portosales/yii/framework/base/CApplication.php(458): CModule->getComponent('db')
+#4 /srv/www/htdocs/portosales/yii/framework/db/ar/CActiveRecord.php(637): CApplication->getDb()
+#5 /srv/www/htdocs/portosales/yii/framework/db/ar/CActiveRecord.php(1433): CActiveRecord->getDbConnection()
+#6 /srv/www/htdocs/portosales/yii/framework/db/ar/CActiveRecord.php(1522): CActiveRecord->getTableAlias(true)
+#7 /srv/www/htdocs/portosales/protected/components/UserIdentity.php(21): CActiveRecord->findByAttributes(Array)
+#8 /srv/www/htdocs/portosales/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#9 /srv/www/htdocs/portosales/yii/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#10 /srv/www/htdocs/portosales/yii/framework/validators/CValidator.php(201): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#11 /srv/www/htdocs/portosales/yii/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#12 /srv/www/htdocs/portosales/protected/controllers/SiteController.php(131): CModel->validate()
+#13 /srv/www/htdocs/portosales/yii/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#14 /srv/www/htdocs/portosales/yii/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#15 /srv/www/htdocs/portosales/yii/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#16 /srv/www/htdocs/portosales/yii/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#17 /srv/www/htdocs/portosales/yii/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#18 /srv/www/htdocs/portosales/yii/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#19 /srv/www/htdocs/portosales/yii/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#20 /srv/www/htdocs/portosales/yii/framework/web/CController.php(291): CFilterChain->run()
+#21 /srv/www/htdocs/portosales/yii/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#22 /srv/www/htdocs/portosales/yii/framework/web/CWebApplication.php(282): CController->run('login')
+#23 /srv/www/htdocs/portosales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#24 /srv/www/htdocs/portosales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#25 /srv/www/htdocs/portosales/index.php(13): CApplication->run()
 #26 {main}
-REQUEST_URI=/Test/index.php?r=portoprint/rate/price&id=laKRpZanka0%3D&start=l6KSqJKjk6GXpA%3D%3D&end=l6KSqZKikqGXow%3D%3D&customer=lQ%3D%3D&add=lg%3D%3D&edt=lg%3D%3D&del=lQ%3D%3D&menu=lqM%3D
-HTTP_REFERER=http://sps-portoprint.com/Test/index.php?r=portoprint/default
----
-2015/01/21 17:08:25 [error] [exception.CException] exception 'CException' with message 'Propiedad "Ratesupplier"."quantity_$i" no se encuentra definida.' in /var/www/framework1.1.13/framework/base/CComponent.php:130
-Stack trace:
-#0 /var/www/framework1.1.13/framework/db/ar/CActiveRecord.php(143): CComponent->__get('quantity_$i')
-#1 /var/www/framework1.1.13/framework/base/CModel.php(595): CActiveRecord->__get('quantity_$i')
-#2 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/open_perm.php(323) : eval()'d code(1): CModel->offsetGet('quantity_$i')
-#3 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/open_perm.php(323): eval()
-#4 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#5 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#6 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#7 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/all.php(783): CController->renderPartial('price/open_perm', Array)
-#8 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#9 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#10 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#11 /var/www/framework1.1.13/framework/web/CController.php(782): CController->renderPartial('price/all', Array, true)
-#12 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(770): CController->render('price/all', Array)
-#13 /var/www/framework1.1.13/framework/web/actions/CInlineAction.php(49): RateController->actionPrice()
-#14 /var/www/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#15 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#16 /var/www/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#17 /var/www/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#18 /var/www/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#19 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#20 /var/www/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#21 /var/www/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#22 /var/www/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('price')
-#23 /var/www/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('portoprint/rate...')
-#24 /var/www/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#25 /var/www/sps-portoprint.com/Test/index.php(19): CApplication->run()
-#26 {main}
-REQUEST_URI=/Test/index.php?r=portoprint/rate/price&id=laKRpZanka0%3D&start=l6KSqJKjk6GXpA%3D%3D&end=l6KSqZKikqGXow%3D%3D&customer=lQ%3D%3D&add=lg%3D%3D&edt=lg%3D%3D&del=lQ%3D%3D&menu=lqM%3D
-HTTP_REFERER=http://sps-portoprint.com/Test/index.php?r=portoprint/default
----
-2015/01/21 17:11:34 [error] [exception.CException] exception 'CException' with message 'Propiedad "Ratesupplier"."quantity_$i" no se encuentra definida.' in /var/www/framework1.1.13/framework/base/CComponent.php:130
-Stack trace:
-#0 /var/www/framework1.1.13/framework/db/ar/CActiveRecord.php(143): CComponent->__get('quantity_$i')
-#1 /var/www/framework1.1.13/framework/base/CModel.php(595): CActiveRecord->__get('quantity_$i')
-#2 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/open_perm.php(323) : eval()'d code(1): CModel->offsetGet('quantity_$i')
-#3 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/open_perm.php(323): eval()
-#4 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#5 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#6 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#7 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/all.php(783): CController->renderPartial('price/open_perm', Array)
-#8 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#9 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#10 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#11 /var/www/framework1.1.13/framework/web/CController.php(782): CController->renderPartial('price/all', Array, true)
-#12 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(770): CController->render('price/all', Array)
-#13 /var/www/framework1.1.13/framework/web/actions/CInlineAction.php(49): RateController->actionPrice()
-#14 /var/www/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#15 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#16 /var/www/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#17 /var/www/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#18 /var/www/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#19 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#20 /var/www/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#21 /var/www/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#22 /var/www/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('price')
-#23 /var/www/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('portoprint/rate...')
-#24 /var/www/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#25 /var/www/sps-portoprint.com/Test/index.php(19): CApplication->run()
-#26 {main}
-REQUEST_URI=/Test/index.php?r=portoprint/rate/price&id=laKRpZanka0%3D&start=l6KSqJKjk6GXpA%3D%3D&end=l6KSqZKikqGXow%3D%3D&customer=lQ%3D%3D&add=lg%3D%3D&edt=lg%3D%3D&del=lQ%3D%3D&menu=lqM%3D
-HTTP_REFERER=http://sps-portoprint.com/Test/index.php?r=portoprint/default
----
-2015/01/22 16:45:01 [error] [system.db.CDbCommand] CDbCommand::fetchAll() falló: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'portop_new.generalform' doesn't exist. La sentencia SQL ejecutada fue: SHOW FULL COLUMNS FROM `generalform`.
-in /var/www/sps-portoprint.com/Test/protected/modules/portoprint/models/Generalform.php (20)
-in /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/open_perm.php (248)
-in /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/all.php (783)
-2015/01/22 16:45:01 [error] [exception.CDbException] exception 'CDbException' with message 'La tabla "generalform" definida en la clase active record "Generalform" no se ha podido encontrar en la base de datos.' in /var/www/framework1.1.13/framework/db/ar/CActiveRecord.php:2310
-Stack trace:
-#0 /var/www/framework1.1.13/framework/db/ar/CActiveRecord.php(387): CActiveRecordMetaData->__construct(Object(Generalform))
-#1 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/models/Generalform.php(20): CActiveRecord::model('Generalform')
-#2 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/open_perm.php(248): Generalform::model()
-#3 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#4 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#5 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#6 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/all.php(783): CController->renderPartial('price/open_perm', Array)
-#7 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#8 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#9 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#10 /var/www/framework1.1.13/framework/web/CController.php(782): CController->renderPartial('price/all', Array, true)
-#11 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(770): CController->render('price/all', Array)
-#12 /var/www/framework1.1.13/framework/web/actions/CInlineAction.php(49): RateController->actionPrice()
-#13 /var/www/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#14 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#15 /var/www/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#16 /var/www/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#17 /var/www/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#18 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#19 /var/www/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#20 /var/www/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#21 /var/www/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('price')
-#22 /var/www/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('portoprint/rate...')
-#23 /var/www/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#24 /var/www/sps-portoprint.com/Test/index.php(19): CApplication->run()
-#25 {main}
-REQUEST_URI=/Test/index.php?r=portoprint/rate/price&id=laKRpZanka0%3D&start=l6KSqJKjk6GXpQ%3D%3D&end=l6KSqZKikqGXpA%3D%3D&customer=lQ%3D%3D&add=lg%3D%3D&edt=lg%3D%3D&del=lQ%3D%3D&menu=lqM%3D
-HTTP_REFERER=http://sps-portoprint.com/Test/index.php?r=portoprint/default
----
-2015/01/22 17:19:39 [error] [system.db.CDbCommand] CDbCommand::fetchAll() falló: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.general_formida' in 'on clause'. La sentencia SQL ejecutada fue: SELECT t.* FROM `generalform` `t` inner join formcustomer f on f.general_formida=t.general_formid  WHERE t.companyid=6 and f.customerid=9.
-in /var/www/sps-portoprint.com/Test/protected/modules/portoprint/models/Generalform.php (96)
-in /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/open_perm.php (249)
-in /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/all.php (783)
-2015/01/22 17:19:39 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falló al ejecutar la sentencia SQL: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'f.general_formida' in 'on clause'. The SQL statement executed was: SELECT t.* FROM `generalform` `t` inner join formcustomer f on f.general_formida=t.general_formid  WHERE t.companyid=6 and f.customerid=9' in /var/www/framework1.1.13/framework/db/CDbCommand.php:541
-Stack trace:
-#0 /var/www/framework1.1.13/framework/db/CDbCommand.php(395): CDbCommand->queryInternal('fetchAll', Array, Array)
-#1 /var/www/framework1.1.13/framework/db/ar/CActiveRecord.php(1297): CDbCommand->queryAll()
-#2 /var/www/framework1.1.13/framework/db/ar/CActiveRecord.php(1416): CActiveRecord->query(Object(CDbCriteria), true)
-#3 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/models/Generalform.php(96): CActiveRecord->findAll(Object(CDbCriteria))
-#4 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/open_perm.php(249): Generalform->get_forms('9')
-#5 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#6 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#7 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#8 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/all.php(783): CController->renderPartial('price/open_perm', Array)
-#9 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#10 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#11 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#12 /var/www/framework1.1.13/framework/web/CController.php(782): CController->renderPartial('price/all', Array, true)
-#13 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(770): CController->render('price/all', Array)
-#14 /var/www/framework1.1.13/framework/web/actions/CInlineAction.php(49): RateController->actionPrice()
-#15 /var/www/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#16 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#17 /var/www/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#18 /var/www/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#19 /var/www/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#20 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#21 /var/www/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#22 /var/www/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#23 /var/www/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('price')
-#24 /var/www/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('portoprint/rate...')
-#25 /var/www/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#26 /var/www/sps-portoprint.com/Test/index.php(19): CApplication->run()
-#27 {main}
-REQUEST_URI=/Test/index.php?r=portoprint/rate/price&id=laKRpZanka0%3D&start=l6KSqJKjk6GXpQ%3D%3D&end=l6KSqZKikqGXpA%3D%3D&customer=lQ%3D%3D&add=lg%3D%3D&edt=lg%3D%3D&del=lQ%3D%3D&menu=lqM%3D
-HTTP_REFERER=http://sps-portoprint.com/Test/index.php?r=portoprint/default
----
-2015/01/30 16:34:11 [error] [exception.CException] exception 'CException' with message 'Propiedad "Rate"."rateext" no se encuentra definida.' in /var/www/framework1.1.13/framework/base/CComponent.php:130
-Stack trace:
-#0 /var/www/framework1.1.13/framework/db/ar/CActiveRecord.php(143): CComponent->__get('rateext')
-#1 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/open.php(1150): CActiveRecord->__get('rateext')
-#2 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#3 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#4 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#5 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/all.php(783): CController->renderPartial('price/open', Array)
-#6 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#7 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#8 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#9 /var/www/framework1.1.13/framework/web/CController.php(782): CController->renderPartial('price/all', Array, true)
-#10 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(770): CController->render('price/all', Array)
-#11 /var/www/framework1.1.13/framework/web/actions/CInlineAction.php(49): RateController->actionPrice()
-#12 /var/www/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#13 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#14 /var/www/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#15 /var/www/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#16 /var/www/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#17 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#18 /var/www/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#19 /var/www/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#20 /var/www/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('price')
-#21 /var/www/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('portoprint/rate...')
-#22 /var/www/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#23 /var/www/sps-portoprint.com/Test/index.php(19): CApplication->run()
-#24 {main}
-REQUEST_URI=/Test/index.php?r=portoprint/rate/price&id=laKRpZankas%3D&start=l6KSqJKjk6GYow%3D%3D&end=l6KSqZKikqGYog%3D%3D&customer=lQ%3D%3D&add=lg%3D%3D&edt=lg%3D%3D&del=lg%3D%3D&menu=lqM%3D
-HTTP_REFERER=http://sps-portoprint.com/Test/index.php?r=portoprint/default
----
-2015/02/11 13:45:43 [error] [exception.CException] exception 'CException' with message 'RateController no ha podido encontrar la vista "" solicitada.' in /var/www/framework1.1.13/framework/web/CController.php:878
-Stack trace:
-#0 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/all.php(811): CController->renderPartial(NULL, Array)
-#1 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#2 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#3 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#4 /var/www/framework1.1.13/framework/web/CController.php(782): CController->renderPartial('price/all', Array, true)
-#5 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(764): CController->render('price/all', Array)
-#6 /var/www/framework1.1.13/framework/web/actions/CInlineAction.php(49): RateController->actionPrice()
-#7 /var/www/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#8 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#9 /var/www/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#10 /var/www/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#11 /var/www/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#12 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#13 /var/www/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#14 /var/www/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#15 /var/www/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('price')
-#16 /var/www/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('portoprint/rate...')
-#17 /var/www/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#18 /var/www/sps-portoprint.com/Test/index.php(19): CApplication->run()
-#19 {main}
-REQUEST_URI=/Test/index.php?r=portoprint/rate/price&id=laKRpJ2qmaQ%3D&start=l6KSqJKjkqGWpQ%3D%3D&end=l6KSqZKik6GWow%3D%3D&customer=lQ%3D%3D&add=lg%3D%3D&edt=lg%3D%3D&del=lg%3D%3D&menu=lqM%3D
-HTTP_REFERER=http://sps-portoprint.com/Test/index.php?r=portoprint/default
----
-2015/02/11 13:45:57 [error] [exception.CException] exception 'CException' with message 'RateController no ha podido encontrar la vista "" solicitada.' in /var/www/framework1.1.13/framework/web/CController.php:878
-Stack trace:
-#0 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/all.php(811): CController->renderPartial(NULL, Array)
-#1 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#2 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#3 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#4 /var/www/framework1.1.13/framework/web/CController.php(782): CController->renderPartial('price/all', Array, true)
-#5 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(764): CController->render('price/all', Array)
-#6 /var/www/framework1.1.13/framework/web/actions/CInlineAction.php(49): RateController->actionPrice()
-#7 /var/www/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#8 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#9 /var/www/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#10 /var/www/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#11 /var/www/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#12 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#13 /var/www/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#14 /var/www/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#15 /var/www/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('price')
-#16 /var/www/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('portoprint/rate...')
-#17 /var/www/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#18 /var/www/sps-portoprint.com/Test/index.php(19): CApplication->run()
-#19 {main}
-REQUEST_URI=/Test/index.php?r=portoprint/rate/price&id=laKRpJ2qmaQ%3D&start=l6KSqJKjkqGWpQ%3D%3D&end=l6KSqZKik6GWow%3D%3D&customer=lQ%3D%3D&add=lg%3D%3D&edt=lg%3D%3D&del=lg%3D%3D&menu=lqM%3D
-HTTP_REFERER=http://sps-portoprint.com/Test/index.php?r=portoprint/default
----
-2015/02/11 13:48:37 [error] [exception.CException] exception 'CException' with message 'RateController no ha podido encontrar la vista "" solicitada.' in /var/www/framework1.1.13/framework/web/CController.php:878
-Stack trace:
-#0 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/all.php(811): CController->renderPartial(NULL, Array)
-#1 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#2 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#3 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#4 /var/www/framework1.1.13/framework/web/CController.php(782): CController->renderPartial('price/all', Array, true)
-#5 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(764): CController->render('price/all', Array)
-#6 /var/www/framework1.1.13/framework/web/actions/CInlineAction.php(49): RateController->actionPrice()
-#7 /var/www/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#8 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#9 /var/www/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#10 /var/www/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#11 /var/www/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#12 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#13 /var/www/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#14 /var/www/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#15 /var/www/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('price')
-#16 /var/www/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('portoprint/rate...')
-#17 /var/www/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#18 /var/www/sps-portoprint.com/Test/index.php(19): CApplication->run()
-#19 {main}
-REQUEST_URI=/Test/index.php?r=portoprint/rate/price&id=laKRpJ2qmaQ%3D&start=l6KSqJKjkqGWpQ%3D%3D&end=l6KSqZKik6GWow%3D%3D&customer=lQ%3D%3D&add=lg%3D%3D&edt=lg%3D%3D&del=lg%3D%3D&menu=lqM%3D
-HTTP_REFERER=http://sps-portoprint.com/Test/index.php?r=portoprint/default
----
-2015/02/11 13:51:31 [error] [system.db.CDbCommand] CDbCommand::fetchAll() falló: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.rateidS' in 'field list'. La sentencia SQL ejecutada fue: SELECT 
-            LPAD(t.rateidS,8,0) as rateid, 
-                            LPAD(t.bundleid,8,0) as bundleid, 
-                            t.entryid, 
-                            t.serviceid, 
-                            s.servicedsc, 
-                            t.statusid, 
-                            st.statusdsc, 
-                            LPAD( t.parentrateid ,8,0) as  parentrateid, 
-                            t.version, 
-                            t.projectid, 
-                            p.projectdsc, 
-                            c.customerid, 
-                            c.customerdsc, 
-                            b.branddsc, 
-                            
-                            concat(eu.firstname, ' ', eu.plastname ) as firstname, 
-                            t.statustime, 
-                            wh.name as whname, 
-                            da.designagencydsc, 
-                            concat(cc.name,' ', cc.plastname) as name, 
-                            t.ratedate, 
-                            t.expiration, 
-                            t.note, 
-                            t.ratetype, 
-                            t.image, 
-                            t.quantity_1, 
-                            t.quantity_2, 
-                            t.quantity_3, 
-                            t.quantity_4, 
-                            t.quantity_5, 
-                            t.quantity_6, 
-                            t.odptime, 
-                            t.odctime, 
-                            t.quantityselect, 
-                            t.ppp_1, 
-                            t.ppp_2, 
-                            t.ppp_3, 
-                            t.ppp_4, 
-                            t.ppp_5, 
-                            t.ppp_6, 
-                            t.pprice, 
-                            t.saving, 
-                            t.iva, 
-                            t.currency, 
-                            t.duration, 
-                            t.send, 
-                            t.formula, 
-                            ADDTIME(t.statustime,duration) as finalize, 
-                            t.complete, 
-                            t.probability,
-                            IFNULL(r.rateodpid,0) as rateodpid,
-                            IFNULL((SELECT t.quantityselect - SUM(cantidad) FROM evaluation WHERE rateid = t.rateid),t.quantityselect) as resto,
-                            r.supplierid,ucp.userid FROM `rate` `t` INNER JOIN project p ON p.projectid = t.projectid
-						   INNER JOIN employeeuser eu on eu.userid = t.userid
-						   LEFT JOIN warehouse wh on wh.warehouseid = t.warehouseid
-						   LEFT JOIN designagency da on da.designagencyid = t.designagencyid
-						   LEFT JOIN customercontact cc on cc.contactid = t.customercontactid
-						   INNER JOIN service s ON s.serviceid = t.serviceid
-						   INNER JOIN status st ON st.statusid = t.statusid
-						   INNER JOIN brand b ON b.brandid = p.brandid
-						   INNER JOIN customer c on c.customerid = b.customerid
-						   INNER JOIN service s2 on s2.serviceid = s.serviceparentid
-						   INNER JOIN service s3 on s3.serviceid = s2.serviceparentid
-						   INNER JOIN service s4 on s4.serviceid = s3.serviceparentid
-						   INNER JOIN service s5 on s5.serviceid = s4.serviceparentid
-						   INNER JOIN userservice  ON userservice.serviceid = s5.serviceid
-						   INNER JOIN usercustomerpermission ucp ON ucp.customerid = c.customerid
-                                                   
-                                                   LEFT  JOIN rateodp r ON r.rateid = t.rateid WHERE  t.bundleid = 00008880 AND ucp.userid = 1 and userservice.userid = 1 and t.active = 1 GROUP BY t.rateid ORDER BY t.ratedate desc.
-in /var/www/sps-portoprint.com/Test/protected/modules/portoprint/models/Rate.php (424)
-in /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php (1691)
-in /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php (729)
-2015/02/11 13:51:31 [error] [exception.CDbException] exception 'CDbException' with message 'CDbCommand falló al ejecutar la sentencia SQL: SQLSTATE[42S22]: Column not found: 1054 Unknown column 't.rateidS' in 'field list'. The SQL statement executed was: SELECT 
-            LPAD(t.rateidS,8,0) as rateid, 
-                            LPAD(t.bundleid,8,0) as bundleid, 
-                            t.entryid, 
-                            t.serviceid, 
-                            s.servicedsc, 
-                            t.statusid, 
-                            st.statusdsc, 
-                            LPAD( t.parentrateid ,8,0) as  parentrateid, 
-                            t.version, 
-                            t.projectid, 
-                            p.projectdsc, 
-                            c.customerid, 
-                            c.customerdsc, 
-                            b.branddsc, 
-                            
-                            concat(eu.firstname, ' ', eu.plastname ) as firstname, 
-                            t.statustime, 
-                            wh.name as whname, 
-                            da.designagencydsc, 
-                            concat(cc.name,' ', cc.plastname) as name, 
-                            t.ratedate, 
-                            t.expiration, 
-                            t.note, 
-                            t.ratetype, 
-                            t.image, 
-                            t.quantity_1, 
-                            t.quantity_2, 
-                            t.quantity_3, 
-                            t.quantity_4, 
-                            t.quantity_5, 
-                            t.quantity_6, 
-                            t.odptime, 
-                            t.odctime, 
-                            t.quantityselect, 
-                            t.ppp_1, 
-                            t.ppp_2, 
-                            t.ppp_3, 
-                            t.ppp_4, 
-                            t.ppp_5, 
-                            t.ppp_6, 
-                            t.pprice, 
-                            t.saving, 
-                            t.iva, 
-                            t.currency, 
-                            t.duration, 
-                            t.send, 
-                            t.formula, 
-                            ADDTIME(t.statustime,duration) as finalize, 
-                            t.complete, 
-                            t.probability,
-                            IFNULL(r.rateodpid,0) as rateodpid,
-                            IFNULL((SELECT t.quantityselect - SUM(cantidad) FROM evaluation WHERE rateid = t.rateid),t.quantityselect) as resto,
-                            r.supplierid,ucp.userid FROM `rate` `t` INNER JOIN project p ON p.projectid = t.projectid
-						   INNER JOIN employeeuser eu on eu.userid = t.userid
-						   LEFT JOIN warehouse wh on wh.warehouseid = t.warehouseid
-						   LEFT JOIN designagency da on da.designagencyid = t.designagencyid
-						   LEFT JOIN customercontact cc on cc.contactid = t.customercontactid
-						   INNER JOIN service s ON s.serviceid = t.serviceid
-						   INNER JOIN status st ON st.statusid = t.statusid
-						   INNER JOIN brand b ON b.brandid = p.brandid
-						   INNER JOIN customer c on c.customerid = b.customerid
-						   INNER JOIN service s2 on s2.serviceid = s.serviceparentid
-						   INNER JOIN service s3 on s3.serviceid = s2.serviceparentid
-						   INNER JOIN service s4 on s4.serviceid = s3.serviceparentid
-						   INNER JOIN service s5 on s5.serviceid = s4.serviceparentid
-						   INNER JOIN userservice  ON userservice.serviceid = s5.serviceid
-						   INNER JOIN usercustomerpermission ucp ON ucp.customerid = c.customerid
-                                                   
-                                                   LEFT  JOIN rateodp r ON r.rateid = t.rateid WHERE  t.bundleid = 00008880 AND ucp.userid = 1 and userservice.userid = 1 and t.active = 1 GROUP BY t.rateid ORDER BY t.ratedate desc' in /var/www/framework1.1.13/framework/db/CDbCommand.php:541
-Stack trace:
-#0 /var/www/framework1.1.13/framework/db/CDbCommand.php(395): CDbCommand->queryInternal('fetchAll', Array, Array)
-#1 /var/www/framework1.1.13/framework/db/ar/CActiveRecord.php(1297): CDbCommand->queryAll()
-#2 /var/www/framework1.1.13/framework/db/ar/CActiveRecord.php(1416): CActiveRecord->query(Object(CDbCriteria), true)
-#3 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/models/Rate.php(424): CActiveRecord->findAll(Object(CDbCriteria))
-#4 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(1691): Rate->bundleByUser('00008880', '1')
-#5 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(729): RateController->loadBundleModel('00008880')
-#6 /var/www/framework1.1.13/framework/web/actions/CInlineAction.php(49): RateController->actionPrice()
-#7 /var/www/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#8 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#9 /var/www/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#10 /var/www/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#11 /var/www/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#12 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#13 /var/www/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#14 /var/www/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#15 /var/www/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('price')
-#16 /var/www/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('portoprint/rate...')
-#17 /var/www/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#18 /var/www/sps-portoprint.com/Test/index.php(19): CApplication->run()
-#19 {main}
-REQUEST_URI=/Test/index.php?r=portoprint/rate/price&id=laKRpJ2qmaQ%3D&start=l6KSqJKjkqGWpQ%3D%3D&end=l6KSqZKik6GWow%3D%3D&customer=lQ%3D%3D&add=lg%3D%3D&edt=lg%3D%3D&del=lg%3D%3D&menu=lqM%3D
-HTTP_REFERER=http://sps-portoprint.com/Test/index.php?r=portoprint/default
----
-2015/02/11 13:57:21 [error] [exception.CException] exception 'CException' with message 'RateController no ha podido encontrar la vista "" solicitada.' in /var/www/framework1.1.13/framework/web/CController.php:878
-Stack trace:
-#0 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/all.php(811): CController->renderPartial(NULL, Array)
-#1 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#2 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#3 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#4 /var/www/framework1.1.13/framework/web/CController.php(782): CController->renderPartial('price/all', Array, true)
-#5 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(764): CController->render('price/all', Array)
-#6 /var/www/framework1.1.13/framework/web/actions/CInlineAction.php(49): RateController->actionPrice()
-#7 /var/www/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#8 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#9 /var/www/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#10 /var/www/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#11 /var/www/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#12 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#13 /var/www/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#14 /var/www/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#15 /var/www/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('price')
-#16 /var/www/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('portoprint/rate...')
-#17 /var/www/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#18 /var/www/sps-portoprint.com/Test/index.php(19): CApplication->run()
-#19 {main}
-REQUEST_URI=/Test/index.php?r=portoprint/rate/price&id=laKRpJ2qmaQ%3D&start=l6KSqJKjkqGWpQ%3D%3D&end=l6KSqZKik6GWow%3D%3D&customer=lQ%3D%3D&add=lg%3D%3D&edt=lg%3D%3D&del=lg%3D%3D&menu=lqM%3D
-HTTP_REFERER=http://sps-portoprint.com/Test/index.php?r=portoprint/default
----
-2015/02/11 14:02:10 [error] [exception.CException] exception 'CException' with message 'RateController no ha podido encontrar la vista "" solicitada.' in /var/www/framework1.1.13/framework/web/CController.php:878
-Stack trace:
-#0 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/all.php(811): CController->renderPartial(NULL, Array)
-#1 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#2 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#3 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#4 /var/www/framework1.1.13/framework/web/CController.php(782): CController->renderPartial('price/all', Array, true)
-#5 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(764): CController->render('price/all', Array)
-#6 /var/www/framework1.1.13/framework/web/actions/CInlineAction.php(49): RateController->actionPrice()
-#7 /var/www/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#8 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#9 /var/www/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#10 /var/www/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#11 /var/www/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#12 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#13 /var/www/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#14 /var/www/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#15 /var/www/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('price')
-#16 /var/www/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('portoprint/rate...')
-#17 /var/www/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#18 /var/www/sps-portoprint.com/Test/index.php(19): CApplication->run()
-#19 {main}
-REQUEST_URI=/Test/index.php?r=portoprint/rate/price&id=laKRpJ2qmaQ%3D&start=l6KSqJKjkqGWpQ%3D%3D&end=l6KSqZKik6GWow%3D%3D&customer=lQ%3D%3D&add=lg%3D%3D&edt=lg%3D%3D&del=lg%3D%3D&menu=lqM%3D
-HTTP_REFERER=http://sps-portoprint.com/Test/index.php?r=portoprint/default
----
-2015/02/11 17:11:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'El sistema no ha podido encontrar la acción "Test" solicitada.' in /var/www/framework1.1.13/framework/web/CController.php:483
-Stack trace:
-#0 /var/www/framework1.1.13/framework/web/CController.php(270): CController->missingAction('Test')
-#1 /var/www/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('Test')
-#2 /var/www/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('site/Test/index...')
-#3 /var/www/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#4 /var/www/sps-portoprint.com/Test/index.php(19): CApplication->run()
-#5 {main}
-REQUEST_URI=/Test/index.php?r=site/Test/index.php?r=portoprint/rate/price&id=laKRpJ2qmaQ%3D&start=l6KSqJKjkqGWpQ%3D%3D&end=l6KSqZKik6GWow%3D%3D&customer=lQ%3D%3D&add=lg%3D%3D&edt=lg%3D%3D&del=lg%3D%3D&menu=lqM%3D
----
-2015/02/12 11:28:49 [error] [exception.CException] exception 'CException' with message 'RateController no ha podido encontrar la vista "" solicitada.' in /var/www/framework1.1.13/framework/web/CController.php:878
-Stack trace:
-#0 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/views/rate/price/all.php(813): CController->renderPartial('', Array)
-#1 /var/www/framework1.1.13/framework/web/CBaseController.php(126): require('/var/www/sps-po...')
-#2 /var/www/framework1.1.13/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/sps-po...', Array, true)
-#3 /var/www/framework1.1.13/framework/web/CController.php(869): CBaseController->renderFile('/var/www/sps-po...', Array, true)
-#4 /var/www/framework1.1.13/framework/web/CController.php(782): CController->renderPartial('price/all', Array, true)
-#5 /var/www/sps-portoprint.com/Test/protected/modules/portoprint/controllers/RateController.php(764): CController->render('price/all', Array)
-#6 /var/www/framework1.1.13/framework/web/actions/CInlineAction.php(49): RateController->actionPrice()
-#7 /var/www/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#8 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#9 /var/www/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#10 /var/www/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#11 /var/www/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#12 /var/www/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#13 /var/www/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#14 /var/www/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#15 /var/www/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('price')
-#16 /var/www/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('portoprint/rate...')
-#17 /var/www/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#18 /var/www/sps-portoprint.com/Test/index.php(19): CApplication->run()
-#19 {main}
-REQUEST_URI=/Test/index.php?r=portoprint/rate/price&id=laKRpJ2qmaQ%3D&start=l6KSqJKjkqGWpg%3D%3D&end=l6KSqZKik6GWpA%3D%3D&customer=lQ%3D%3D&add=lg%3D%3D&edt=lg%3D%3D&del=lg%3D%3D&menu=lqM%3D
-HTTP_REFERER=http://sps-portoprint.com/Test/index.php?r=portoprint/default
----
-2015/02/16 11:31:54 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[HY000] [2002] No such file or directory' in /srv/www/htdocs/framework1.1.13/framework/db/CDbConnection.php:381
-Stack trace:
-#0 /srv/www/htdocs/framework1.1.13/framework/db/CDbConnection.php(330): CDbConnection->open()
-#1 /srv/www/htdocs/framework1.1.13/framework/db/CDbConnection.php(308): CDbConnection->setActive(true)
-#2 /srv/www/htdocs/framework1.1.13/framework/base/CModule.php(387): CDbConnection->init()
-#3 /srv/www/htdocs/framework1.1.13/framework/base/CApplication.php(438): CModule->getComponent('db')
-#4 /srv/www/htdocs/framework1.1.13/framework/db/ar/CActiveRecord.php(623): CApplication->getDb()
-#5 /srv/www/htdocs/framework1.1.13/framework/db/ar/CActiveRecord.php(2309): CActiveRecord->getDbConnection()
-#6 /srv/www/htdocs/framework1.1.13/framework/db/ar/CActiveRecord.php(387): CActiveRecordMetaData->__construct(Object(User))
-#7 /srv/www/htdocs/sps-portoprint.com/Test/protected/models/User.php(38): CActiveRecord::model('User')
-#8 /srv/www/htdocs/sps-portoprint.com/Test/protected/components/UserIdentity.php(21): User::model()
-#9 /srv/www/htdocs/sps-portoprint.com/Test/protected/models/LoginForm.php(54): UserIdentity->authenticate()
-#10 /srv/www/htdocs/framework1.1.13/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
-#11 /srv/www/htdocs/framework1.1.13/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
-#12 /srv/www/htdocs/framework1.1.13/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
-#13 /srv/www/htdocs/sps-portoprint.com/Test/protected/controllers/SiteController.php(64): CModel->validate()
-#14 /srv/www/htdocs/framework1.1.13/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
-#15 /srv/www/htdocs/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#16 /srv/www/htdocs/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#17 /srv/www/htdocs/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#18 /srv/www/htdocs/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#19 /srv/www/htdocs/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#20 /srv/www/htdocs/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#21 /srv/www/htdocs/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#22 /srv/www/htdocs/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#23 /srv/www/htdocs/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('login')
-#24 /srv/www/htdocs/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
-#25 /srv/www/htdocs/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#26 /srv/www/htdocs/sps-portoprint.com/Test/index.php(19): CApplication->run()
-#27 {main}
-REQUEST_URI=/sps-portoprint.com/Test/index.php?r=site/login
-HTTP_REFERER=http://localhost/sps-portoprint.com/Test/index.php?r=site/login
----
-2015/05/13 10:16:16 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[HY000] [1045] Access denied for user 'portop_v2'@'localhost' (using password: YES)' in /srv/www/htdocs/framework1.1.13/framework/db/CDbConnection.php:381
-Stack trace:
-#0 /srv/www/htdocs/framework1.1.13/framework/db/CDbConnection.php(330): CDbConnection->open()
-#1 /srv/www/htdocs/framework1.1.13/framework/db/CDbConnection.php(308): CDbConnection->setActive(true)
-#2 /srv/www/htdocs/framework1.1.13/framework/base/CModule.php(387): CDbConnection->init()
-#3 /srv/www/htdocs/framework1.1.13/framework/base/CApplication.php(438): CModule->getComponent('db')
-#4 /srv/www/htdocs/framework1.1.13/framework/db/ar/CActiveRecord.php(623): CApplication->getDb()
-#5 /srv/www/htdocs/framework1.1.13/framework/db/ar/CActiveRecord.php(2309): CActiveRecord->getDbConnection()
-#6 /srv/www/htdocs/framework1.1.13/framework/db/ar/CActiveRecord.php(387): CActiveRecordMetaData->__construct(Object(User))
-#7 /srv/www/htdocs/tiendao/Portal/protected/models/User.php(38): CActiveRecord::model('User')
-#8 /srv/www/htdocs/tiendao/Portal/protected/components/UserIdentity.php(21): User::model()
-#9 /srv/www/htdocs/tiendao/Portal/protected/models/LoginForm.php(54): UserIdentity->authenticate()
-#10 /srv/www/htdocs/framework1.1.13/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
-#11 /srv/www/htdocs/framework1.1.13/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
-#12 /srv/www/htdocs/framework1.1.13/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
-#13 /srv/www/htdocs/tiendao/Portal/protected/controllers/SiteController.php(64): CModel->validate()
-#14 /srv/www/htdocs/framework1.1.13/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
-#15 /srv/www/htdocs/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#16 /srv/www/htdocs/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#17 /srv/www/htdocs/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#18 /srv/www/htdocs/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#19 /srv/www/htdocs/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#20 /srv/www/htdocs/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#21 /srv/www/htdocs/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#22 /srv/www/htdocs/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#23 /srv/www/htdocs/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('login')
-#24 /srv/www/htdocs/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
-#25 /srv/www/htdocs/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#26 /srv/www/htdocs/tiendao/Portal/index.php(19): CApplication->run()
-#27 {main}
-REQUEST_URI=/tiendao/Portal/index.php?r=site/login
-HTTP_REFERER=http://localhost/tiendao/Portal/index.php?r=site/login
----
-2015/05/13 10:17:10 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[HY000] [1045] Access denied for user 'root'@'localhost' (using password: NO)' in /srv/www/htdocs/framework1.1.13/framework/db/CDbConnection.php:381
-Stack trace:
-#0 /srv/www/htdocs/framework1.1.13/framework/db/CDbConnection.php(330): CDbConnection->open()
-#1 /srv/www/htdocs/framework1.1.13/framework/db/CDbConnection.php(308): CDbConnection->setActive(true)
-#2 /srv/www/htdocs/framework1.1.13/framework/base/CModule.php(387): CDbConnection->init()
-#3 /srv/www/htdocs/framework1.1.13/framework/base/CApplication.php(438): CModule->getComponent('db')
-#4 /srv/www/htdocs/framework1.1.13/framework/db/ar/CActiveRecord.php(623): CApplication->getDb()
-#5 /srv/www/htdocs/framework1.1.13/framework/db/ar/CActiveRecord.php(2309): CActiveRecord->getDbConnection()
-#6 /srv/www/htdocs/framework1.1.13/framework/db/ar/CActiveRecord.php(387): CActiveRecordMetaData->__construct(Object(User))
-#7 /srv/www/htdocs/tiendao/Portal/protected/models/User.php(38): CActiveRecord::model('User')
-#8 /srv/www/htdocs/tiendao/Portal/protected/components/UserIdentity.php(21): User::model()
-#9 /srv/www/htdocs/tiendao/Portal/protected/models/LoginForm.php(54): UserIdentity->authenticate()
-#10 /srv/www/htdocs/framework1.1.13/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
-#11 /srv/www/htdocs/framework1.1.13/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
-#12 /srv/www/htdocs/framework1.1.13/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
-#13 /srv/www/htdocs/tiendao/Portal/protected/controllers/SiteController.php(64): CModel->validate()
-#14 /srv/www/htdocs/framework1.1.13/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
-#15 /srv/www/htdocs/framework1.1.13/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
-#16 /srv/www/htdocs/framework1.1.13/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
-#17 /srv/www/htdocs/framework1.1.13/framework/web/filters/CFilter.php(40): CFilterChain->run()
-#18 /srv/www/htdocs/framework1.1.13/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
-#19 /srv/www/htdocs/framework1.1.13/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
-#20 /srv/www/htdocs/framework1.1.13/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
-#21 /srv/www/htdocs/framework1.1.13/framework/web/CController.php(291): CFilterChain->run()
-#22 /srv/www/htdocs/framework1.1.13/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
-#23 /srv/www/htdocs/framework1.1.13/framework/web/CWebApplication.php(282): CController->run('login')
-#24 /srv/www/htdocs/framework1.1.13/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
-#25 /srv/www/htdocs/framework1.1.13/framework/base/CApplication.php(169): CWebApplication->processRequest()
-#26 /srv/www/htdocs/tiendao/Portal/index.php(19): CApplication->run()
-#27 {main}
-REQUEST_URI=/tiendao/Portal/index.php?r=site/login
-HTTP_REFERER=http://localhost/tiendao/Portal/index.php?r=site/login
+REQUEST_URI=/portosales/index.php?r=site/login
+HTTP_REFERER=http://localhost/portosales/index.php?r=site/login
 ---

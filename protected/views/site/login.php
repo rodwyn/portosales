@@ -1,74 +1,57 @@
-<!--<div class="row">
-	<div class="col-xs-12 col-sm-12 col-md-7 col-lg-8 hidden-xs hidden-sm">
-		<h1 class="txt-color-red login-header-big">SMART PRINT SOFTWARE 2.0</h1>
-		<div class="hero">
-			<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/logo.jpg" alt="">
-		</div>
+<!-- form <?php
+/* @var $this SiteController */
+/* @var $model LoginForm */
+/* @var $form CActiveForm  */
 
-		<div class="row">
-			
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-				Copyright &copy; <?php echo date('Y'); ?> by PortoPrint. All Rights Reserved.
-			</div>
-		</div>
+$this->pageTitle=Yii::app()->name . ' - Login';
+$this->breadcrumbs=array(
+	'Login',
+);
+?>
 
+<h1>Login</h1>
+
+<p>Please fill out the following form with your login credentials:</p>
+
+<div class="form">
+<?php $form=$this->beginWidget('CActiveForm', array(
+	'id'=>'login-form',
+	'enableClientValidation'=>true,
+	'clientOptions'=>array(
+		'validateOnSubmit'=>true,
+	),
+)); ?>
+
+	<p class="note">Fields with <span class="required">*</span> are required.</p>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'username'); ?>
+		<?php echo $form->textField($model,'username'); ?>
+		<?php echo $form->error($model,'username'); ?>
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
-		<div class="well no-padding">
-			<?php $form=$this->beginWidget('CActiveForm', array(
-					'id'=>'login-form',
-					'enableClientValidation'=>false,
-					'clientOptions'=>array(
-						'validateOnSubmit'=>true,
-					),
-					'htmlOptions'=>array("class"=>"smart-form client-form")
-				)); ?>
-				<header>
-					LOGIN
-				</header>
 
-				<fieldset>
-					<?php if($form->error($model,'username')!="" || $form->error($model,'password')){?>
-					<div class="alert alert-danger fade in">
-						<button data-dismiss="alert" class="close">
-							×
-						</button>
-						<?php echo $form->error($model,'username')." ".$form->error($model,'password'); ?>
-					</div>
-					<?php } ?>
-					<section>
-						<label class="label">Usuario</label>
-						<label class="input"> <i class="icon-append fa fa-user"></i>
-							<?php echo $form->textField($model,'username',array('maxlength'=>45,'class'=>'box')); ?>
-							<b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i>Utilice el usuario proporcionado por el administrador</b></label>
-					</section>
-
-					<section>
-						<label class="label">Contraseña</label>
-						<label class="input"> <i class="icon-append fa fa-lock"></i>
-							<?php echo $form->passwordField($model,'password',array('maxlength'=>45,'class'=>'box')); ?>
-							<b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i>Utilice la contraeña proporcionada por el administrador</b> </label>
-						<div class="note">
-							<a href="javascript:void(0)">Recuperar contraseña</a>
-						</div>
-					</section>
-
-				</fieldset>
-				<footer>
-					<button type="submit" class="btn btn-primary">
-						Entrar
-					</button>
-				</footer>
-			<?php $this->endWidget(); ?>
-
-		</div>
-		
-		
+	<div class="row">
+		<?php echo $form->labelEx($model,'password'); ?>
+		<?php echo $form->passwordField($model,'password'); ?>
+		<?php echo $form->error($model,'password'); ?>
+		<p class="hint">
+			Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.
+		</p>
 	</div>
+
+	<div class="row rememberMe">
+		<?php echo $form->checkBox($model,'rememberMe'); ?>
+		<?php echo $form->label($model,'rememberMe'); ?>
+		<?php echo $form->error($model,'rememberMe'); ?>
+	</div>
+
+	<div class="row buttons">
+		<?php echo CHtml::submitButton('Login'); ?>
+	</div>
+
+<?php $this->endWidget(); ?>
 </div>
 -->
-
-
 <div class="row">
         <div class="col-sm-10 col-sm-offset-1">
                 <div class="login-container">
@@ -242,5 +225,3 @@
         </div><!-- /.col -->
 </div><!-- /.row -->
                                 
-                                
-

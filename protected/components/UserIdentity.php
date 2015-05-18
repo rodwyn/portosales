@@ -15,9 +15,9 @@ class UserIdentity extends CUserIdentity
 	 * against some persistent user identity storage (e.g. database).
 	 * @return boolean whether authentication succeeds.
 	 */
-	
 	public function authenticate()
 	{
+	
 		$user = User::model()->findByAttributes(array('username'=>$this->username));	
 		
 		if($user === null)
@@ -25,7 +25,20 @@ class UserIdentity extends CUserIdentity
 		else if($user->password!==$this->password)
                     $this->errorCode = self::ERROR_PASSWORD_INVALID;
 		else {
-                     if($user->usertype==2){
+                    if($user->usertype==1){
+			$companiesdb = Usercompany::model()->findByAttributes(array('userid'=>$user->userid,'active'=>1));
+                        $companyds=  Company::model()->findByAttributes(array("companyid"=>$companiesdb->companyid));
+                        $type=$user->usertype;
+                        $useri=$user->userid;
+                        $this->setState('userid',$user->userid);
+                        $this->setState('profileid',$user->profileid);
+			$this->setState('username',$user->employeeuser->firstname." ".$user->employeeuser->plastname);
+			$this->setState('usertype',$user->usertype);
+			$this->setState('companyid',$companiesdb->companyid);
+                        $this->setState('companydsc',$companyds->companydsc);
+			
+			
+                    } else if($user->usertype==2){
                         
                       
                         $this->setState('userid',$user->userid);
@@ -34,22 +47,10 @@ class UserIdentity extends CUserIdentity
                         $this->setState('supplierid',$user->supplieruser->supplierid);
                      
 			
-                    }else if($user->usertype==3){
-                           
-                            //$name=$cliente->getal
-                         $this->setState('userid',$user->userid);
-			$this->setState('username',$user->customeruser->firstname." ".$user->customeruser->plastname);
-                        $this->setState('usertype',$user->usertype);                        
-                         $this->setState('customerid',$user->customeruser->customerid);
-                         $this->setState('tax','');
-                         $this->setState('duration','');
-                        
-                         
-                         
                     }
                     
 			$this->errorCode=self::ERROR_NONE;
-                        $this->errorCode = self::ERROR_NONE;
+            $this->errorCode = self::ERROR_NONE;
         }
         return !$this->errorCode;
 	}
