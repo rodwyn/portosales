@@ -86,56 +86,38 @@ DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `portosales`.`product`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `portosales`.`product` (
-  `productid` INT(11) NOT NULL AUTO_INCREMENT,
-  `categoryid` INT(11) NULL DEFAULT NULL,
-  `name` VARCHAR(45) NOT NULL,
-  `description` VARCHAR(140) NULL DEFAULT NULL,
-  `barcode` VARCHAR(16) NOT NULL,
-  `sku` VARCHAR(16) NULL DEFAULT NULL,
-  `image` VARCHAR(128) NOT NULL DEFAULT 'noimage.jpg',
-  `listprice` DECIMAL(9,2) NOT NULL,
-  `auctionprice` DECIMAL(9,2) NULL DEFAULT NULL,
-  `state` ENUM('N','O') NULL DEFAULT 'O',
-  `reference` VARCHAR(19) NULL DEFAULT NULL,
-  `createdate` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
-  `creator` INT(11) NULL DEFAULT NULL,
-  `editdate` TIMESTAMP NULL DEFAULT NULL,
-  `editor` INT(11) NULL DEFAULT NULL,
-  `corporateid` INT(11) NOT NULL,
-  `active` TINYINT(1) NULL DEFAULT '1',
-  `supplierid` INT(10) NOT NULL,
-  `interest` DECIMAL(9,2) NULL,
-  `tax` DECIMAL(4,2) NULL,
-  PRIMARY KEY (`productid`),
-  INDEX `fk_product_category1_idx` (`categoryid` ASC),
-  INDEX `fk_product_corporate1_idx` (`corporateid` ASC),
-  INDEX `fk_product_user1_idx` (`editor` ASC),
-  INDEX `fk_product_user2_idx` (`creator` ASC),
-  INDEX `fk_product_supplier1_idx` (`interest` ASC),
-  CONSTRAINT `fk_product_category1`
-    FOREIGN KEY (`categoryid`)
-    REFERENCES `portosales`.`category` (`categoryid`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_product_corporate1`
+CREATE TABLE IF NOT EXISTS `portosales`.`supplier` (
+  `supplierid` INT(10) NOT NULL AUTO_INCREMENT,
+  `corporateid` INT(10) NOT NULL,
+  `corporatename` VARCHAR(100) NOT NULL,
+  `supplierdsc` VARCHAR(100) NOT NULL,
+  `contactname` VARCHAR(100) NOT NULL,
+  `website` VARCHAR(100) NOT NULL,
+  `phone` VARCHAR(30) NOT NULL,
+  `email` VARCHAR(100) NOT NULL,
+  `email2` VARCHAR(100) NULL DEFAULT NULL,
+  `email3` VARCHAR(100) NULL DEFAULT NULL,
+  `email4` VARCHAR(100) NULL DEFAULT NULL,
+  `email5` VARCHAR(100) NULL DEFAULT NULL,
+  `rfc` VARCHAR(15) NOT NULL,
+  `address` VARCHAR(100) NOT NULL,
+  `suburb` VARCHAR(100) NULL DEFAULT NULL,
+  `cp` VARCHAR(100) NULL DEFAULT NULL,
+  `cityid` INT(10) UNSIGNED NOT NULL,
+  `paymentterms` VARCHAR(50) NOT NULL DEFAULT '3 dias',
+  `active` TINYINT(1) NOT NULL DEFAULT '1',
+  `block` ENUM('0','1') NULL DEFAULT '1',
+  PRIMARY KEY (`supplierid`),
+  INDEX `fk_supplier_corporate1_idx` (`corporateid` ASC),
+  INDEX `fk_supplier_city1_idx` (`cityid` ASC),
+  CONSTRAINT `fk_supplier_corporate1`
     FOREIGN KEY (`corporateid`)
     REFERENCES `portosales`.`corporate` (`corporateid`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_product_user1`
-    FOREIGN KEY (`editor`)
-    REFERENCES `portosales`.`user` (`userid`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_product_user2`
-    FOREIGN KEY (`creator`)
-    REFERENCES `portosales`.`user` (`userid`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_product_supplier1`
-    FOREIGN KEY (`interest`)
-    REFERENCES `portosales`.`supplier` (`supplierid`)
+  CONSTRAINT `fk_supplier_city1`
+    FOREIGN KEY (`cityid`)
+    REFERENCES `portosales`.`city` (`cityid`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -203,3 +185,6 @@ ADD CONSTRAINT `fk_supplier_city1`
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
 
+#Ing. Rodwyn 
+#Registro de supplier
+INSERT INTO `portosales`.`supplier` (`corporateid`, `corporatename`, `rfc`) VALUES ('1', 'No Aplica', 'XXXX000000XXX');
