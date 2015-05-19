@@ -273,7 +273,13 @@ CREATE TABLE IF NOT EXISTS `portosales`.`trademark` (
   `trademarkid` INT(11) NOT NULL AUTO_INCREMENT,
   `trademark` VARCHAR(45) NOT NULL,
   `active` ENUM('S','N') NULL DEFAULT 'S',
-  PRIMARY KEY (`trademarkid`))
+  PRIMARY KEY (`trademarkid`),
+INDEX `fk_trademark_corporate1_idx` (`corporateid` ASC),
+CONSTRAINT `fk_trademark_corporate1`
+    FOREIGN KEY (`corporateid`)
+    REFERENCES `portosales`.`corporate` (`corporateid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION),
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
