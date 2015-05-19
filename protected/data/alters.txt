@@ -257,3 +257,64 @@ DEFAULT CHARACTER SET = utf8;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+
+#Ing. Rodwyn Moreno
+#Tabla marca, modelo y producto
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+
+-- -----------------------------------------------------
+-- Table `portosales`.`trademark`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `portosales`.`trademark` (
+  `trademarkid` INT(11) NOT NULL AUTO_INCREMENT,
+  `trademark` VARCHAR(45) NOT NULL,
+  `active` ENUM('S','N') NULL DEFAULT 'S',
+  PRIMARY KEY (`trademarkid`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+
+-- -----------------------------------------------------
+-- Table `portosales`.`product`
+-- -----------------------------------------------------
+ALTER TABLE `portosales`.`product` 
+ADD COLUMN `trademarkid` INT(11) NOT NULL AFTER `tax`,
+ADD COLUMN `modelid` INT(11) NULL AFTER `trademarkid`,
+ADD INDEX `fk_product_trademark1_idx` (`trademarkid` ASC);
+ALTER TABLE `portosales`.`product` 
+ADD CONSTRAINT `fk_product_trademark1`
+  FOREIGN KEY (`trademarkid`)
+  REFERENCES `portosales`.`trademark` (`trademarkid`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+
+-- -----------------------------------------------------
+-- Table `portosales`.`model`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `portosales`.`model` (
+  `modelid` INT(11) NOT NULL AUTO_INCREMENT,
+  `trademarkid` INT(11) NOT NULL,
+  `model` VARCHAR(45) NOT NULL,
+  `active` ENUM('S','N') NULL DEFAULT 'S',
+  PRIMARY KEY (`modelid`),
+  INDEX `fk_model_trademark1_idx` (`trademarkid` ASC),
+  CONSTRAINT `fk_model_trademark1`
+    FOREIGN KEY (`trademarkid`)
+    REFERENCES `portosales`.`trademark` (`trademark`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_general_ci;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
