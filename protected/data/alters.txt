@@ -182,3 +182,24 @@ COLLATE = utf8_general_ci;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+#Ing. Rodwyn
+#Cambios tabla supplier
+ALTER TABLE `portosales`.`supplier` 
+DROP FOREIGN KEY `fk_supplier_city1`;
+ALTER TABLE `portosales`.`supplier` 
+CHANGE COLUMN `supplierdsc` `supplierdsc` VARCHAR(100) NULL ,
+CHANGE COLUMN `contactname` `contactname` VARCHAR(100) NULL ,
+CHANGE COLUMN `website` `website` VARCHAR(100) NULL ,
+CHANGE COLUMN `phone` `phone` VARCHAR(30) NULL ,
+CHANGE COLUMN `email` `email` VARCHAR(100) NULL ,
+CHANGE COLUMN `address` `address` VARCHAR(100) NULL ,
+CHANGE COLUMN `cityid` `cityid` INT(10) UNSIGNED NULL ,
+CHANGE COLUMN `paymentterms` `paymentterms` VARCHAR(50) NULL DEFAULT '3 dias' ;
+ALTER TABLE `portosales`.`supplier` 
+ADD CONSTRAINT `fk_supplier_city1`
+  FOREIGN KEY (`cityid`)
+  REFERENCES `portosales`.`city` (`cityid`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
