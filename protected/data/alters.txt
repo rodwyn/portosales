@@ -324,3 +324,15 @@ COLLATE = utf8_general_ci;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+#Ing. Rodwyn Moreno
+#Relación marca con categoría
+ALTER TABLE `portosales`.`trademark` 
+ADD COLUMN `categoryid` INT(11) NOT NULL AFTER `trademark`,
+ADD INDEX `fk_trademark_category1_idx` (`categoryid` ASC);
+ALTER TABLE `portosales`.`trademark` 
+ADD CONSTRAINT `fk_trademark_category1`
+  FOREIGN KEY (`categoryid`)
+  REFERENCES `portosales`.`category` (`categoryid`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
