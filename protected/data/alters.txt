@@ -327,12 +327,42 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 #Ing. Rodwyn Moreno
 #Relación marca con categoría
-ALTER TABLE `portosales`.`trademark` 
-ADD COLUMN `categoryid` INT(11) NOT NULL AFTER `trademark`,
-ADD INDEX `fk_trademark_category1_idx` (`categoryid` ASC);
-ALTER TABLE `portosales`.`trademark` 
-ADD CONSTRAINT `fk_trademark_category1`
-  FOREIGN KEY (`categoryid`)
-  REFERENCES `portosales`.`category` (`categoryid`)
-  ON DELETE NO ACTION
-  ON UPDATE NO ACTION;
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+CREATE TABLE IF NOT EXISTS `portosales`.`trademarkcategory` (
+  `trademarkcategoryid` INT(11) NOT NULL AUTO_INCREMENT,
+  `trademarkid` INT(11) NOT NULL,
+  `categoryid` INT(11) NOT NULL,
+  PRIMARY KEY (`trademarkcategoryid`),
+  INDEX `fk_trademarkcategory_trademark1_idx` (`trademarkid` ASC),
+  INDEX `fk_trademarkcategory_category1_idx` (`categoryid` ASC),
+  CONSTRAINT `fk_trademarkcategory_trademark1`
+    FOREIGN KEY (`trademarkid`)
+    REFERENCES `portosales`.`trademark` (`trademarkid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_trademarkcategory_category1`
+    FOREIGN KEY (`categoryid`)
+    REFERENCES `portosales`.`category` (`categoryid`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+#Ing. Rodwyn Moreno
+#Tabla Usertypemenu
+CREATE TABLE IF NOT EXISTS `portosales`.`usertypemenu` (
+  `idusertypemenu` INT(10) NOT NULL AUTO_INCREMENT,
+  `usertype` TINYINT(1) NOT NULL,
+  `menuid` INT(10) NOT NULL,
+  `activo` ENUM('0','1') CHARACTER SET 'utf8' COLLATE 'utf8_spanish2_ci' NOT NULL DEFAULT '0',
+  PRIMARY KEY (`idusertypemenu`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 50
+DEFAULT CHARACTER SET = utf8
+COLLATE = utf8_spanish2_ci
