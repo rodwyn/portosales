@@ -20,7 +20,7 @@
 
 		<!-- ace styles -->
 		<link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/themes/assets/css/ace.css" class="ace-main-stylesheet" id="main-ace-style" />
-
+                
 		<!--[if lte IE 9]>
 			<link rel="stylesheet" href="../assets/css/ace-part2.css" class="ace-main-stylesheet" />
 		<![endif]-->
@@ -40,6 +40,10 @@
 		<script src="../assets/js/html5shiv.js"></script>
 		<script src="../assets/js/respond.js"></script>
 		<![endif]-->
+                
+                <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/themes/assets/css/jquery.dataTables.min.css" type="text/css"/>
+                <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/themes/old/css/dataTables.responsive.css" type="text/css"/>
+                
 </head>
 
 <body class="no-skin">
@@ -47,10 +51,8 @@
             <script>
                   
                     var session_menu= JSON.parse('<?php echo json_encode (Yii::app()->user->menu);?>');
-                    var session_submenu= JSON.parse('<?php echo json_encode (Yii::app()->user->submenu);?>');
-                  
-                   console.log(session_menu);
-                   console.log(session_submenu);
+                    console.log(session_menu);
+                 
             </script>
         </div>
 	  <!-- #section:basics/navbar.layout -->
@@ -193,7 +195,7 @@
 	      <div id="sidebar" class="sidebar      h-sidebar                navbar-collapse collapse">
 		  <script type="text/javascript">
 		      try {
-			  ace.settings.check('sidebar', 'fixed')<?php echo $content; ?>
+			  ace.settings.check('sidebar', 'fixed')
 		      } catch (e) {
 		      }
 		  </script>
@@ -203,32 +205,19 @@
 		     
 		  </ul><!-- /.nav-list -->
                   
-                                   
-				
-                  
-                  
-                  
+                         
                 <script>
 
                    $( document ).ready(function() {
                      var menu_session=session_menu;
+                     console.log(menu_session);
                      var cad='';
+                    $.each(menu_session, function( key,  val ) {
 
-                  
-
-                     $.each(menu_session, function( key,  val ) {
-
-                        if(val['level']==0){
+                       
                             cad+=' <li class="hover" id="ml'+val['ml']+'"> <a href="'+val['url']+'" data-menuid ="'+val['menuid']+'" title="'+key+'" ><i class="menu-icon'+val['icon']+'"></i>'+
                               '<span class="menu-text" >'+key+'</span></a><b class="arrow"></b></li>';
-                         }else{
-
-                              cad+=' <li class="hover"><a href class="dropdown-toggle">'+
-                              '<i class="menu-icon'+val['icon']+'"></i>'+
-                              '<span class="menu-text">'+key+'</span><b class="arrow fa fa-angle-down"></b></a><b class="arrow"></b>'+
-                              ' <ul class="submenu">'+
-                                submenu(val['menuid'])+ '</ul></li>';
-                         }
+                         
                      });
 
                      $("#SessMenuResp").html(cad);
@@ -236,23 +225,7 @@
 
                     });
 
-                    function submenu(parent){
-                       var list='';
-                       var submenu_session=session_submenu;
-
-                        $.each(submenu_session, function( key,  val ) {
-                               if(val['parentmenuid']==parent){
-                                    //translate="'+val['translate']+'"
-
-                                    list+='<li class="hover" ><a href="'+val['state']+'" data-menuid ="'+val['menuid']+'" title="'+key+'" ><i class="menu-icon'+val['icon']+'"></i>'+
-                                         key+'</a></li>';
-
-                                }
-
-                        });   
-
-                        return list;
-                    }
+                   
                 </script>
                   
                   
@@ -346,7 +319,9 @@
 	  <script src="<?php echo Yii::app()->request->baseUrl; ?>/themes/assets/js/ace/ace.settings-skin.js"></script>
 	  <script src="<?php echo Yii::app()->request->baseUrl; ?>/themes/assets/js/ace/ace.widget-on-reload.js"></script>
 	  <script src="<?php echo Yii::app()->request->baseUrl; ?>/themes/assets/js/ace/ace.searchbox-autocomplete.js"></script>
-          <script src="<?php echo Yii::app()->request->baseUrl; ?>/theme/old/js/app.js"></script>
+          <script src="<?php echo Yii::app()->request->baseUrl; ?>/themes/assets/js/jquery.dataTables.min.js"></script>
+          <script src="<?php echo Yii::app()->request->baseUrl; ?>/themes/old/js/dataTables.responsive.js"></script>
+          <script src="<?php echo Yii::app()->request->baseUrl; ?>/themes/old/js/app.js"></script>
 	  <!-- inline scripts related to this page -->
 	  <script type="text/javascript">
 	      jQuery(function($) {

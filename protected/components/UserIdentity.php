@@ -41,11 +41,7 @@ class UserIdentity extends CUserIdentity
 			$this->setState('companyid',$companiesdb->companyid);
                         $this->setState('companydsc',$companyds->companydsc);
                         $this->setState('menu',$menu[0]);
-                        if(isset($menu[1])){
-                            $this->setState('submenu',$menu[1]);
-                        }else{
-                            $this->setState('submenu','0');
-                        }
+                       
                    
                     
 			$this->errorCode=self::ERROR_NONE;

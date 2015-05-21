@@ -1370,3 +1370,416 @@ Stack trace:
 REQUEST_URI=/sales/index.php?r=product/index
 HTTP_REFERER=http://localhost/sales/index.php?r=history/index
 ---
+2015/05/21 16:28:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "product/index".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('product/index')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=product/index
+HTTP_REFERER=http://localhost/sales/index.php?r=history/index
+---
+2015/05/21 16:29:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 16:47:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+---
+2015/05/21 16:47:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ingreso/index".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('ingreso/index')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=ingreso/index
+HTTP_REFERER=http://localhost/sales/index.php?r=administrador/default
+---
+2015/05/21 16:49:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 16:58:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:00:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:05:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:05:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:14:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:35:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:35:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:35:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:41:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:41:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:42:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:43:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:44:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:44:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:44:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:45:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:45:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:46:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:49:48 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:49:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:50:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:50:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:51:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:51:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:51:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:52:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:52:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:53:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:53:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:54:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:55:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:55:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:55:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:55:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 17:55:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 18:00:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 18:00:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "history/index".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('history/index')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=history/index
+HTTP_REFERER=http://localhost/sales/index.php?r=administrador/default
+---
+2015/05/21 18:00:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "product/index".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('product/index')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=product/index
+HTTP_REFERER=http://localhost/sales/index.php?r=history/index
+---
+2015/05/21 18:00:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "product/index".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('product/index')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=product/index
+HTTP_REFERER=http://localhost/sales/index.php?r=history/index
+---
+2015/05/21 18:02:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---
+2015/05/21 18:43:11 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "administrador/default".' in /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php:286
+Stack trace:
+#0 /srv/www/htdocs/sales/yii/framework/web/CWebApplication.php(141): CWebApplication->runController('administrador/d...')
+#1 /srv/www/htdocs/sales/yii/framework/base/CApplication.php(184): CWebApplication->processRequest()
+#2 /srv/www/htdocs/sales/index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/sales/index.php?r=administrador/default
+HTTP_REFERER=http://localhost/sales/index.php?r=site/login
+---

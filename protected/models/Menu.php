@@ -131,14 +131,7 @@ class Menu extends CActiveRecord
                         $maynus=array();
                         foreach( $result as $row){
                             if($row->level==0){
-                                
-                                $smenudb = $this->qrySmenu(array('menuparentid'=>$row->menuid,'usertype'=>$data,'userid'=>$userid ));
-                            
-                                if(count($smenudb)!=0){
-                                   $conta=1;
-                                }else{
-                                   $conta=0;
-                                }
+                              
                                $maynus[0][$row->menudsc] = array(
                                             'url'=> $row->menulink,
                                             'menuid'=> $row->menuid,
@@ -146,22 +139,6 @@ class Menu extends CActiveRecord
                                             'icon'=>$row->icon,
                                             'ml'=>$ml
                                         );
-                                foreach( $smenudb as $submenu){
-                                     
-                                     //$plugis1= Menuplugins::model()->findByAttributes(array("menuid"=>$submenu->menuid));
-                                  //   $lista_plugins1=  implode(',', $plugis1);
-                                    if($submenu->menuparentid==$row->menuid){
-                                        if($submenu->menudsc==$row->menudsc){ $flag=1; }else{ $flag=0;}
-                                            $maynus[1][$submenu->menudsc] = array(
-                                                'url'=> $submenu->menulink, 
-                                                'menuid'=> $submenu->menuid,
-                                                'parentmenuid'=> $row->menuid,
-                                                'flag'=> $flag,
-                                                'icon'=>$submenu->icon
-                                            );
-                                      }
-                                }
-                                
                                
                             }
                            $ml++; 

@@ -26,12 +26,7 @@ ENGINE = InnoDB;
 INSERT INTO `portosales`.`corporate` (`corporatedsc`, `active`) VALUES ('PORTOPRINT', '1');
 INSERT INTO `portosales`.`company` (`companyid`, `corporateid`, `companydsc`, `rfc`, `tax`, `duration`, `active`) VALUES ('', '1', 'MultiEmpeños', 'multi903494', '1', '2', '1');
 INSERT INTO `portosales`.`employeeuser` (`userid`, `firstname`, `plastname`, `mlastname`, `phone`, `email`) VALUES ('1', 'Edgar', 'Sanabria', 'Paredes', '5538816601', 'ragde18@hotmail.es');
-DELETE FROM `portosales`.`usertype` WHERE `usertype`='4';
-DELETE FROM `portosales`.`usertype` WHERE `usertype`='3';
-UPDATE `portosales`.`usertype` SET `usertypedsc`='Administrador' WHERE `usertype`='2';
-UPDATE `portosales`.`usertype` SET `usertypedsc`='Vendedor' WHERE `usertype`='1';
-INSERT INTO `usertype` (`usertypedsc`) VALUES ('Vendedor');
-INSERT INTO `portosales`.`usercompany` (`usercompanyid`, `userid`, `companyid`, `active`) VALUES ('1', '1', '1', '1');
+
 
 #Ing. Rodwyn Moreno
 #Tablas product, supplier, warranty, warrantyproduct
@@ -366,3 +361,36 @@ ENGINE = InnoDB
 AUTO_INCREMENT = 50
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_spanish2_ci
+
+#Edgar Sanabria Paredes
+#Complementos para tablas iniciales 21 de Mayo 2015
+
+INSERT INTO `menu` (`menuid`,`menudsc`,`menuparentid`,`menulink`,`menuorder`,`active`,`level`,`icon`) VALUES (1,'Venta',0,'index.php?r=default/index',1,1,0,' glyphicon glyphicon-shopping-cart');
+INSERT INTO `menu` (`menuid`,`menudsc`,`menuparentid`,`menulink`,`menuorder`,`active`,`level`,`icon`) VALUES (2,'Historial',0,'index.php?r=history/index',2,1,0,' glyphicon glyphicon-list-alt');
+INSERT INTO `menu` (`menuid`,`menudsc`,`menuparentid`,`menulink`,`menuorder`,`active`,`level`,`icon`) VALUES (3,'Productos',0,'index.php?r=product/index',3,1,0,' glyphicon glyphicon-barcode');
+INSERT INTO `menu` (`menuid`,`menudsc`,`menuparentid`,`menulink`,`menuorder`,`active`,`level`,`icon`) VALUES (4,'Ingreso',0,'index.php?r=entry/index',7,1,0,' glyphicon glyphicon-arrow-down');
+INSERT INTO `menu` (`menuid`,`menudsc`,`menuparentid`,`menulink`,`menuorder`,`active`,`level`,`icon`) VALUES (5,'Transito',0,'index.php?r=transit/index',6,1,0,' glyphicon glyphicon-resize-horizontal');
+INSERT INTO `menu` (`menuid`,`menudsc`,`menuparentid`,`menulink`,`menuorder`,`active`,`level`,`icon`) VALUES (6,'Transferencia',0,'index.php?r=transfer/index',5,1,0,' glyphicon glyphicon-share');
+INSERT INTO `usertypemenu` (`idusertypemenu`,`usertype`,`menuid`,`activo`) VALUES (50,1,1,'1');
+INSERT INTO `usertypemenu` (`idusertypemenu`,`usertype`,`menuid`,`activo`) VALUES (51,1,2,'1');
+INSERT INTO `usertypemenu` (`idusertypemenu`,`usertype`,`menuid`,`activo`) VALUES (52,1,3,'1');
+INSERT INTO `usertypemenu` (`idusertypemenu`,`usertype`,`menuid`,`activo`) VALUES (53,2,2,'1');
+INSERT INTO `usertypemenu` (`idusertypemenu`,`usertype`,`menuid`,`activo`) VALUES (54,2,3,'1');
+INSERT INTO `usertypemenu` (`idusertypemenu`,`usertype`,`menuid`,`activo`) VALUES (55,2,4,'1');
+INSERT INTO `usertypemenu` (`idusertypemenu`,`usertype`,`menuid`,`activo`) VALUES (56,2,5,'1');
+INSERT INTO `usertypemenu` (`idusertypemenu`,`usertype`,`menuid`,`activo`) VALUES (58,2,6,'1');
+INSERT INTO `usertype` (`usertype`,`usertypedsc`) VALUES (1,'Cajero');
+INSERT INTO `usertype` (`usertype`,`usertypedsc`) VALUES (2,'Operaciones');
+INSERT INTO `usertype` (`usertype`,`usertypedsc`) VALUES (3,'Gerente de Tienda');
+INSERT INTO `usertype` (`usertype`,`usertypedsc`) VALUES (4,'Director Regional');
+INSERT INTO `usertype` (`usertype`,`usertypedsc`) VALUES (5,'Director de Operaciones');
+INSERT INTO `usertype` (`usertype`,`usertypedsc`) VALUES (6,'Logistica');
+INSERT INTO `usertype` (`usertype`,`usertypedsc`) VALUES (7,'Comercial');
+INSERT INTO `usertype` (`usertype`,`usertypedsc`) VALUES (8,'Auditoria');
+INSERT INTO `usertype` (`usertype`,`usertypedsc`) VALUES (9,'Sistema');
+INSERT INTO `usercompany` (`usercompanyid`,`userid`,`companyid`,`active`) VALUES (1,1,1,1);
+INSERT INTO `usercompany` (`usercompanyid`,`userid`,`companyid`,`active`) VALUES (2,2,1,1);
+INSERT INTO `employeeuser` (`userid`,`firstname`,`plastname`,`mlastname`,`phone`,`email`) VALUES (1,'Edgar','Sanabria','Paredes','5538816601','ragde18@hotmail.es');
+INSERT INTO `employeeuser` (`userid`,`firstname`,`plastname`,`mlastname`,`phone`,`email`) VALUES (2,'Rodwyn','Moreno','Martinez',NULL,'rodwyn@live.com');
+INSERT INTO `user` (`userid`,`username`,`password`,`usertype`,`profileid`,`active`,`key`,`flag`) VALUES (1,'portoprint','mportoxppt',1,4,'1','',0);
+INSERT INTO `user` (`userid`,`username`,`password`,`usertype`,`profileid`,`active`,`key`,`flag`) VALUES (2,'esanabria','blaster',2,2,'1','',0);
