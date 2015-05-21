@@ -25,29 +25,28 @@ class UserIdentity extends CUserIdentity
 		else if($user->password!==$this->password)
                     $this->errorCode = self::ERROR_PASSWORD_INVALID;
 		else {
-                    if($user->usertype==1){
+                  
 			$companiesdb = Usercompany::model()->findByAttributes(array('userid'=>$user->userid,'active'=>1));
                         $companyds=  Company::model()->findByAttributes(array("companyid"=>$companiesdb->companyid));
+                       
+                        $menu_model = new Menu();
                         $type=$user->usertype;
                         $useri=$user->userid;
+                        $menu = $menu_model->qryMenu($type,$useri);
+                        
                         $this->setState('userid',$user->userid);
                         $this->setState('profileid',$user->profileid);
 			$this->setState('username',$user->employeeuser->firstname." ".$user->employeeuser->plastname);
 			$this->setState('usertype',$user->usertype);
 			$this->setState('companyid',$companiesdb->companyid);
                         $this->setState('companydsc',$companyds->companydsc);
-			
-			
-                    } else if($user->usertype==2){
-                        
-                      
-                        $this->setState('userid',$user->userid);
-			$this->setState('username',$user->supplieruser->firstname." ".$user->supplieruser->plastname);
-                        $this->setState('usertype',$user->usertype);
-                        $this->setState('supplierid',$user->supplieruser->supplierid);
-                     
-			
-                    }
+                        $this->setState('menu',$menu[0]);
+                        if(isset($menu[1])){
+                            $this->setState('submenu',$menu[1]);
+                        }else{
+                            $this->setState('submenu','0');
+                        }
+                   
                     
 			$this->errorCode=self::ERROR_NONE;
             $this->errorCode = self::ERROR_NONE;

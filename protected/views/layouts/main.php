@@ -43,6 +43,16 @@
 </head>
 
 <body class="no-skin">
+     <div style="display:none;">
+            <script>
+                  
+                    var session_menu= JSON.parse('<?php echo json_encode (Yii::app()->user->menu);?>');
+                    var session_submenu= JSON.parse('<?php echo json_encode (Yii::app()->user->submenu);?>');
+                  
+                   console.log(session_menu);
+                   console.log(session_submenu);
+            </script>
+        </div>
 	  <!-- #section:basics/navbar.layout -->
 	  <div id="navbar" class="navbar navbar-default    navbar-collapse       h-navbar">
 	      <script type="text/javascript">
@@ -187,30 +197,65 @@
 		      } catch (e) {
 		      }
 		  </script>
-		  <ul class="nav nav-list">
-		      <li class="active open hover">
-			  <a href="hogar.html">
-			      <i class="menu-icon glyphicon glyphicon-shopping-cart"></i>
-			      <span class="menu-text"> Venta </span>
-			  </a>
-			  <b class="arrow"></b>
-		      </li>
-		      <li class="hover">
-			  <a href="bebes.html">
-			      <i class="menu-icon glyphicon glyphicon-list-alt"></i>
-			      <span class="menu-text"> Historial </span>
-			  </a>
-			  <b class="arrow"></b>
-		      </li>
-		      <li class="hover">
-			  <a href="femen.html">
-			      <i class="menu-icon glyphicon glyphicon-barcode"></i>
-			      <span class="menu-text"> Productos </span>
-			  </a>
-			  <b class="arrow"></b>
-		      </li>
+		  
+                  
+                  <ul class="nav nav-list" id="SessMenuResp">
+		     
 		  </ul><!-- /.nav-list -->
+                  
+                                   
+				
+                  
+                  
+                  
+                <script>
 
+                   $( document ).ready(function() {
+                     var menu_session=session_menu;
+                     var cad='';
+
+                  
+
+                     $.each(menu_session, function( key,  val ) {
+
+                        if(val['level']==0){
+                            cad+=' <li class="hover" id="ml'+val['ml']+'"> <a href="'+val['url']+'" data-menuid ="'+val['menuid']+'" title="'+key+'" ><i class="menu-icon'+val['icon']+'"></i>'+
+                              '<span class="menu-text" >'+key+'</span></a><b class="arrow"></b></li>';
+                         }else{
+
+                              cad+=' <li class="hover"><a href class="dropdown-toggle">'+
+                              '<i class="menu-icon'+val['icon']+'"></i>'+
+                              '<span class="menu-text">'+key+'</span><b class="arrow fa fa-angle-down"></b></a><b class="arrow"></b>'+
+                              ' <ul class="submenu">'+
+                                submenu(val['menuid'])+ '</ul></li>';
+                         }
+                     });
+
+                     $("#SessMenuResp").html(cad);
+
+
+                    });
+
+                    function submenu(parent){
+                       var list='';
+                       var submenu_session=session_submenu;
+
+                        $.each(submenu_session, function( key,  val ) {
+                               if(val['parentmenuid']==parent){
+                                    //translate="'+val['translate']+'"
+
+                                    list+='<li class="hover" ><a href="'+val['state']+'" data-menuid ="'+val['menuid']+'" title="'+key+'" ><i class="menu-icon'+val['icon']+'"></i>'+
+                                         key+'</a></li>';
+
+                                }
+
+                        });   
+
+                        return list;
+                    }
+                </script>
+                  
+                  
 		  <!-- #section:basics/sidebar.layout.minimize -->
 
 		  <!-- /section:basics/sidebar.layout.minimize -->

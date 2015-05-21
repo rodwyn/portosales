@@ -112,4 +112,73 @@ class Menu extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+         public function qryMenu($data,$userid) {
+            $criteria=new CDbCriteria;
+            $criteria1=new CDbCriteria;
+            
+            $criteria->select = "t.*";
+            $criteria->join = "INNER JOIN usertypemenu up on up.menuid=t.menuid 
+                                INNER JOIN user u on up.usertype=u.usertype";
+            $criteria->condition = "t.active = 1 AND t.level=0 AND u.userid={$userid} AND u.usertype = {$data}";
+            $criteria->order = "t.menuorder ASC";
+            
+            
+            $result= $this->findAll($criteria);
+            $ml = 1;
+                        $conta=0;
+                        $flag=0;
+                        $maynus=array();
+                        foreach( $result as $row){
+                            if($row->level==0){
+                                
+                                $smenudb = $this->qrySmenu(array('menuparentid'=>$row->menuid,'usertype'=>$data,'userid'=>$userid ));
+                            
+                                if(count($smenudb)!=0){
+                                   $conta=1;
+                                }else{
+                                   $conta=0;
+                                }
+                               $maynus[0][$row->menudsc] = array(
+                                            'url'=> $row->menulink,
+                                            'menuid'=> $row->menuid,
+                                            'level'=> $conta,
+                                            'icon'=>$row->icon,
+                                            'ml'=>$ml
+                                        );
+                                foreach( $smenudb as $submenu){
+                                     
+                                     //$plugis1= Menuplugins::model()->findByAttributes(array("menuid"=>$submenu->menuid));
+                                  //   $lista_plugins1=  implode(',', $plugis1);
+                                    if($submenu->menuparentid==$row->menuid){
+                                        if($submenu->menudsc==$row->menudsc){ $flag=1; }else{ $flag=0;}
+                                            $maynus[1][$submenu->menudsc] = array(
+                                                'url'=> $submenu->menulink, 
+                                                'menuid'=> $submenu->menuid,
+                                                'parentmenuid'=> $row->menuid,
+                                                'flag'=> $flag,
+                                                'icon'=>$submenu->icon
+                                            );
+                                      }
+                                }
+                                
+                               
+                            }
+                           $ml++; 
+                        }
+                 
+            return $maynus;
+            
+        }
+         public function qrySmenu($data) {
+            $criteria=new CDbCriteria;
+            
+            $criteria->select = "t.*";
+             $criteria->join = "INNER JOIN usertypemenu up on up.menuid=t.menuid 
+                                INNER JOIN user u on up.usertype=u.usertype";
+            $criteria->condition = 't.menuparentid = '.$data['menuparentid'].' AND t.active = 1 AND t.level = 1';
+            $criteria->order = "menuorder ASC";
+            return $this->findAll($criteria);
+        }
+        
 }
